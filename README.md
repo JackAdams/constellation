@@ -17,9 +17,9 @@ Plugins
 
 Examples of plugins are:
 
-[babrahams:temple](https://github.com/JackAdams/temple) (for visualizing template information)
-[babrahams:constellation-session](https://github.com/JackAdams/constellation-session) (for viewing / manipulating data in the Session variable)
-[babrahams:constellation-subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
+- [babrahams:temple](https://github.com/JackAdams/temple) (for visualizing template information)
+- [babrahams:constellation-session](https://github.com/JackAdams/constellation-session) (for viewing / manipulating data in the Session variable)
+- [babrahams:constellation-subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
 
 If you want to write a plugin, take a look at the source of the packages above.
 
@@ -41,7 +41,7 @@ Package["babrahams:constellation"].API.addTab({
 
 `headerContentTemplate` is rendered in the header bar of the Constellation UI, right before the name of your plugin (we're assuming you'll probably want this to `float: right;`).
 
-'menuContentTemplate` is rendered in the strip at the top of the main content area of the tab that appears when the tab is open.
+`menuContentTemplate` is rendered in the strip at the top of the main content area of the tab that appears when the tab is open.
 
 `mainContentTemplate` is rendered in the space for the main content when a tab is open.
 
@@ -62,6 +62,6 @@ All of these must be prefixed by `Package["babrahams:constellation"].API.` when 
 
 `hideCollection('collectionName')` allows you to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab)
 
-`getCurrentTab()` gets the id of the currently selected tab
+`getCurrentTab()` gets the `id` of the currently selected tab
 
 `setCurrentTab("unique-id-for-my-tab")` allows you to change tabs programatically (use either the `id` value set in the `addTab({ ... })` call or the `name` value)
