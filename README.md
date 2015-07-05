@@ -58,7 +58,7 @@ All of these must be prefixed by `Package["babrahams:constellation"].API.` when 
 
 `addTab({name: "my-plugin"})` registers a new tab called "my-plugin" in Constellation's UI - see above for the fields the object can have when adding a tab
 
-`isActive` lets you check whether Constellation's UI is active or closed
+`isActive()` lets you check whether Constellation's UI is active or closed
 
 `hideCollection('collectionName')` allows you to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab)
 
