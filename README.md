@@ -47,7 +47,7 @@ Package["babrahams:constellation"].API.addTab({
 
 You can set `active: false` in the object above if you don't want your plugin to be shown automatically (the user can make it visible through the "Config" tab).
 
-You can also set `id: "unique-id-for-my-tab"` if you like, but unless two plugins share the same name, this isn't going to be a problem.
+You can also set `id: "unique-id-for-my-tab"` if you like, but unless two plugins share the same name, this isn't going to be necessary.
 
 __Note__: make sure you put `debugOnly: true` in your package's `Package.describe({ ... });`
 
@@ -64,4 +64,4 @@ All of these must be prefixed by `Package["babrahams:constellation"].API.` when 
 
 `getCurrentTab()` gets the `id` of the currently selected tab
 
-`setCurrentTab("unique-id-for-my-tab")` allows you to change tabs programatically (use either the `id` value set in the `addTab({ ... })` call or the `name` value)
+`setCurrentTab("unique-id-for-my-tab")` allows you to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value)
