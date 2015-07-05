@@ -1,0 +1,20 @@
+<template name="Constellation_docViewer">
+  {{#if searching}}
+    {{> Constellation_search}}
+  {{/if}}
+  {{#with activeDocument}}
+    <div class="{{editStyle}}">
+      {{#if editStyle}}  
+        <pre contenteditable="{{editContent}}">{{{documentJSON}}}</pre>
+      {{else}}
+        {{#if noInlineEditing}}
+          <pre>{{{documentJSON}}}</pre>
+        {{else}}
+          {{> editableJSON document=this collection=..}}
+        {{/if}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{> Constellation_docInsert_main}}
+  {{/with}}
+</template>

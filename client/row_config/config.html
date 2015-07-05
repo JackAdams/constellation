@@ -1,0 +1,24 @@
+<template name="Constellation_config_header">
+
+  <div style="float: right" class="Constellation_Minimize" title="Minimize">_</div>
+
+</template>
+  
+<template name="Constellation_config_menu">
+  
+  <div style="text-indent:8px;">Show and hide tabs</div>
+  
+</template>
+
+<template name="Constellation_config_view">
+        
+  <ul class="Constellation_installed_tabs">
+    {{#each installedTabs}}
+      <li class="Constellation_config_item {{#if collection}}Constellation_collection_item{{/if}}">
+        <input type="checkbox" id="Constellation-tab-{{id}}" checked={{tabActive}} />&nbsp;
+        <label for="Constellation-tab-{{id}}">{{name}}</label>
+      </li>
+    {{/each}}
+  </ul>
+
+</template>

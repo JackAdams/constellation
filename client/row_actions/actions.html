@@ -1,0 +1,40 @@
+<template name="Constellation_actions_header">
+
+  {{#with stack}}{{> Constellation_global_undo_redo }}{{/with}}
+        
+</template>
+
+<template name="Constellation_actions_menu">
+
+  <div class="Constellation_log_purge">Purge log</div>
+
+</template>
+             
+<template name="Constellation_actions_main">
+
+  {{#each actions}}
+    {{> Constellation_action}}
+  {{else}}
+    No actions logged
+  {{/each}}
+
+</template>
+
+<template name="Constellation_global_undo_redo">
+  <span class="undo-redo-buttons">
+    {{#with stack 'undo'}}<span class="undo-button"><span title="Undo {{action}} {{collection}}: {{json}}">undo</span></span>{{/with}}{{#with stack 'redo'}}<span class="redo-button"><span title="Redo {{action}} {{collection}}: {{json}}">redo</span></span>{{/with}}
+  </span>
+</template>
+
+<template name="Constellation_action">
+  <div class="Constellation_action">
+    {{#with singleAction}}{{> Constellation_global_undo_redo }}{{/with}}
+    {{action}} {{collection}} <span class="Constellation_action_time">{{time}}</span>
+    <br />
+    <span class="Constellation_action_toggle"><a href="" class="Constellation_toggle_document">{{document._id}}</a></span>
+    {{#if fullDoc}}
+      <br />
+      <pre>{{{json}}}</pre>
+    {{/if}}
+  </div>
+</template>

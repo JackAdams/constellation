@@ -1,0 +1,51 @@
+<body>
+  {{> Constellation}}
+</body>
+
+<template name="Constellation">
+  {{#if constellationActive}}
+    <div id="Constellation" class="{{active}} Constellation">
+      {{#each rows}}
+        {{#if visible}}
+          {{> Constellation_row}}
+        {{/if}}
+      {{/each}}
+    </div>
+  {{/if}}      
+</template>
+
+<template name="Constellation_row">
+
+  <div class="Constellation_row {{#unless noOpen}}{{active}}{{/unless}} {{#unless collection}}Constellation_tool{{/unless}}">
+    
+    {{> Constellation_headerContent}}
+
+    <strong>{{name}}</strong><br>
+    
+    <div class="Constellation_contentView">
+
+      <div class="Constellation_menuContent">
+        {{> Constellation_menuContent}}
+      </div>
+      
+      <div class="Constellation_documentViewer">
+        {{> Constellation_mainContent}}
+      </div>
+
+    </div>
+    
+  </div>
+  
+</template>
+
+<template name="Constellation_menuContent">
+  {{> Template.dynamic template=template data=id}}
+</template>
+
+<template name="Constellation_headerContent">
+  {{> Template.dynamic template=template data=id}}
+</template>
+
+<template name="Constellation_mainContent">
+  {{> Template.dynamic template=template data=id}}
+</template>

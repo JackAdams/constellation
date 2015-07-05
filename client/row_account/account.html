@@ -1,0 +1,29 @@
+<template name="Constellation_account_status">
+	
+  {{#if currentUser}}
+    <div class="Constellation_account_active"></div>
+  {{else}}
+    <div class="Constellation_account_inactive"></div>
+  {{/if}}
+
+</template>
+
+<template name="Constellation_account_view">
+  
+  {{#if currentUser}}
+    {{> Constellation_accountViewer}}
+  {{else}}
+    <div class="Constellation_docBar1">
+      Not Signed In
+    </div>
+  {{/if}}
+
+</template>
+
+<template name="Constellation_account_controls">
+  
+  {{#if currentUser}}
+    {{> Constellation_docControls}}
+  {{/if}}
+  
+</template>

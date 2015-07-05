@@ -1,0 +1,43 @@
+<template name="Constellation_docControls">
+		
+  <div class="{{Constellation_menuContent_editing}}">
+    {{#if account}}
+      <div class="Constellation_docBar1">
+        {{#if editing}}
+          <div class="Constellation_edit_title">Update Document</div>
+          <div class="Constellation_edit_save">Save</div>
+          <div class="Constellation_edit_cancel">Cancel</div>
+        {{else}}
+          <div class="Constellation_m_edit Constellation_m_updateAccount">Update</div>
+          <div class="Constellation_m_signout">Sign Out</div>
+        {{/if}}
+      </div>
+    {{else}}
+      <div class="Constellation_docBar1">
+        {{#if notEmpty}}
+          {{#if editing}}
+            <div class="Constellation_edit_title">Update Document</div>
+            <div class="Constellation_edit_save">Save</div>
+            <div class="Constellation_edit_cancel">Cancel</div>
+          {{else}}
+            <div class="Constellation_m_edit">Update</div>
+            <div class="Constellation_m_new">Duplicate</div>
+            <div class="Constellation_m_delete">Remove</div>
+            {{> Constellation_search_button align="left"}}
+            <div class="{{disable_right}} Constellation_m_right">&rsaquo;</div>
+            <div class="{{disable_left}} Constellation_m_left">&lsaquo;</div>
+          {{/if}}
+        {{else}}
+          {{> Constellation_docInsert}}
+        {{/if}}
+      </div>
+    {{/if}}	
+  </div>
+
+</template>
+
+<template name="Constellation_search_button">
+
+  <div class="Constellation_m_search_{{align}}" title="Search / Filter">?</div>
+  
+</template>

@@ -1,0 +1,8 @@
+<template name="Constellation_search">
+  <select class="Constellation_search_fields">
+    {{#each fields}}
+      <option selected={{selected}} title="{{type}}">{{name}}</option>
+    {{/each}}
+  </select>
+  <input type="text" class="Constellation_search" value="{{value}}" placeholder="search value ..." />
+</template>

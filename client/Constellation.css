@@ -1,0 +1,572 @@
+#Constellation {  
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 143px;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.Constellation {
+  background-color: rgba(63,63,63,.92);
+  -webkit-font-smoothing: antialiased;
+  position: fixed;
+  transition: 0.3s;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #fff;
+  font-size: 14px;
+  line-height: 28px;
+  padding: 0px;
+  margin: 0px;
+  z-index: 9999999997;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: default;
+}
+
+.Constellation * {
+  outline: none;
+}
+
+.Constellation strong {
+  color: rgba(255,255,255,.8);
+  font-weight: bold;
+}
+
+.Constellation .Constellation_tool strong {
+  color: rgba(215,235,255,.8);
+}
+
+#Constellation ::-webkit-scrollbar { 
+    display: none; 
+}
+
+#Constellation.Constellation_expand {
+  width: 100% !important;
+  max-width: 320px !important;
+  }
+
+#Constellation.Constellation_fullscreen {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  opacity: 0.93 !important;
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: auto !important }
+
+#Constellation.Constellation_fullscreen .Constellation_contentView {
+  height: 95%;	
+}
+
+.Constellation_editable {
+  cursor: auto; }
+
+.Constellation_editable span {
+  color: #fff !important; }
+
+#Constellation a {
+  color: #999;
+  text-decoration: none;
+}
+
+#Constellation a:hover {
+  color: #A6E22D;
+  text-decoration: underline;
+}
+
+#Constellation *, .Constellation_row {
+  outline: none;
+  font-family: Liberation Mono, Courier, Lucidatypewriter, Fixed, monospace !important; } 
+
+#Constellation pre {
+  outline: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  display: block;
+  list-style: none;
+  quotes: none;
+  content: "";
+  content: none;
+  background: transparent;
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.Constellation_empty {
+  line-height: 14px !important;
+  font-size: 12px !important;
+  background-image: -moz-linear-gradient(#000, #292929);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#000), to(#292929));
+  background-image: -webkit-linear-gradient(#000, #292929);
+  background-image: -o-linear-gradient(#000, #000);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$c1', endColorstr='$c2',GradientType=0);
+  color: rgba(255, 255, 255, 0.6); }
+  
+.Constellation_row {
+  padding: 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+  height: 28px;
+  position: relative;
+  transition: 0.3s;
+  margin-bottom: 1px;
+}
+
+.Constellation_row_name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 8px;
+  z-index: 9999999999999;
+  position: relative;
+}
+.Constellation_row:last-child {
+  margin-bottom: 0px;
+}
+
+.ConstellationHide {
+  opacity: 0;
+  transition: 0.3s;
+  display: none; }
+
+.Constellation_row:hover {
+  cursor: pointer; }
+
+.Constellation_empty {
+  padding: 8px;
+  line-height: 16px;
+  font-size: 11px; }
+
+.Constellation_expand .ConstellationHide {
+  display: inline; }
+
+.Constellation_row_expand {
+  height: 320px;
+  cursor: default !important; 
+}
+.Constellation_row_expand .Constellation_contentView {
+  box-shadow: 0 0 0 80px rgba(0,0,0,.68);
+}
+
+.Constellation_row_expand .ConstellationHide {
+  opacity: 1;
+  max-width: auto;
+  overflow: auto;
+}
+
+.Constellation_row_expand .Constellation_Controls {
+  width: 20px;
+  line-height: 19px;
+  font-size: 22px;
+  height: 20px;
+  border-radius: 50px;
+  background: #fff;
+  color: #000;
+  opacity: 0.2;
+}
+
+.Constellation_row_expand .Constellation_Controls:hover {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.Constellation_row_expand .Constellation_plus {
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.Constellation_counter {
+  float: right;
+}
+
+.Constellation_header { 
+  color: rgba(255,255,255,.6);
+}
+
+.Constellation_header .Constellation_documentViewer {
+  padding-bottom: 25px;
+  padding-top: 3px;
+  border-radius: 5px;
+}
+
+.Constellation_header:hover {
+  cursor: pointer;
+}
+
+.Constellation_Minimize, .Constellation_FullScreen {
+  display: none;
+  padding: 0 9px;
+  margin-right: -9px;
+  opacity: 0;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.Constellation_FullScreen {
+  margin-right: 0;
+  display: block;
+}
+
+.Constellation_Minimize:hover, .Constellation_FullScreen:hover {
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+#Constellation.Constellation_fullscreen .Constellation_row_expand {
+  overflow: auto;
+  height: inherit;
+}
+
+#Constellation.Constellation_fullscreen .Constellation_row_expand .Constellation_documentViewer {
+  height: auto;
+}
+
+.Constellation_expand .Constellation_Minimize, .Constellation_expand .Constellation_FullScreen {
+  display: inline;
+  opacity: 1;
+}
+
+.Constellation_contentView {
+  box-shadow: 0 0 0 80px rgba(0,0,0,.35);
+  border-radius: 5px;
+  transition: .3s;
+}
+
+.Constellation_documentViewer {
+  height: 255px;
+  padding: 0 7px;
+  padding-top: 3px;
+  line-height: 20px;
+  z-index: 99;
+  overflow: auto;
+  border-radius: 0 0 5px 5px;
+  z-index: 9999999998;
+  position: relative;
+  transition: 0.3s;
+  color: rgba(255,255,255,.5); 
+}
+
+.Constellation_documentViewer pre {
+  margin: 0px;
+  padding: 0px;
+  padding-top: 3px;
+  color: rgba(255,255,255,.5);
+  overflow: visible;
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+.Constellation_documentViewer span {
+  transition: 0.2s;
+}
+
+.Constellation_documentViewer_buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-collapse: collapse;
+}
+
+.Constellation_documentViewer_buttons div {
+  float: right;
+  line-height: 18px;
+  right: 0;
+  margin-right: 5px;
+  margin-top: 5px;
+  padding: 0 4px;
+  padding-top: 2px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-family: "Menlo", Courier, Lucidatypewriter, Fixed, monospace;
+}
+
+/* green */
+.Constellation_string {
+  color: #A6E22D !important; }
+
+/* dark orange */
+.Constellation_number {
+  color: #E6DB74 !important; }
+
+/* blue */
+.Constellation_boolean {
+  color: #66D9EF !important; }
+
+/* magenta */
+.Constellation_null {
+  color: #AE81FF !important; }
+  
+/* red */
+.Constellation_key {
+  color: #F92772 !important; }
+
+.Constellation_menuContent {
+  line-height: 28px;
+  height: 28px;
+  border-radius: 5px 5px 0 0;
+  
+  color: rgba(255, 255, 255, 0.6);
+  padding-bottom: 1px;
+
+  position: relative;
+  /*background: rgba();*/
+  /*background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAAECAAAAACBhLHlAAAAD0lEQVR4AWM0YwAhXRACAAVnAMsAW/K6AAAAAElFTkSuQmCC");*/
+  background: rgba(0,0,0,.2);
+  background-size: 1px 2px;
+  background-position: 0 -1px;
+  overflow: hidden;
+}
+
+.Constellation_menuContent .Constellation_docBar1, .Constellation_menuContent .Constellation_docBar2 {
+  position: absolute;
+  top: 0;
+  height: 28px;
+  width: 100%;
+  transition: 0.2s;
+}
+
+.Constellation_m_left, .Constellation_m_right, .Constellation_m_new, .Constellation_m_edit, .Constellation_m_delete, .Constellation_menuContent_insert, .Constellation_log_purge {
+  float: left;
+  border-left: 1px solid rgba(0,0,0,.4);
+  padding: 0 6px;
+}
+
+.Constellation_m_search_left {
+  float: left;
+  padding: 0 3px;
+  border-right: 1px solid rgba(0,0,0,.4);
+}
+
+.Constellation_m_search_right {
+  float: right;
+  padding: 0 3px;
+  border-left: 1px solid rgba(0,0,0,.4);
+}
+
+.Constellation_m_edit {
+  border-left: 0px solid transparent;
+}
+
+.Constellation_m_delete, .Constellation_log_purge {
+  border-right: 1px solid rgba(0,0,0,.4);
+}
+
+.Constellation_edit_save, .Constellation_edit_cancel {
+  border-left: 1px solid rgba(0,0,0,.4);
+  padding: 0 8px;
+  float: right;
+}
+
+.Constellation_edit_title {
+  float: left;
+  padding-left: 8px;
+}
+
+.Constellation_m_edit {
+  margin-left: 0px;
+}
+
+.Constellation_m_left, .Constellation_m_right {
+  float: right !important;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 0 8px !important;
+  border-right: 0px solid transparent;
+  border-left: 1px solid rgba(0,0,0,.4);
+}
+
+.Constellation_m_signout, .Constellation_m_signin {
+  border-left: 1px solid rgba(0,0,0,.4);
+  float: right;
+  padding: 0 8px;
+}
+
+.Constellation_m_updateAccount {
+  border-right: 1px solid rgba(0,0,0,.4);
+}
+
+.Constellation_edit_save:hover, .Constellation_edit_cancel:hover, .Constellation_menuContent_insert:hover, .Constellation_m_signout:hover, .Constellation_m_signin:hover, .Constellation_m_left:hover, .Constellation_m_right:hover, .Constellation_m_new:hover, .Constellation_m_edit:hover, .Constellation_m_delete:hover, .Constellation_m_search_right:hover, .Constellation_m_search_left:hover, .Constellation_log_purge:hover {
+  color: #2CA6E2;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.Constellation_m_disabled {
+  color: rgba(0,0,0,.4) !important;
+  cursor: default !important;
+  background: transparent !important;
+}
+
+
+.Constellation_m_wrapper {
+  width: 100%;
+  max-width: 67px;
+  overflow: hidden;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.Constellation_m_wrapper .Constellation_m_edit {
+  transition: 0.3s;
+}
+
+.Constellation_m_wrapper .Constellation_m_wrapper2 {
+  min-width: 120px;
+  margin-right: -120px;
+  float: right;
+  transition: 0.3s;
+}
+
+.Constellation_m_wrapper_expand {
+  max-width: 100%;
+}
+  
+.Constellation_m_wrapper_expand .Constellation_m_edit {
+  background: transparent;
+  cursor: default;
+}
+
+.Constellation_m_wrapper_expand .Constellation_m_wrapper2 {
+  margin-right: 0px;
+}
+
+
+
+.Constellation_account_active, .Constellation_account_inactive {
+  float: right;
+  height: 8px;
+  width: 8px;
+  border-radius: 10px;
+  background: #EB4C16;
+  margin-top: 10px;
+}
+
+.Constellation_account_active {
+  background: #A6E22D;
+}
+
+#Constellation input {
+  border: 0;
+  padding: 0 !important;
+  margin: 0;
+  text-indent: 0px;
+  padding: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  height: 18px !important;
+  margin: 0px !important;
+  line-height: inherit !important;
+  border: 0px solid transparent !important;
+  color: inherit;
+}
+
+#Constellation .editable-JSON-_id-field, #Constellation .editable-JSON-_id-value {
+  opacity: 1;
+}
+
+#Constellation .Constellation_documentViewer pre, .editable-JSON {
+  white-space: pre;       /* CSS 3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word; 
+}
+
+#Constellation .undo-redo-buttons, #Constellation .constellation-menu-button-container {
+  float: right;
+  vertical-align: middle;
+  display: inline-block;
+  margin: -2px 0 0 0;
+}
+
+#Constellation .undo-button, #Constellation .redo-button, #Constellation .constellation-menu-button {
+  cursor: pointer !important;
+  font-size: 9px;
+  padding: 1px 1px 0px 1px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.05);
+  border-radius: 2px;
+  line-height: 9px;
+  margin-right: 2px;
+}
+
+#Constellation .undo-button:hover, #Constellation .redo-button:hover, #Constellation .constellation-menu-button:hover, #Constellation .constellation-menu-button-active {
+  transition: 0.3s;
+  background: rgba(255,255,255,.1);
+  color: #2CA6E2;
+}
+
+.Constellation_action {
+  border-bottom: 1px solid rgba(255,255,255,.2);
+}
+
+.Constellation_action_time {
+  color: grey;
+  font-size: smaller;	
+}
+
+.Constellation_action_toggle {
+  font-size: smaller;	
+}
+
+.Constellation_installed_tabs {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.Constellation_installed_tabs li {
+  margin: 0;	
+}
+
+.Constellation_installed_tabs li label{
+  display: inline-block;
+}
+
+#Constellation .Constellation_tool {
+  background-color: rgba(43,63,83,.92);
+}
+
+#Constellation input.Constellation_search {
+  height: 16px !important;
+  padding: 0 3px !important;
+  width: 150px;
+  color: rgba(0,0,0,.8);
+  opacity: 0.8;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+#Constellation .Constellation_search_fields {
+  width: 115px;
+  color: rgba(0,0,0,.8);
+  opacity: 0.8;
+}
+
+#Constellation .Constellation_config_item {
+  padding: 0 8px;
+  overflow: hidden;
+}
+
+#Constellation .Constellation_collection_item {
+  color: rgba(255,255,255,.8);
+}
+
+#Constellation .Constellation_config_item input {
+  vertical-align: middle;
+}
