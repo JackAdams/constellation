@@ -435,7 +435,7 @@
 
 
 
-.Constellation_account_active, .Constellation_account_inactive {
+.Constellation_item_active, .Constellation_item_inactive {
   float: right;
   height: 8px;
   width: 8px;
@@ -444,7 +444,7 @@
   margin-top: 10px;
 }
 
-.Constellation_account_active {
+.Constellation_item_active {
   background: #A6E22D;
 }
 

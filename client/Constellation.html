@@ -57,3 +57,11 @@
 <template name="Constellation_searchContent">
   {{> Template.dynamic template=template data=id}}
 </template>
+
+<template name="Constellation_onOffLight">
+  {{#if this}}
+    <div class="Constellation_item_active"></div>
+  {{else}}
+    <div class="Constellation_item_inactive"></div>
+  {{/if}}
+</template>

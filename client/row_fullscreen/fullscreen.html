@@ -1,9 +1,5 @@
 <template name="Constellation_fullscreen_header">
 
-  {{#if fullscreen}}
-    <div class="Constellation_account_active"></div>
-  {{else}}
-    <div class="Constellation_account_inactive"></div>
-  {{/if}}
+  {{> Constellation_onOffLight fullscreen}}
 
 </template>

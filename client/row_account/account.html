@@ -1,10 +1,6 @@
 <template name="Constellation_account_status">
 	
-  {{#if currentUser}}
-    <div class="Constellation_account_active"></div>
-  {{else}}
-    <div class="Constellation_account_inactive"></div>
-  {{/if}}
+  {{> Constellation_onOffLight currentUser}}
 
 </template>
 
