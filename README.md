@@ -59,20 +59,24 @@ __Note__: make sure you put `debugOnly: true` in your package's `Package.describ
 API
 ---
 
-All of these must be prefixed by `Package["babrahams:constellation"].API.` when using then in your plugin code.
+All methods must be prefixed by `Package["babrahams:constellation"].API.` when using then in your plugin code, so write this at the top of your files that use the API
+```
+var Constellation = Package["babrahams:constellation"].API;
+```
+then you can write:
 
-`addTab({name: "my-plugin"})` registers a new tab called "my-plugin" in Constellation's UI - see above for the fields the object can have when adding a tab
+`Constellaton.addTab({name: "my-plugin"})` to register a new tab called "my-plugin" in Constellation's UI - see above for the fields the object can have when adding a tab
 
-`isActive()` lets you check whether Constellation's UI is active or closed
+`Constellaton.isActive()` to check whether Constellation's UI is active or closed
 
-`hideCollection('collectionName')` allows you to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab)
+`Constellaton.hideCollection('collectionName')` to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab)
 
-`getCurrentTab()` gets the `id` of the currently selected tab
+`Constellaton.getCurrentTab()` to get the `id` of the currently selected tab
 
-`setCurrentTab("unique-id-for-my-tab")` allows you to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value)
+`Constellaton.setCurrentTab("unique-id-for-my-tab")` to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value)
 
 ```
-registerCallbacks({
+Constellaton.registerCallbacks({
   "myCallBack" : function () {
     console.log("Callback fired!");
   }
