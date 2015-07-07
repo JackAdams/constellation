@@ -44,7 +44,7 @@ _.extend(Constellation, {
         alert("There is an error with your JSON syntax.\n\nNote: keys and string values need double quotes.");
         break;
       case "duplicate":
-        alert("There was an error duplicating your document.");
+        alert("There was an error duplicating your document. Check you're not duplicating keys for fields with unique indexes.");
         break;
       case "remove":
         alert("There was an error removing your document.");

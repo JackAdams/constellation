@@ -21,3 +21,10 @@ Template.Constellation_collection_count.helpers({
 
   }
 });
+
+Template.Constellation_search_button.events({ 
+  'click .Constellation_search_button' : function (evt) {
+	evt.stopPropagation();
+	Session.set('Constellation_searching', !Session.get('Constellation_searching'));  
+  }
+});

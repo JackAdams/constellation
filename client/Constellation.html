@@ -24,6 +24,10 @@
     
     <div class="Constellation_contentView">
 
+      <div class="Constellation_searchContent">
+        {{> Constellation_searchContent}}
+      </div>
+
       <div class="Constellation_menuContent">
         {{> Constellation_menuContent}}
       </div>
@@ -47,5 +51,9 @@
 </template>
 
 <template name="Constellation_mainContent">
+  {{> Template.dynamic template=template data=id}}
+</template>
+
+<template name="Constellation_searchContent">
   {{> Template.dynamic template=template data=id}}
 </template>

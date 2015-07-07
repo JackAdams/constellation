@@ -2,8 +2,8 @@
 
   <!-- Collection Count -->
   <div class="Constellation_counter">
-    {{#if collectionCount}}
-        <span class="ConstellationHide">{{currentPosition}}/</span>{{/if}}{{collectionCount}}
+    {{#if collectionCount}} 
+      <span class="ConstellationHide">{{> Constellation_search_button}}{{currentPosition}}/</span>{{/if}}{{collectionCount}}
   </div>
       
 </template>
@@ -13,4 +13,12 @@
     If you think this is an error, please report it on
     <a href="https://github.com/JackAdams/constellation" style="color: #cc0000">GitHub</a>.
   </div>
+</template>
+
+<template name="Constellation_search_button">
+
+  <span class="Constellation_search_button_container">
+    <span class="Constellation_search_button" title="Search / Filter">?</span>
+  </span>
+  
 </template>

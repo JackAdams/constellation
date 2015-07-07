@@ -256,9 +256,3 @@ Template.Constellation_docControls.helpers({
     }
   }
 });
-
-Template.Constellation_search_button.events({ 
-  'click .Constellation_m_search_left, click .Constellation_m_search_right' : function () {
-	Session.set('Constellation_searching', !Session.get('Constellation_searching'));  
-  }
-});

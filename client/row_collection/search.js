@@ -19,6 +19,9 @@ Template.Constellation_search.helpers({
   value: function () {
 	var value = Session.get(Constellation.searchKey(String(Template.instance().data), 'value'));
 	return (!_.isUndefined(value)) ? value : '';  
+  },
+  searching: function () {
+	return Session.get('Constellation_searching');  
   }
 });
 

@@ -15,33 +15,7 @@ var insertDoc = function (ConstellationCollection, documentData) {
 }
 
 Meteor.methods({
-  Constellation_verify: function () {
 
-    // NOTE: This function is not in use
-
-    // Check if the Meteor absolute URL
-    // begins with http://localhost:
-
-    var location = Meteor.absoluteUrl(),
-         current = location.substring(0, 17);
-
-    if (current === "http://localhost:") {
-      return "verified";
-    }
-    return false;
-
-    // Currently not in use, but under consideration
-    // To Use:
-
-    // Meteor.call("Constellation_verify", function (error, result) {
-    //   if (result === "verified") {
-    //     task();
-    //   } else {
-    //      return "absoluteURLError"
-    //   }
-    // });
-
-  },
   Constellation_update: function (collectionName, documentData, originalDocumentData) {
 
     check(collectionName, String);
@@ -94,6 +68,7 @@ Meteor.methods({
     );
 
   },
+  
   Constellation_remove: function (collectionName, documentID) {
 
     check(collectionName, String);
@@ -108,6 +83,7 @@ Meteor.methods({
     return docToBeRemoved;
 
   },
+  
   Constellation_duplicate: function (collectionName, documentID) {
 
     check(collectionName, String);
@@ -127,6 +103,7 @@ Meteor.methods({
     }
 
   },
+  
   Constellation_insert: function(collectionName, documentData) {
 
     check(collectionName, String);
@@ -144,5 +121,6 @@ Meteor.methods({
     
     return newId;
 
-  },
+  }
+  
 });

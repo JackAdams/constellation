@@ -1,7 +1,4 @@
 Template.Constellation_docViewer.helpers({
-  searching: function () {
-	return Session.get('Constellation_searching');  
-  },
   activeDocument: function () {
     var collectionName = String(this);
     var currentCollection = Constellation.Collection(collectionName);

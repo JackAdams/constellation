@@ -346,18 +346,6 @@
   padding: 0 6px;
 }
 
-.Constellation_m_search_left {
-  float: left;
-  padding: 0 3px;
-  border-right: 1px solid rgba(0,0,0,.4);
-}
-
-.Constellation_m_search_right {
-  float: right;
-  padding: 0 3px;
-  border-left: 1px solid rgba(0,0,0,.4);
-}
-
 .Constellation_m_edit {
   border-left: 0px solid transparent;
 }
@@ -400,7 +388,7 @@
   border-right: 1px solid rgba(0,0,0,.4);
 }
 
-.Constellation_edit_save:hover, .Constellation_edit_cancel:hover, .Constellation_menuContent_insert:hover, .Constellation_m_signout:hover, .Constellation_m_signin:hover, .Constellation_m_left:hover, .Constellation_m_right:hover, .Constellation_m_new:hover, .Constellation_m_edit:hover, .Constellation_m_delete:hover, .Constellation_m_search_right:hover, .Constellation_m_search_left:hover, .Constellation_log_purge:hover {
+.Constellation_edit_save:hover, .Constellation_edit_cancel:hover, .Constellation_menuContent_insert:hover, .Constellation_m_signout:hover, .Constellation_m_signin:hover, .Constellation_m_left:hover, .Constellation_m_right:hover, .Constellation_m_new:hover, .Constellation_m_edit:hover, .Constellation_m_delete:hover, .Constellation_log_purge:hover {
   color: #2CA6E2;
   transition: .2s;
   cursor: pointer;
@@ -542,22 +530,6 @@
   background-color: rgba(43,63,83,.92);
 }
 
-#Constellation input.Constellation_search {
-  height: 16px !important;
-  padding: 0 3px !important;
-  width: 150px;
-  color: rgba(0,0,0,.8);
-  opacity: 0.8;
-  border-radius: 3px;
-  vertical-align: middle;
-}
-
-#Constellation .Constellation_search_fields {
-  width: 115px;
-  color: rgba(0,0,0,.8);
-  opacity: 0.8;
-}
-
 #Constellation .Constellation_config_item {
   padding: 0 8px;
   overflow: hidden;
@@ -569,4 +541,51 @@
 
 #Constellation .Constellation_config_item input {
   vertical-align: middle;
+}
+
+.Constellation_search_button_container {
+  position: relative;
+  display: inline-block;	
+}
+
+.Constellation_search_button {
+  border-radius: 5px;
+  background-color: rgba(255,255,255,.2);
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  line-height: 14px;
+  font-size: 12px;
+  padding: 0 0 0 4px;
+  top: -12px;
+  left: -22px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.Constellation_search_button:hover {
+  background-color: rgba(255,255,255,.4);
+  color: #fff;
+}
+
+.Constellation_search_container {
+  display: none;
+}
+
+#Constellation input.Constellation_search {
+  height: 16px !important;
+  padding: 0 3px !important;
+  width: 150px;
+  color: rgba(0,0,0,.8);
+  opacity: 0.8;
+  border-radius: 3px;
+  vertical-align: middle;
+  line-height: 16px !important;
+}
+
+#Constellation .Constellation_search_fields {
+  width: 115px;
+  color: rgba(0,0,0,.8);
+  opacity: 0.8;
+  margin-left: 5px;
 }

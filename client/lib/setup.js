@@ -51,6 +51,7 @@ Meteor.startup(function() {
 		  headerContentTemplate: "Constellation_collection_count",
 		  menuContentTemplate: "Constellation_docControls",
 		  mainContentTemplate: "Constellation_docViewer",
+		  searchContentTemplate: "Constellation_search",
 		  active: true,
 		  collection: true
 		}); 
