@@ -48,6 +48,10 @@ Package["babrahams:constellation"].API.addTab({
 
 You can set `active: false` in the object above if you don't want your plugin to be shown automatically (the user can make it visible through the "Config" tab).
 
+`noOpen: true` means the tab won't open when clicked.
+
+`callback: "myCallBack"` will fire the `"myCallBack"` function every time the tab header is clicked. `"myCallBack"` must be registered as shown in the API section below.
+
 You can also set `id: "unique-id-for-my-tab"` if you like, but unless two plugins share the same name, this isn't going to be necessary.
 
 __Note__: make sure you put `debugOnly: true` in your package's `Package.describe({ ... });`
@@ -66,3 +70,11 @@ All of these must be prefixed by `Package["babrahams:constellation"].API.` when 
 `getCurrentTab()` gets the `id` of the currently selected tab
 
 `setCurrentTab("unique-id-for-my-tab")` allows you to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value)
+
+```
+registerCallbacks({
+  "myCallBack" : function () {
+    console.log("Callback fired!");
+  }
+});
+```
