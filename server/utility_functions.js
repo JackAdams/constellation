@@ -22,9 +22,9 @@ Constellation.diffDocumentData = function (dbDoc, newData, oldData) {
 
   var finalData = {};
 
-  var dbDocFields = _.keys(dbDoc),
-newDataFields = _.keys(newData),
-oldDataFields = _.keys(oldData); // console.log("dbDocFields",dbDocFields); console.log("newDataFields",newDataFields); console.log("oldDataFields",oldDataFields);
+  var dbDocFields = _.keys(dbDoc);
+  var newDataFields = _.keys(newData);
+  var oldDataFields = _.keys(oldData); // console.log("dbDocFields",dbDocFields); console.log("newDataFields",newDataFields); console.log("oldDataFields",oldDataFields);
 
   // First get the set of fields that we won't be saving because they were dynamically added on the client
 
@@ -40,40 +40,40 @@ oldDataFields = _.keys(oldData); // console.log("dbDocFields",dbDocFields); cons
 
   _.each(oldAndNewFields, function(field) {
 
-if (_.contains(dynamicallyAddedFields, field)) {
+    if (_.contains(dynamicallyAddedFields, field)) {
   
-  // We don't want to add this field to the actual mongodb document
-  console.log("'" + field + "' appears to be a dynamically added field. This field was not updated.");
-  return;
+      // We don't want to add this field to the actual mongodb document
+      console.log("'" + field + "' appears to be a dynamically added field. This field was not updated.");
+      return;
 
-}
+    }
 
-if (_.contains(unpublishedFields, field)) {
+    if (_.contains(unpublishedFields, field)) {
 
-  // We don't want to overwrite the existing mondodb document value
-  if (newData[field]) {
-// Give a message to user as to why that field wasn't updated
-console.log("'" + field + "' is an unpublished field. This field's value was not overwritten.");
-  }
-  // Make sure the old value is retained
-  finalData[field] = dbDoc[field];
-  return;
+      // We don't want to overwrite the existing mondodb document value
+      if (newData[field]) {
+        // Give a message to user as to why that field wasn't updated
+        console.log("'" + field + "' is an unpublished field. This field's value was not overwritten.");
+      }
+      // Make sure the old value is retained
+      finalData[field] = dbDoc[field];
+      return;
 
-}
+    }
 
-if (!_.isUndefined(newData[field])) {
+    if (!_.isUndefined(newData[field])) {
         
-  finalData[field] = (_.isObject(newData[field]) && !_.isArray(newData[field]) && !_.isDate(newData[field])) ? Constellation.diffDocumentData(dbDoc[field] || {}, newData[field], oldData[field] || {}) : newData[field];
+      finalData[field] = (_.isObject(newData[field]) && !_.isArray(newData[field]) && !_.isDate(newData[field])) ? Constellation.diffDocumentData(dbDoc[field] || {}, newData[field], oldData[field] || {}) : newData[field];
       
     }
 
-// This will let unpublished fields into the database,
-// so the user may be confused by the lack of an update in the client
-// simply because the added field isn't published
-// The following solves that problem, but doesn't allow new fields to be added at all:
-// finalData[field] = oldData[field] && newData[field];
-// We actually need to know the set of fields published by the publication that the client side doc came from
-// but how do we get that?
+    // This will let unpublished fields into the database,
+    // so the user may be confused by the lack of an update in the client
+    // simply because the added field isn't published
+    // The following solves that problem, but doesn't allow new fields to be added at all:
+    // finalData[field] = oldData[field] && newData[field];
+    // We actually need to know the set of fields published by the publication that the client side doc came from
+    // but how do we get that?
 
   });
 
