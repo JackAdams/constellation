@@ -48,7 +48,7 @@
 #Constellation.Constellation_expand {
   width: 100% !important;
   max-width: 320px !important;
-  }
+}
 
 #Constellation.Constellation_fullscreen {
   width: 100% !important;
@@ -59,17 +59,20 @@
   position: absolute;
   left: 0;
   top: 0;
-  overflow: auto !important }
+  overflow: auto !important
+}
 
 #Constellation.Constellation_fullscreen .Constellation_contentView {
-  height: 95%;	
+  height: 95%;    
 }
 
 .Constellation_editable {
-  cursor: auto; }
+  cursor: auto;
+}
 
 .Constellation_editable span {
-  color: #fff !important; }
+  color: #fff !important;
+}
 
 #Constellation a {
   color: #999;
@@ -83,7 +86,8 @@
 
 #Constellation *, .Constellation_row {
   outline: none;
-  font-family: Liberation Mono, Courier, Lucidatypewriter, Fixed, monospace !important; } 
+  font-family: Liberation Mono, Courier, Lucidatypewriter, Fixed, monospace !important;
+} 
 
 #Constellation pre {
   outline: none;
@@ -100,7 +104,8 @@
   content: none;
   background: transparent;
   border-collapse: collapse;
-  border-spacing: 0; }
+  border-spacing: 0;
+}
 
 .Constellation_empty {
   line-height: 14px !important;
@@ -110,7 +115,8 @@
   background-image: -webkit-linear-gradient(#000, #292929);
   background-image: -o-linear-gradient(#000, #000);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$c1', endColorstr='$c2',GradientType=0);
-  color: rgba(255, 255, 255, 0.6); }
+  color: rgba(255, 255, 255, 0.6);
+}
   
 .Constellation_row {
   padding: 0 8px;
@@ -138,18 +144,22 @@
 .ConstellationHide {
   opacity: 0;
   transition: 0.3s;
-  display: none; }
+  display: none;
+}
 
 .Constellation_row:hover {
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 .Constellation_empty {
   padding: 8px;
   line-height: 16px;
-  font-size: 11px; }
+  font-size: 11px;
+}
 
 .Constellation_expand .ConstellationHide {
-  display: inline; }
+  display: inline;
+}
 
 .Constellation_row_expand {
   height: 320px;
@@ -297,23 +307,28 @@
 
 /* green */
 .Constellation_string {
-  color: #A6E22D !important; }
+  color: #A6E22D !important;
+}
 
 /* dark orange */
 .Constellation_number {
-  color: #E6DB74 !important; }
+  color: #E6DB74 !important;
+}
 
 /* blue */
 .Constellation_boolean {
-  color: #66D9EF !important; }
+  color: #66D9EF !important;
+}
 
 /* magenta */
 .Constellation_null {
-  color: #AE81FF !important; }
+  color: #AE81FF !important;
+}
   
 /* red */
 .Constellation_key {
-  color: #F92772 !important; }
+  color: #F92772 !important;
+}
 
 .Constellation_menuContent {
   line-height: 28px;
@@ -505,11 +520,11 @@
 
 .Constellation_action_time {
   color: grey;
-  font-size: smaller;	
+  font-size: smaller;    
 }
 
 .Constellation_action_toggle {
-  font-size: smaller;	
+  font-size: smaller;    
 }
 
 .Constellation_installed_tabs {
@@ -519,7 +534,7 @@
 }
 
 .Constellation_installed_tabs li {
-  margin: 0;	
+  margin: 0;    
 }
 
 .Constellation_installed_tabs li label{
@@ -545,7 +560,7 @@
 
 .Constellation_search_button_container {
   position: relative;
-  display: inline-block;	
+  display: inline-block;    
 }
 
 .Constellation_search_button {

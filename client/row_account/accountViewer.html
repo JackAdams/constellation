@@ -1,11 +1,11 @@
 <template name="Constellation_accountViewer">
 
   <div class="{{editStyle}}">
-    {{#if editStyle}}  
-      <pre contenteditable="{{editContent}}">{{{accountData}}}</pre>
-    {{else}}
-      {{> editableJSON document=currentUser collection="users"}}
-    {{/if}}
+{{#if editStyle}}  
+  <pre contenteditable="{{editContent}}">{{{accountData}}}</pre>
+{{else}}
+  {{> editableJSON document=currentUser collection="users"}}
+{{/if}}
   </div>
-    
+
 </template>

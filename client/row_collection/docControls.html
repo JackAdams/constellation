@@ -1,5 +1,5 @@
 <template name="Constellation_docControls">
-		
+        
   <div class="{{Constellation_menuContent_editing}}">
     {{#if account}}
       <div class="Constellation_docBar1">
@@ -23,14 +23,14 @@
             <div class="Constellation_m_edit">Update</div>
             <div class="Constellation_m_new">Duplicate</div>
             <div class="Constellation_m_delete">Remove</div>
-            <div class="{{disable_right}} Constellation_m_right">&rsaquo;</div>
-            <div class="{{disable_left}} Constellation_m_left">&lsaquo;</div>
+            <div class="{{disable}} Constellation_m_right">&rsaquo;</div>
+            <div class="{{disable}} Constellation_m_left">&lsaquo;</div>
           {{/if}}
         {{else}}
           {{> Constellation_docInsert}}
         {{/if}}
       </div>
-    {{/if}}	
+    {{/if}}
   </div>
 
 </template>

@@ -5,7 +5,7 @@ Template.Constellation_config_header.events({
   },
   'click .Constellation_FullScreen' : function (e) {
     e.stopPropagation();
-	Constellation.toggleFullScreen();
+    Constellation.toggleFullScreen();
   }
 });
 
@@ -20,11 +20,11 @@ Template.Constellation_config_view.helpers({
 
 Template.Constellation_config_view.events({
   'change input' : function (evt, tmpl) {
-	var key = ('Constellation_' + this.id).replace(/_/g,"-");
-	var value = evt.target.checked;
-	TabStates.set(this.id, value);
-	Meteor.defer(function() {
-	  localStorage[key] = value;
-	});
+    var key = ('Constellation_' + this.id).replace(/_/g,"-");
+    var value = evt.target.checked;
+    TabStates.set(this.id, value);
+    Meteor.defer(function() {
+      localStorage[key] = value;
+    });
   }
 });

@@ -30,13 +30,13 @@ if (!!EditableJSON) {
     console.log("action:",action);
     console.log("result:", result);
     console.log("doc after:", Mongo.Collection.get(collection).findOne({_id:this._id}));*/
-	if (Constellation.Collection(collection)) {
-	  UndoRedo.add(collection, {
-		action: 'update',
-		document: documentBefore,
-		updatedDocument: this
-	  });
-	}
+    if (Constellation.Collection(collection)) {
+      UndoRedo.add(collection, {
+        action: 'update',
+        document: documentBefore,
+        updatedDocument: this
+      });
+    }
   });
 }
 
@@ -140,7 +140,7 @@ UndoRedo.undo = function (action, redo) {
       });
       break;
     case 'update' :
-      var currentDoc = Mongo.Collection.get(collection).findOne({_id: doc._id}); // Collection
+      var currentDoc = Mongo.Collection.get(collection).findOne({_id: doc._id}, {transform: null}); // Collection
       /*console.log("redo:",redo);
       console.log("collection:",collection);
       console.log("latestAction:",latestAction);
@@ -178,7 +178,7 @@ UndoRedo.undo = function (action, redo) {
         setStacks();
         return;
       }*/
-	  // console.log("collection:",collection);console.log("diffedVersion:",diffedVersion);console.log("currentDoc:", currentDoc);
+      // console.log("collection:",collection);console.log("diffedVersion:",diffedVersion);console.log("currentDoc:", currentDoc);
       Meteor.call('Constellation_update', collection, diffedVersion, currentDoc, function (err, res) {
         UndoRedo.setDocumentNumber(collection, doc._id);
         setStacks(); 

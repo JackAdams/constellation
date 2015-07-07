@@ -1,19 +1,20 @@
 <template name="Constellation_docInsert">
 
-    <div class="Constellation_menuContent">
-        <div class="Constellation_menuContent_insert" style="float: right">Insert</div>
-        &nbsp;Create new document
-    </div>
+  <div class="Constellation_menuContent">
+    <div class="Constellation_menuContent_insert" style="float: right">Insert</div>
+    {{> Constellation_search_button align="right"}}
+    &nbsp;Create new document
+  </div>
     
 </template>
 
 <template name="Constellation_docInsert_main">
 
-    <div class="Constellation_documentViewer" id="Constellation_{{this}}_newEntry" contenteditable=true>
+  <div class="Constellation_documentViewer" id="Constellation_{{this}}_newEntry" contenteditable=true>
     
 <pre>{
 
 }</pre>
-    </div>
+  </div>
     
 </template>

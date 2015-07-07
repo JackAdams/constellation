@@ -2,7 +2,7 @@ Template.Constellation_docViewer.helpers({
   activeDocument: function () {
     var collectionName = String(this);
     var currentCollection = Constellation.Collection(collectionName);
-    var documents = currentCollection.find(Constellation.searchSelector(collectionName)).fetch();
+    var documents = currentCollection.find(Constellation.searchSelector(collectionName), {transform: null}).fetch();
     var sessionKey = "Constellation_" + String(this);
     var docNumber = Session.get(sessionKey);
     var docCurrent = documents[docNumber];
@@ -40,6 +40,6 @@ Template.Constellation_docViewer.helpers({
 
   },
   noInlineEditing: function () {
-	return Session.get('Constellation_noInlineEditing');  
+    return Session.get('Constellation_noInlineEditing');  
   }
 });

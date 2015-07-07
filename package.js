@@ -10,11 +10,11 @@ Package.describe({
 Package.onUse(function(api) {
 
   var clientFiles = [
-	"client/lib/utils.js",
-	"client/lib/api.js",
-	"client/lib/setup.js",
-	"client/row_fullscreen/fullscreen.html",
-	"client/row_fullscreen/fullscreen.js",
+    "client/lib/utils.js",
+    "client/lib/api.js",
+    "client/lib/setup.js",
+    "client/row_fullscreen/fullscreen.html",
+    "client/row_fullscreen/fullscreen.js",
     "client/row_config/config.html",
     "client/row_config/config.js",
     "client/row_account/account.html",
@@ -23,16 +23,16 @@ Package.onUse(function(api) {
     "client/row_account/accountViewer.js",
     "client/row_collection/collections.html",
     "client/row_collection/collections.js",
-	"client/row_collection/search.html",
-	"client/row_collection/search.js",
+    "client/row_collection/search.html",
+    "client/row_collection/search.js",
     "client/row_collection/docViewer.html",
     "client/row_collection/docViewer.js",
     "client/row_collection/docInsert.html",
     "client/row_collection/docInsert.js",
     "client/row_collection/docControls.html",
     "client/row_collection/docControls.js",
-	"client/row_actions/undoRedo.html",
-	"client/row_actions/undoRedo.js",
+    "client/row_actions/undoRedo.html",
+    "client/row_actions/undoRedo.js",
     "client/row_actions/actions.html",
     "client/row_actions/actions.js",
     "client/Constellation.css",
@@ -61,7 +61,8 @@ Package.onUse(function(api) {
   api.add_files(serverFiles, "server");
   
   if (api.export) {
-    api.export(['Constellation','API'], "client");
+    api.export('API','client');
+    api.export('Constellation');
   }
 
 });

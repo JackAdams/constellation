@@ -3,11 +3,11 @@
 // so these are all available outside of the package via Package["babrahams:constellation"].Constellation
 
 _.extend(Constellation, {
-	
+    
   'colorize': function (json) {
-	if (_.isUndefined(json)) {
+    if (_.isUndefined(json)) {
       return '';
-	}
+    }
     // colorized the JSON objects
     if (typeof json != 'string') {
       json = JSON.stringify(json, undefined, 2);
@@ -32,7 +32,7 @@ _.extend(Constellation, {
   'getDocumentUpdate': function (data) {
 
     var elementID = '#ConstellationDoc_' + data;
-	var newData   = $(elementID + ' pre').text();
+    var newData   = $(elementID + ' pre').text();
 
     return newData;
 
@@ -65,92 +65,92 @@ _.extend(Constellation, {
 
   },
   'parse': function (data) {
-	var newObject = false;
-	
-	try {
-	  newObject = JSON.parse(data);
-	} catch (error) { console.log(data);
-	  Constellation.error("json.parse");
-	}
+    var newObject = false;
+    
+    try {
+      newObject = JSON.parse(data);
+    } catch (error) { console.log(data);
+      Constellation.error("json.parse");
+    }
 
     return newObject;
 
   },
   'toggleFullScreen' : function () {
-	Session.set('Constellation_fullscreen', !Session.get('Constellation_fullscreen'));  
+    Session.set('Constellation_fullscreen', !Session.get('Constellation_fullscreen'));  
   },
   'searchKey' : function (collectionName, type) {
     return 'Constellation_' + collectionName + '_' + type;
   },
   'searchSelector' : function (collectionName, exact) {
-	var selector = {};
-	if (!Session.get('Constellation_searching')) {
-	  return selector;	
-	}
-	var field = Session.get(Constellation.searchKey(collectionName, 'field')) || {name: '_id', type: 'string'};
-	var searchValue = Session.get(Constellation.searchKey(collectionName, 'value')), matcher;
-	if (typeof searchValue !== 'undefined' && searchValue !== '') {
-	  if (exact) {
-		matcher = searchValue;
-	  }
-	  else {
-	    switch (field.type) {
-		  case 'string' :
-		    matcher = {$regex: searchValue, $options: 'i'};
-			break;
-		  case 'object' :
-		  case 'array' :
-		    try {
+    var selector = {};
+    if (!Session.get('Constellation_searching')) {
+      return selector;    
+    }
+    var field = Session.get(Constellation.searchKey(collectionName, 'field')) || {name: '_id', type: 'string'};
+    var searchValue = Session.get(Constellation.searchKey(collectionName, 'value')), matcher;
+    if (typeof searchValue !== 'undefined' && searchValue !== '') {
+      if (exact) {
+        matcher = searchValue;
+      }
+      else {
+        switch (field.type) {
+          case 'string' :
+            matcher = {$regex: searchValue, $options: 'i'};
+            break;
+          case 'object' :
+          case 'array' :
+            try {
               matcher = JSON.parse(searchValue);
-			}
-			catch (err) {
-			  matcher = (field.type === 'array') ? [] : {};	
-			}
-			break;
-		    matcher = JSON.parse(searchValue) || {};
-			break;
-		  case 'date' :
-		    matcher = new Date(searchValue);
-			break;
-		  case 'null' :
-		    matcher = (searchValue === 'null') ? null : searchValue;
-			break;
-		  case 'boolean' :
-		    matcher = Boolean(searchValue);
-			break;
-		  case 'number' :
-		    matcher = parseInt(searchValue);
-			break;
-		  default :
-		    matcher = undefined;
-		}
-	  }
-	  selector[field.name] = matcher;
-	}
-	return selector;
+            }
+            catch (err) {
+              matcher = (field.type === 'array') ? [] : {};    
+            }
+            break;
+            matcher = JSON.parse(searchValue) || {};
+            break;
+          case 'date' :
+            matcher = new Date(searchValue);
+            break;
+          case 'null' :
+            matcher = (searchValue === 'null') ? null : searchValue;
+            break;
+          case 'boolean' :
+            matcher = Boolean(searchValue);
+            break;
+          case 'number' :
+            matcher = parseInt(searchValue);
+            break;
+          default :
+            matcher = undefined;
+        }
+      }
+      selector[field.name] = matcher;
+    }
+    return selector;
   },
   'guessType' : function (value) {
     if (_.isArray(value)) {
-	  return 'array';
-	}
-	if (_.isDate(value)) {
-	  return 'date';	
-	}
-	if (_.isObject(value)) {
-	  return 'object';
-	}
-	if (_.isString(value)) {
-	  return 'string';
-	}
-	if (_.isBoolean(value)) {
-	  return 'boolean'; 
-	}
-	if (_.isNumber(value)) {
-	  return 'number';  
-	}
-	if (_.isNull(value)) {
-	  return 'null';  
-	}
-	return 'undefined';
+      return 'array';
+    }
+    if (_.isDate(value)) {
+      return 'date';    
+    }
+    if (_.isObject(value)) {
+      return 'object';
+    }
+    if (_.isString(value)) {
+      return 'string';
+    }
+    if (_.isBoolean(value)) {
+      return 'boolean'; 
+    }
+    if (_.isNumber(value)) {
+      return 'number';  
+    }
+    if (_.isNull(value)) {
+      return 'null';  
+    }
+    return 'undefined';
   }
 });

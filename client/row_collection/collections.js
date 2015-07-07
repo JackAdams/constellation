@@ -4,7 +4,7 @@ Template.Constellation_collection_count.helpers({
     var collectionName = String(this);
     var collectionVar = Constellation.Collection(collectionName);
 
-    var count = collectionVar && collectionVar.find(Constellation.searchSelector(collectionName)).count() || 0;
+    var count = collectionVar && collectionVar.find(Constellation.searchSelector(collectionName), {transform: null}).count() || 0;
 
     return count;
 
@@ -24,7 +24,7 @@ Template.Constellation_collection_count.helpers({
 
 Template.Constellation_search_button.events({ 
   'click .Constellation_search_button' : function (evt) {
-	evt.stopPropagation();
-	Session.set('Constellation_searching', !Session.get('Constellation_searching'));  
+    evt.stopPropagation();
+    Session.set('Constellation_searching', !Session.get('Constellation_searching'));  
   }
 });

@@ -27,7 +27,7 @@ Meteor.methods({
 
     var currentDbDoc = ConstellationCollection.findOne({
       _id: documentID
-    });
+    }, {transform: null});
 
     if (!currentDbDoc) {
       // A document with this _id value is not in the db
@@ -76,7 +76,7 @@ Meteor.methods({
 
     var ConstellationCollection = Constellation.Collection(collectionName);
     
-    var docToBeRemoved = ConstellationCollection.findOne(documentID);
+    var docToBeRemoved = ConstellationCollection.findOne(documentID, {transform: null});
 
     ConstellationCollection.remove(documentID);
     
@@ -89,8 +89,8 @@ Meteor.methods({
     check(collectionName, String);
     check(documentID, String);
 
-    var ConstellationCollection = Constellation.Collection(collectionName),
-      OriginalDoc = ConstellationCollection.findOne(documentID);
+    var ConstellationCollection = Constellation.Collection(collectionName);
+    var OriginalDoc = ConstellationCollection.findOne(documentID, {transform: null});
 
     if (OriginalDoc) {
 

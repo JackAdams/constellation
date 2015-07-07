@@ -17,13 +17,30 @@ API.hideCollection = function (collectionName) {
 
   var ConstellationConfig = Session.get("Constellation") || {};
   
-  var collections = _.without(ConstellationConfig.collections || {}, collectionName);
+  var collections = _.without(ConstellationConfig.collections || [], collectionName);
 
   ConstellationConfig.collections = collections;
 
   Session.set("Constellation", ConstellationConfig);
   
 }
+
+// Lets external packages show collections
+
+API.showCollection = function (collectionName) {
+
+  // In case a collection does not get detected, like a local one
+  var ConstellationConfig = Session.get("Constellation") || {};
+  
+  var collections = ConstellationConfig.collections || [];
+
+  collections.push(collectionName);
+  
+  Session.set("Constellation", ConstellationConfig);
+
+}
+
+// Lets external packages know whether the Constellation console is open or not
 
 API.isActive = function () {
   return Session.get('Constellation_active');	

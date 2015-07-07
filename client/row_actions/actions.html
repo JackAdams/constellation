@@ -34,7 +34,12 @@
     <span class="Constellation_action_toggle"><a href="" class="Constellation_toggle_document">{{document._id}}</a></span>
     {{#if fullDoc}}
       <br />
-      <pre>{{{json}}}</pre>
+      Before:
+      <br />
+      <pre>{{{json "before"}}}</pre>
+      After:
+      <br />
+      <pre>{{{json "after"}}}</pre>
     {{/if}}
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template name="Constellation_account_status">
-	
+    
   {{> Constellation_onOffLight currentUser}}
 
 </template>
@@ -7,11 +7,11 @@
 <template name="Constellation_account_view">
   
   {{#if currentUser}}
-    {{> Constellation_accountViewer}}
+{{> Constellation_accountViewer}}
   {{else}}
-    <div class="Constellation_docBar1">
-      Not Signed In
-    </div>
+<div class="Constellation_docBar1">
+  Not Signed In
+</div>
   {{/if}}
 
 </template>
@@ -19,7 +19,7 @@
 <template name="Constellation_account_controls">
   
   {{#if currentUser}}
-    {{> Constellation_docControls}}
+{{> Constellation_docControls}}
   {{/if}}
   
 </template>
