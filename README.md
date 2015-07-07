@@ -59,7 +59,7 @@ __Note__: make sure you put `debugOnly: true` in your package's `Package.describ
 API
 ---
 
-All methods must be prefixed by `Package["babrahams:constellation"].API.` when using then in your plugin code, so write this at the top of your files that use the API
+All methods must be prefixed by `Package["babrahams:constellation"].API.` when using them in your plugin code, so write this at the top of your files that use the API
 ```
 var Constellation = Package["babrahams:constellation"].API;
 ```
