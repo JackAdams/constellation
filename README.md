@@ -20,6 +20,7 @@ Examples of plugins are:
 - [babrahams:temple](https://github.com/JackAdams/temple) (for visualizing template information)
 - [babrahams:constellation-session](https://github.com/JackAdams/constellation-session) (for viewing / manipulating data in the Session variable)
 - [babrahams:constellation-subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
+- [babrahams:constellation-autopublish](https://github.com/JackAdams/constellation-autopublish) (for toggling autopublish behaviour)
 
 If you want to write a plugin, take a look at the source of the packages above.
 
