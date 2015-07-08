@@ -13,7 +13,7 @@ Template.Constellation_docInsert.events({
       Meteor.call('Constellation_insert', CollectionName, newObject, function (error, result) {
         if (!error) {
           // if successful, set the proper session variable value
-          sessionKey = "Constellation_" + CollectionName;
+          sessionKey = Constellation.sessKey(CollectionName);
           Session.set(sessionKey, 0);
           var newDoc = Mongo.Collection.get(CollectionName).findOne(result, {transform: null});
           UndoRedo.add(CollectionName, {

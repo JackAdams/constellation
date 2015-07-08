@@ -1,7 +1,7 @@
 Template.Constellation_config_header.events({
   'click .Constellation_Minimize' : function (e) {
     e.stopPropagation();
-    Session.set("Constellation_currentRow", null);  
+    Session.set("Constellation_currentTab", null);  
   },
   'click .Constellation_FullScreen' : function (e) {
     e.stopPropagation();
@@ -14,13 +14,13 @@ Template.Constellation_config_view.helpers({
     return _.initial(Session.get('Constellation_tabs'));
   },
   tabActive: function () {
-    return this.id === 'constellation_config' || TabStates.get(this.id);
+    return this.id === 'constellation_plugin_config' || TabStates.get(this.id);
   }
 });
 
 Template.Constellation_config_view.events({
   'change input' : function (evt, tmpl) {
-    var key = ('Constellation_' + this.id).replace(/_/g,"-");
+    var key = this.id.replace(/_/g,"-");
     var value = evt.target.checked;
     TabStates.set(this.id, value);
     Meteor.defer(function() {

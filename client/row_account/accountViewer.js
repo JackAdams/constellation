@@ -25,7 +25,7 @@ Template.Constellation_accountViewer.helpers({
     if (!(json_output === undefined)) {
       colorize = Constellation.colorize(json_output);
     }
-	else {
+    else {
       colorize = json_output;
     }
 

@@ -3,7 +3,7 @@ Template.Constellation_docViewer.helpers({
     var collectionName = String(this);
     var currentCollection = Constellation.Collection(collectionName);
     var documents = currentCollection.find(Constellation.searchSelector(collectionName), {transform: null}).fetch();
-    var sessionKey = "Constellation_" + String(this);
+    var sessionKey = Constellation.sessKey(String(this));
     var docNumber = Session.get(sessionKey);
     var docCurrent = documents[docNumber];
     return docCurrent;

@@ -27,11 +27,11 @@ Meteor.startup(function() {
       Constellation.toggleFullScreen();
     }
   });
-
+  
   Constellation.defaultTabs = [
-    {name: 'Full screen', id: 'constellation_fullscreen', active:false, noOpen:true, onClick: "toggleFullScreen", headerContentTemplate: 'Constellation_fullscreen_header'},
-    {name: 'Account', id: 'constellation_user_account', mainContentTemplate: 'Constellation_account_view', headerContentTemplate: 'Constellation_account_status', menuContentTemplate: 'Constellation_account_controls', active:false},
-    {name: 'Actions', id: 'constellation_actions', mainContentTemplate:'Constellation_actions_main', headerContentTemplate: 'Constellation_actions_header', menuContentTemplate: 'Constellation_actions_menu', active:true},
+    {name: 'Full screen', id: 'constellation_plugin_fullscreen', active:false, noOpen:true, onClick: "toggleFullScreen", headerContentTemplate: 'Constellation_fullscreen_header'},
+    {name: 'Account', id: 'constellation_plugin_user_account', mainContentTemplate: 'Constellation_account_view', headerContentTemplate: 'Constellation_account_status', menuContentTemplate: 'Constellation_account_controls', active:false},
+    {name: 'Actions', id: 'constellation_plugin_actions', mainContentTemplate:'Constellation_actions_main', headerContentTemplate: 'Constellation_actions_header', menuContentTemplate: 'Constellation_actions_menu', active:true}
   ];
   
   Tracker.autorun(function() {
@@ -53,22 +53,23 @@ Meteor.startup(function() {
           mainContentTemplate: "Constellation_docViewer",
           searchContentTemplate: "Constellation_search",
           active: true,
-          collection: true
+          collection: true 
         }); 
       });
     }
     else {
       Constellation.tabs.push({
          name: "No collections found",
+         id: 'constellation_no_collections',
          mainContentTemplate: "Constellation_collections_notFound" 
       });
     }
     
     // Config goes at the bottom
-    Constellation.tabs.push({name: 'Config ...', id: 'constellation_config', headerContentTemplate: 'Constellation_config_header', menuContentTemplate: 'Constellation_config_menu', mainContentTemplate: 'Constellation_config_view', active: true});
+    Constellation.tabs.push({name: 'Config ...', id: 'constellation_plugin_config', headerContentTemplate: 'Constellation_config_header', menuContentTemplate: 'Constellation_config_menu', mainContentTemplate: 'Constellation_config_view', active: true});
     
     _.each(Constellation.tabs, function (tab) {
-      var key = ('Constellation_' + tab.id).replace(/_/g,"-");
+      var key = tab.id.replace(/_/g,"-"); // All tabs already have namespaced id values beginning with constellation_ and a prefix
       var storedValue = localStorage[key]; // localStorage just does string values, not booleans
       var state = (typeof storedValue !== 'undefined') ? ((storedValue === "false") ? false : true) : ((typeof tab.active !== 'undefined') ? tab.active : true);
       TabStates.set(tab.id, state);
@@ -104,5 +105,15 @@ Meteor.startup(function() {
     Session.set("Constellation", defaults);
 
   }
+  
+  // *****************************
+  // Set up EditableJSON collbacks
+  // *****************************
+  
+  // Note: there is also an `EditableJSON.afterUpdate` callback in /client/row_actions/undoRedo.js
+  
+  EditableJSON.onUnpublishedFieldAdded(function (collection, field, value) { console.log(this, collection,field, value);
+    alert("Are you sure you the new field '" + field + "' is published?" + ((!Package["babrahams:constellation-autopublish"]) ? "\n\nmeteor add babrahams:constellation-autopublish\n\nwill allow you to switch autopublish on and off from the Constellation UI for easy checking." : "\n\nSwitch on autopublish to check."));
+  });
   
 });

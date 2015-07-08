@@ -28,15 +28,7 @@ _.extend(Constellation, {
       }
       return '<span class="' + cls + '">' + match + '</span>';
     });
-  }/*,
-  'getDocumentUpdate': function (data) {
-
-    var elementID = '#ConstellationDoc_' + data;
-    var newData   = $(elementID + ' pre').text();
-
-    return newData;
-
-  }*/,
+  },
   'error': function (data) {
 
     switch (data) {
@@ -79,7 +71,11 @@ _.extend(Constellation, {
   'toggleFullScreen' : function () {
     Session.set('Constellation_fullscreen', !Session.get('Constellation_fullscreen'));  
   },
+  'sessKey' : function (collectionName) {
+    return 'Constellation_collection_' + collectionName;  
+  },
   'searchKey' : function (collectionName, type) {
+    // type is one of: "object", "string", "boolean", "date", "array", "null", "number"
     return 'Constellation_' + collectionName + '_' + type;
   },
   'searchSelector' : function (collectionName, exact) {

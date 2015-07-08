@@ -65,15 +65,25 @@ var Constellation = Package["babrahams:constellation"].API;
 ```
 then you can write:
 
+`Constellaton.isActive()` to check whether Constellation's UI is active or closed (i.e. has the user pressed __Control + M__ or not)
+
 `Constellaton.addTab({name: "my-plugin"})` to register a new tab called "my-plugin" in Constellation's UI - see above for the fields the object can have when adding a tab
 
-`Constellaton.isActive()` to check whether Constellation's UI is active or closed
+The `type` field/param in the three methods below will be:
+ - `"collection"` for collection tabs
+ - `"plugin"` for any tab added using `Constellation.addTab` - i.e. tabs added by plugin packages - and the default tabs, which are: "Fullscreen", "Account", "Actions", "Config"
 
-`Constellaton.hideCollection('collectionName')` to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab)
+`Constellaton.getCurrentTab()` to get the `id` and type of the currently selected tab in an object of the form {id: <tabId}, type: <tabType>}
 
-`Constellaton.getCurrentTab()` to get the `id` of the currently selected tab
+`Constellaton.setCurrentTab("unique-id-of-my-tab", type)` to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value if no id was set)
 
-`Constellaton.setCurrentTab("unique-id-for-my-tab")` to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value)
+`Constellaton.tabVisible("unique-id-of-my-tab", type)` to check if this tab is currently enabled by the user via the "Config ..." panel (i.e. does it currently appear as a tab in the user's UI)
+
+`Constellation.isFullScreen()` to see if Constellation is in fullscreen mode
+
+`Constellaton.hideCollection('collectionName')` to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab - they won't even appear there)
+
+`Constellaton.showCollection('collectionName')` to show collections programatically
 
 ```
 Constellaton.registerCallbacks({

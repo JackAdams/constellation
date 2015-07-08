@@ -26,14 +26,15 @@ Constellation.resetInlineEditingTimer = function() {
 Template.Constellation_docControls.events({
   'click .Constellation_m_new': function() {
 
-    var CollectionName = Session.get("Constellation_currentRow"),
-      DocumentPosition = Session.get("Constellation_" + String(this)),
-      CurrentCollection = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName), {transform: null}).fetch(),
-      CollectionCount = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).count();
+    var CollectionName = Session.get("Constellation_currentTab");
+    var sessionKey = Constellation.sessKey(String(this));
+    var DocumentPosition = Session.get(sessionKey);
+    var CurrentCollection = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName), {transform: null}).fetch();
+    var CollectionCount = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).count();
 
     var CurrentDocument = CurrentCollection[DocumentPosition],
       DocumentID = CurrentDocument._id,
-      sessionKey = "Constellation_" + String(this);
+      sessionKey = Constellation.sessKey(String(this));
 
     var ValidatedCurrentDocument = Constellation.validateDocument(CurrentDocument);
 
@@ -77,8 +78,8 @@ Template.Constellation_docControls.events({
   },
   'click .Constellation_m_delete': function() {
 
-    var CollectionName = Session.get("Constellation_currentRow"),
-      sessionKey = "Constellation_" + String(this);
+    var CollectionName = Session.get("Constellation_currentTab"),
+      sessionKey = Constellation.sessKey(String(this));
       DocumentPosition = Session.get(sessionKey),
       CurrentCollection = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).fetch(),
       CollectionCount = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).count(),
@@ -127,7 +128,7 @@ Template.Constellation_docControls.events({
       Constellation.resetInlineEditingTimer();
       
       // Grab the key
-      var sessionKey = "Constellation_" + String(this);
+      var sessionKey = Constellation.sessKey(String(this));
 
       var CurrentDocument = Session.get(sessionKey);
       var collectionName = String(this);
@@ -159,7 +160,7 @@ Template.Constellation_docControls.events({
       Constellation.resetInlineEditingTimer();
       
       // Grab the key
-      sessionKey = "Constellation_" + String(this);
+      sessionKey = Constellation.sessKey(String(this));
 
       // Get the document count
       var CurrentDocument = Session.get(sessionKey);
@@ -189,19 +190,18 @@ Template.Constellation_docControls.events({
     // We need to send this to the server so we know which fields are up for change
     // when applying the diffing algorithm
 
-    var collectionName = (Session.equals("Constellation_currentRow", "constellation_user_account")) ? "users" : String(this);
+    var collectionName = (Session.equals("Constellation_currentTab", "constellation_plugin_user_account")) ? "users" : String(this);
     
-    var newData = tmpl.$(evt.target).closest('.Constellation_row').find('.Constellation_documentViewer pre').text(); // Constellation.getDocumentUpdate(collectionName);
+    var newData = tmpl.$(evt.target).closest('.Constellation_row').find('.Constellation_documentViewer pre').text();
 
-    if (Session.equals("Constellation_currentRow", "constellation_user_account")) {
-      // var newData = Constellation.getDocumentUpdate("constellation_user_account");
+    if (Session.equals("Constellation_currentTab", "constellation_plugin_user_account")) {
       var newObject = Constellation.parse(newData);
       var oldObject = Meteor.user();
       // console.log(targetCollection);
       // console.log(newData);
       // console.log(newObject);
     } else {
-      var sessionKey = "Constellation_" + collectionName;
+      var sessionKey = Constellation.sessKey(collectionName);
       var DocumentPosition = Session.get(sessionKey);
       var CurrentCollection = Constellation.Collection(collectionName).find(Constellation.searchSelector(collectionName), {transform: null}).fetch();
       var newObject = Constellation.parse(newData);
@@ -234,7 +234,7 @@ Template.Constellation_docControls.events({
 
 Template.Constellation_docControls.helpers({
   disable: function() {
-    var sessionKey = "Constellation_" + String(this);
+    var sessionKey = Constellation.sessKey(String(this));
     var CurrentDocument = Session.get(sessionKey);
     var collectionName = String(this);
     var collectionVar = Constellation.Collection(collectionName);
@@ -268,7 +268,7 @@ Template.Constellation_docControls.helpers({
 
   },
   account: function() {
-    return Session.equals("Constellation_currentRow","constellation_user_account");
+    return Session.equals("Constellation_currentTab","constellation_plugin_user_account");
   },
   notEmpty: function () {
     var collectionName = String(this);

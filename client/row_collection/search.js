@@ -29,7 +29,7 @@ Template.Constellation_search.events({
   'input .Constellation_search' : function (evt, tmpl) {
      var value = tmpl.$(evt.target).val();
      Session.set(Constellation.searchKey(String(this), 'value'), value);
-     var sessionKey = "Constellation_" + String(this);
+     var sessionKey = Constellation.sessKey(String(this));
      Session.set(sessionKey, 0);
   },
   'change .Constellation_search_fields' : function (evt, tmpl) {

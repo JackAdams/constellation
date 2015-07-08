@@ -203,7 +203,7 @@ UndoRedo.redo = function (collection) {
 // Sets the appropriate session variable to the correct document number
 
 UndoRedo.setDocumentNumber = function (collection, _id) {
-  var sessionKey = "Constellation_" + collection;
+  var sessionKey = Constellation.sessKey(collection);
   if (_id) {
     var Collection = Constellation.Collection(collection);
     var documents = Collection.find(Constellation.searchSelector(collection)).fetch();
@@ -225,8 +225,8 @@ UndoRedo.setDocumentNumber = function (collection, _id) {
     }
   }
   Session.set(sessionKey, docNumber);
-  if (!Session.equals("Constellation_currentRow", "constellation_actions_record")) {
-    Session.set("Constellation_currentRow", collection);
+  if (!Session.equals("Constellation_currentTab", "constellation_actions_record")) {
+    Session.set("Constellation_currentTab", collection);
   }
 }
 

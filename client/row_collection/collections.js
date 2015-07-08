@@ -12,7 +12,7 @@ Template.Constellation_collection_count.helpers({
   currentPosition: function () {
 
     var targetCollection = String(this);
-    var sessionKey = "Constellation_" + targetCollection;
+    var sessionKey = Constellation.sessKey(targetCollection);
 
     var current = Session.get(sessionKey);
     var count = current + 1;

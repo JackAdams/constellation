@@ -11,6 +11,47 @@ API.addTab = function (tab) {
   Constellation._tabs.push(tab)
 }
 
+// Get and set tab that is currently open in the UI
+
+API.getCurrentTab = function () {
+  var tabName = Session.get("Constellation_currentTab");
+  var tabData = tabName.split('_');
+  if (tabData[0] === 'constellation' && tabData[1] === 'plugin') {
+    return {
+      id: tabName.replace(/constellation_plugin_/,''),
+      type: 'plugin'
+    };
+  }
+  else {
+    return {
+      id: tabName,
+      type: "collection"
+    };
+  }
+}
+
+API.setCurrentTab = function (id, type) {
+  var tabId = (type === 'collection') ? id : 'constellation_plugin_' + id;
+  var tab = _.find(Session.get('Constellation_tabs'), function (tab) {
+    return tab.id === tabId; 
+  });
+  if (tab) {
+    Session.set('Constellation_currentTab', tab.id);  
+  }
+}
+
+// Check whether a tab is available via the user's UI (have they closed it via the "Config ..." panel or not)
+
+API.tabVisible = function (id, type) {
+  var tabId = (type === 'collection') ? id : 'constellation_plugin_' + id;
+  return TabStates.get(tabId);
+}
+
+// Check whether constellation is in fullscreen mode or not
+API.isFullScreen = function () {
+  return Session.get('Constellation_fullscreen');    
+}
+
 // Lets external packages hide collections
 
 API.hideCollection = function (collectionName) {
@@ -43,21 +84,11 @@ API.showCollection = function (collectionName) {
 // Lets external packages know whether the Constellation console is open or not
 
 API.isActive = function () {
-  return Session.get('Constellation_active');	
+  return Session.get('Constellation_active');    
 }
 
-API.getCurrentTab = function () {
-  return Session.get("Constellation_currentRow");	
-}
-
-API.setCurrentTab = function (id) {
-  var tab = _.find(Session.get('Constellation_tabs'), function (tab) {
-	return tab.id === id || tab.id === 'constellation_plugin_' + id; 
-  });
-  if (tab) {
-	Session.set('Constellation_currentRow',tab.id);  
-  }
-}
+// Register callbacks to be fired on toggling certain tabs
+// Name the callback here (field name) and when adding the tab using { ..., "callback" : fieldName, ... }
 
 API.registerCallbacks = function(obj) {
   if (_.isObject(obj)) {
@@ -74,3 +105,4 @@ API.registerCallbacks = function(obj) {
     throw new Meteor.Error('You must pass an object to register callbacks');  
   }
 }
+    
