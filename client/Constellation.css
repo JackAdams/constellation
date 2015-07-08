@@ -603,4 +603,7 @@
   color: rgba(0,0,0,.8);
   opacity: 0.8;
   margin-left: 5px;
+  height: 16px;
+  font-size: smaller;
+  padding: 0;
 }

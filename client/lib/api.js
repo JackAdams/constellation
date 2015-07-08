@@ -15,6 +15,9 @@ API.addTab = function (tab) {
 
 API.getCurrentTab = function () {
   var tabName = Session.get("Constellation_currentTab");
+  if (!tabName) {
+	return null;  
+  }
   var tabData = tabName.split('_');
   if (tabData[0] === 'constellation' && tabData[1] === 'plugin') {
     return {
