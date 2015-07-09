@@ -57,12 +57,29 @@ _.extend(Constellation, {
 
   },
   'parse': function (data) {
-    var newObject = false;
+    var newObject = null;
     
     try {
-      newObject = JSON.parse(data);
-    } catch (error) { console.log(data);
+		
+      var reISO = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+   
+	  var dateParser = function (key, value) {
+		if (_.isString(value)) {
+		  var a = reISO.exec(value);
+		  if (a) {
+			return new Date(value);
+		  }
+		}
+		return value;
+	  }
+
+      newObject = JSON.parse(data, dateParser);
+	  
+    }
+	catch (error) {
+		
       Constellation.error("json.parse");
+	  
     }
 
     return newObject;
