@@ -1,9 +1,9 @@
 Constellation
 =============
 
-This is a fork of the open source part of the [msavin:mongol](https://github.com/msavin/Mongol) project.
+This is a fork of the open source part of the __Meteortoys__ project (i.e. [msavin:mongol](https://github.com/msavin/Mongol)).
 
-The main difference is that Constellation provides an API for adding plugins (custom tabs) to the existing UI.
+The main difference is that __Constellation__ provides an API for adding plugins (custom tabs) to the existing UI.
 
 Usage
 -----
@@ -80,11 +80,11 @@ The `type` field/param in the three methods below will be:
  - `"collection"` for collection tabs
  - `"plugin"` for any tab added using `Constellation.addTab` - i.e. for tabs added by plugin packages and for the default tabs ("Fullscreen", "Account", "Actions", "Config")
 
-`Constellaton.getCurrentTab()` to get the `id` and type of the currently selected tab in an object of the form `{id: <tabId}, type: <tabType>}`
+`Constellaton.getCurrentTab()` to get the `id` and type of the currently selected tab in an object of the form `{id: <tabId}, type: <tabType>}` (both values are strings)
 
 `Constellaton.setCurrentTab("unique-id-of-my-tab", type)` to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value if no `id` was set)
 
-`Constellaton.isCurrentTab("unique-id-of-my-tab", type)` to check whether this is the current tab or not (returns `true` if you've passed the `id` of the current open tab, along with the correct `type`
+`Constellaton.isCurrentTab("unique-id-of-my-tab", type)` to check whether this is the current tab or not (returns `true` if you've passed the `id` of the current open tab, along with the correct `type`)
 
 `Constellaton.tabVisible("unique-id-of-my-tab", type)` to check if this tab is currently enabled by the user via the "Config ..." panel (i.e. does it currently appear as a tab in the user's UI)
 
