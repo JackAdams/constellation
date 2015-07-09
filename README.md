@@ -7,8 +7,9 @@ The main difference is that Constellation provides an API for adding plugins (cu
 
 Usage
 -----
-
-	$ meteor add constellation:console
+```
+meteor add constellation:console
+```
 
 After installation, press <strong>Control + M</strong> to toggle it.
 
@@ -24,6 +25,11 @@ Examples of plugins are:
 - [constellation:tiny](https://github.com/JackAdams/constellation-tiny) (for _really_ minimizing the UI)
 
 If you want to write a plugin, take a look at the source of the packages above.
+
+If you'd like to start with a few plugins installed, copy this into the command line:
+```
+meteor add constellation:console constellation:subscriptions constellation:autopublish constellation:session babrahams:temple
+```
 
 Making plugins
 --------------
