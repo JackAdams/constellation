@@ -74,15 +74,17 @@ then you can write:
 
 `Constellaton.isActive()` to check whether Constellation's UI is active or closed (i.e. has the user pressed __Control + M__ or not)
 
-`Constellaton.addTab({name: "my-plugin"})` to register a new tab called "my-plugin" in Constellation's UI - see above for the fields the object can have when adding a tab
+`Constellaton.addTab({name: "my-plugin"})` to register a new tab called "my-plugin" in Constellation's UI - see above for the fields the object can have when adding a tab.
 
 The `type` field/param in the three methods below will be:
  - `"collection"` for collection tabs
- - `"plugin"` for any tab added using `Constellation.addTab` - i.e. tabs added by plugin packages - and the default tabs, which are: "Fullscreen", "Account", "Actions", "Config"
+ - `"plugin"` for any tab added using `Constellation.addTab` - i.e. for tabs added by plugin packages and for the default tabs ("Fullscreen", "Account", "Actions", "Config")
 
-`Constellaton.getCurrentTab()` to get the `id` and type of the currently selected tab in an object of the form {id: <tabId}, type: <tabType>}
+`Constellaton.getCurrentTab()` to get the `id` and type of the currently selected tab in an object of the form `{id: <tabId}, type: <tabType>}`
 
-`Constellaton.setCurrentTab("unique-id-of-my-tab", type)` to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value if no id was set)
+`Constellaton.setCurrentTab("unique-id-of-my-tab", type)` to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value if no `id` was set)
+
+`Constellaton.isCurrentTab("unique-id-of-my-tab", type)` to check whether this is the current tab or not (returns `true` if you've passed the `id` of the current open tab, along with the correct `type`
 
 `Constellaton.tabVisible("unique-id-of-my-tab", type)` to check if this tab is currently enabled by the user via the "Config ..." panel (i.e. does it currently appear as a tab in the user's UI)
 
@@ -92,6 +94,7 @@ The `type` field/param in the three methods below will be:
 
 `Constellaton.showCollection('collectionName')` to show collections programatically
 
+If you put a `callback` in your `addTab({ ... })` (e.g. `Constellation.addTab({name: "my-plugin", callback: "myCallBack", ...});`) you need to register it as follows:
 ```
 Constellaton.registerCallbacks({
   "myCallBack" : function () {
