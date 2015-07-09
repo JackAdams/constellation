@@ -1,5 +1,5 @@
 Package.describe({
-  name:    'babrahams:constellation',
+  name:    'constellation:console',
   summary: 'An extensible development console for Meteor.',
   version: '1.0.0',
   git:     'https://github.com/babrahams/constellation.git',

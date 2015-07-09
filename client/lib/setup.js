@@ -41,7 +41,7 @@ Meteor.startup(function() {
   
   Tracker.autorun(function() {
     
-    // Constellation._tabs can be set programatically by other packages that call Package['babrahams:constellation'].Constellation.addTab({ ... }});
+    // Constellation._tabs can be set programatically by other packages that call Package['constellation:console'].Constellation.addTab({ ... }});
     
     Constellation.tabs = Constellation.defaultTabs.concat(_.map(Constellation._tabs, function (tab) { var id = tab.id || tab.name; var thisTab = _.clone(tab); return _.extend(thisTab, {id: 'constellation_plugin_' + id}) }) || []);
     
@@ -118,7 +118,7 @@ Meteor.startup(function() {
   // Note: there is also an `EditableJSON.afterUpdate` callback in /client/row_actions/undoRedo.js
   
   EditableJSON.onUnpublishedFieldAdded(function (collection, field, value) { console.log(this, collection,field, value);
-    alert("Are you sure you the new field '" + field + "' is published?" + ((!Package["babrahams:constellation-autopublish"]) ? "\n\nmeteor add babrahams:constellation-autopublish\n\nwill allow you to switch autopublish on and off from the Constellation UI for easy checking." : "\n\nSwitch on autopublish to check."));
+    alert("Are you sure you the new field '" + field + "' is published?" + ((!Package["constellation:console-autopublish"]) ? "\n\nmeteor add constellation:console-autopublish\n\nwill allow you to switch autopublish on and off from the Constellation UI for easy checking." : "\n\nSwitch on autopublish to check."));
   });
   
 });

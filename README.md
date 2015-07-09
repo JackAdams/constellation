@@ -8,7 +8,7 @@ The main difference is that Constellation provides an API for adding plugins (cu
 Usage
 -----
 
-	$ meteor add babrahams:constellation
+	$ meteor add constellation:console
 
 After installation, press <strong>Control + M</strong> to toggle it.
 
@@ -18,19 +18,20 @@ Plugins
 Examples of plugins are:
 
 - [babrahams:temple](https://github.com/JackAdams/temple) (for visualizing template information)
-- [babrahams:constellation-session](https://github.com/JackAdams/constellation-session) (for viewing / manipulating data in the Session variable)
-- [babrahams:constellation-subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
-- [babrahams:constellation-autopublish](https://github.com/JackAdams/constellation-autopublish) (for toggling autopublish behaviour)
+- [constellation:session](https://github.com/JackAdams/constellation-session) (for viewing / manipulating data in the Session variable)
+- [constellation:subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
+- [constellation:autopublish](https://github.com/JackAdams/constellation-autopublish) (for toggling autopublish behaviour)
+- [constellation:tiny](https://github.com/JackAdams/constellation-tiny) (for really minimizing the UI)
 
 If you want to write a plugin, take a look at the source of the packages above.
 
 Making plugins
 --------------
 
-Make a package with `api.use('babrahams:constellation@1.0.0', 'client')` in the `package.js` file. And put something like this in a js file on the client:
+Make a package with `api.use('constellation:console@1.0.0', 'client')` in the `package.js` file. And put something like this in a js file on the client:
 
 ```
-Package["babrahams:constellation"].API.addTab({
+Package["constellation:console"].API.addTab({
   name: 'Temple',
   mainContentTemplate: 'Constellation_temple_view',
   headerContentTemplate: 'Constellation_temple_header',
@@ -59,9 +60,9 @@ __Note__: make sure you put `debugOnly: true` in your package's `Package.describ
 API
 ---
 
-All methods must be prefixed by `Package["babrahams:constellation"].API.` when using them in your plugin code, so write this at the top of your files that use the API
+All methods must be prefixed by `Package["constellation:console"].API.` when using them in your plugin code, so write this at the top of your files that use the API
 ```
-var Constellation = Package["babrahams:constellation"].API;
+var Constellation = Package["constellation:console"].API;
 ```
 then you can write:
 

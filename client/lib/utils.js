@@ -1,6 +1,6 @@
 // Internal utility methods
 // `Constellation` gets exported along with `API`
-// so these are all available outside of the package via Package["babrahams:constellation"].Constellation
+// so these are all available outside of the package via Package["constellation:console"].Constellation
 
 _.extend(Constellation, {
     
