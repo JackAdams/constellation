@@ -14,7 +14,7 @@ API.addTab = function (tab) {
 // Get and set tab that is currently open in the UI
 
 API.getCurrentTab = function () {
-  var tabName = Session.get("Constellation_currentTab");
+  var tabName = ConstellationDict.get("Constellation_currentTab");
   if (!tabName) {
 	return null;  
   }
@@ -35,11 +35,11 @@ API.getCurrentTab = function () {
 
 API.setCurrentTab = function (id, type) {
   var tabId = (type === 'collection') ? id : 'constellation_plugin_' + id;
-  var tab = _.find(Session.get('Constellation_tabs'), function (tab) {
+  var tab = _.find(ConstellationDict.get('Constellation_tabs'), function (tab) {
     return tab.id === tabId; 
   });
   if (tab) {
-    Session.set('Constellation_currentTab', tab.id);  
+    ConstellationDict.set('Constellation_currentTab', tab.id);  
   }
 }
 
@@ -52,20 +52,20 @@ API.tabVisible = function (id, type) {
 
 // Check whether constellation is in fullscreen mode or not
 API.isFullScreen = function () {
-  return Session.get('Constellation_fullscreen');    
+  return ConstellationDict.get('Constellation_fullscreen');    
 }
 
 // Lets external packages hide collections
 
 API.hideCollection = function (collectionName) {
 
-  var ConstellationConfig = Session.get("Constellation") || {};
+  var ConstellationConfig = ConstellationDict.get("Constellation") || {};
   
   var collections = _.without(ConstellationConfig.collections || [], collectionName);
 
   ConstellationConfig.collections = collections;
 
-  Session.set("Constellation", ConstellationConfig);
+  ConstellationDict.set("Constellation", ConstellationConfig);
   
 }
 
@@ -74,20 +74,20 @@ API.hideCollection = function (collectionName) {
 API.showCollection = function (collectionName) {
 
   // In case a collection does not get detected, like a local one
-  var ConstellationConfig = Session.get("Constellation") || {};
+  var ConstellationConfig = ConstellationDict.get("Constellation") || {};
   
   var collections = ConstellationConfig.collections || [];
 
   collections.push(collectionName);
   
-  Session.set("Constellation", ConstellationConfig);
+  ConstellationDict.set("Constellation", ConstellationConfig);
 
 }
 
 // Lets external packages know whether the Constellation console is open or not
 
 API.isActive = function () {
-  return Session.get('Constellation_active');    
+  return ConstellationDict.get('Constellation_active');    
 }
 
 // Register callbacks to be fired on toggling certain tabs

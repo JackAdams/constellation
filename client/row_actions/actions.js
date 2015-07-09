@@ -1,4 +1,4 @@
-Session.setDefault('Constellation_action_log', []);
+ConstellationDict.setDefault('Constellation_action_log', []);
 
 var addStatus = function (stack, status) {
   return _.map(stack, function (action) { return _.extend(action, {status: status})})    
@@ -11,7 +11,7 @@ Tracker.autorun(function() {
   var actions = _.reduce(collections, function (memo,collection) {
     var collectionName = collection.name;*/
     _.each(['done','undone'], function (status) {
-      var stack = Session.getJSON(UndoRedo.makeKey(null, status)); // collectionName
+      var stack = ConstellationDict.getJSON(UndoRedo.makeKey(null, status)); // collectionName
       if (stack) {
         memo = memo.concat(addStatus(stack, status));
       }
@@ -21,12 +21,12 @@ Tracker.autorun(function() {
   var sortedActions = _.sortBy(memo, function(action) { // actions instead of memo
     return action.timestamp;
   });
-  Session.set('Constellation_action_log', sortedActions.reverse());
+  ConstellationDict.set('Constellation_action_log', sortedActions.reverse());
 });
 
 Template.Constellation_actions_header.helpers({
   stack: function() {
-    var stack = (addStatus(Session.getJSON(UndoRedo.makeKey(null, 'undone')) || [],'undone').concat(addStatus(Session.getJSON(UndoRedo.makeKey(null, 'done')) || [],'done'))).reverse();
+    var stack = (addStatus(ConstellationDict.getJSON(UndoRedo.makeKey(null, 'undone')) || [],'undone').concat(addStatus(ConstellationDict.getJSON(UndoRedo.makeKey(null, 'done')) || [],'done'))).reverse();
     return stack;  
   }
 });
@@ -34,7 +34,7 @@ Template.Constellation_actions_header.helpers({
 Template.Constellation_actions_menu.events({
   'click .Constellation_log_purge' : function () {
     _.each(['done','undone'], function (status) {
-      Session.setJSON(UndoRedo.makeKey(null, status),[]);
+      ConstellationDict.setJSON(UndoRedo.makeKey(null, status),[]);
     });
   }
 });
@@ -42,7 +42,7 @@ Template.Constellation_actions_menu.events({
 Template.Constellation_actions_main.helpers({
     
   actions: function () {
-    return Session.get('Constellation_action_log');
+    return ConstellationDict.get('Constellation_action_log');
   }
     
 });

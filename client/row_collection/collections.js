@@ -14,7 +14,7 @@ Template.Constellation_collection_count.helpers({
     var targetCollection = String(this);
     var sessionKey = Constellation.sessKey(targetCollection);
 
-    var current = Session.get(sessionKey);
+    var current = ConstellationDict.get(sessionKey);
     var count = current + 1;
 
     return count;
@@ -25,6 +25,6 @@ Template.Constellation_collection_count.helpers({
 Template.Constellation_search_button.events({ 
   'click .Constellation_search_button' : function (evt) {
     evt.stopPropagation();
-    Session.set('Constellation_searching', !Session.get('Constellation_searching'));  
+    ConstellationDict.set('Constellation_searching', !ConstellationDict.get('Constellation_searching'));  
   }
 });

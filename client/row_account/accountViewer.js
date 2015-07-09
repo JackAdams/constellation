@@ -2,7 +2,7 @@ Template.Constellation_accountViewer.helpers({
   
   editContent: function () {
 
-    var editMode = Session.get("Constellation_editMode");
+    var editMode = ConstellationDict.get("Constellation_editMode");
 
     if (editMode) {
       return "true";
@@ -11,7 +11,7 @@ Template.Constellation_accountViewer.helpers({
   },
   editStyle: function () {
 
-    var editMode = Session.get("Constellation_editMode");
+    var editMode = ConstellationDict.get("Constellation_editMode");
 
     if (editMode) {
       return "Constellation_editable";

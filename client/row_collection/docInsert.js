@@ -14,7 +14,7 @@ Template.Constellation_docInsert.events({
         if (!error) {
           // if successful, set the proper session variable value
           sessionKey = Constellation.sessKey(CollectionName);
-          Session.set(sessionKey, 0);
+          ConstellationDict.set(sessionKey, 0);
           var newDoc = Mongo.Collection.get(CollectionName).findOne(result, {transform: null});
           UndoRedo.add(CollectionName, {
             action: 'insert',

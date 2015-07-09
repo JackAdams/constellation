@@ -1,7 +1,7 @@
 Template.Constellation_config_header.events({
   'click .Constellation_Minimize' : function (e) {
     e.stopPropagation();
-    Session.set("Constellation_currentTab", null);  
+    ConstellationDict.set("Constellation_currentTab", null);  
   },
   'click .Constellation_FullScreen' : function (e) {
     e.stopPropagation();
@@ -11,7 +11,7 @@ Template.Constellation_config_header.events({
 
 Template.Constellation_config_view.helpers({
   installedTabs: function () {
-    return _.initial(Session.get('Constellation_tabs'));
+    return _.initial(ConstellationDict.get('Constellation_tabs'));
   },
   tabActive: function () {
     return this.id === 'constellation_plugin_config' || TabStates.get(this.id);

@@ -3,7 +3,7 @@
 Template.Constellation_undoRedo.helpers({
   stack: function (type) {
     var key = UndoRedo.makeKey(String(this), (type === 'redo') ? 'undone' : 'done');
-    var stack = Session.getJSON(key);
+    var stack = ConstellationDict.getJSON(key);
     var latest = _.isArray(stack) && stack.length && stack[stack.length - 1]; // console.log("latest " + key + ":",latest);
     return (latest) ? {latest: latest, count: stack.length} : null; 
   }
@@ -59,14 +59,14 @@ UndoRedo.add = function (collection, data) {
   data.id = Random.id();
   var doneStackKey = UndoRedo.makeKey(collection, 'done');
   var undoneStackKey = UndoRedo.makeKey(collection, 'undone');
-  var doneStack = _.clone(Session.getJSON(doneStackKey));
+  var doneStack = _.clone(ConstellationDict.getJSON(doneStackKey));
   if (!_.isArray(doneStack)) {
     doneStack = [];
   }
   doneStack.push(data);
-  Session.setJSON(doneStackKey, doneStack);
+  ConstellationDict.setJSON(doneStackKey, doneStack);
   // Clear the undone stack on every new action
-  // Session.setJSON(undoneStackKey, []);
+  // ConstellationDict.setJSON(undoneStackKey, []);
 }
 
 UndoRedo.undo = function (action, redo) {
@@ -74,12 +74,12 @@ UndoRedo.undo = function (action, redo) {
   var collection = action.collection;
   var doneStackKey = UndoRedo.makeKey(collection, 'done');
   var undoneStackKey = UndoRedo.makeKey(collection, 'undone');
-  var doneStack = Session.getJSON(doneStackKey) || [];
-  var undoneStack = Session.getJSON(undoneStackKey) || [];
+  var doneStack = ConstellationDict.getJSON(doneStackKey) || [];
+  var undoneStack = ConstellationDict.getJSON(undoneStackKey) || [];
   // console.log("collection:",collection);console.log("doneStackKey:",doneStackKey);console.log("undoneStackKey:",undoneStackKey);console.log("doneStack:",doneStack);console.log("undoneStack:",undoneStack);
   var setStacks = function () {
-    Session.setJSON(doneStackKey, doneStack);
-    Session.setJSON(undoneStackKey, undoneStack);
+    ConstellationDict.setJSON(doneStackKey, doneStack);
+    ConstellationDict.setJSON(undoneStackKey, undoneStack);
   }
   // Get the latest thing on the done stack
   var currentStack = (redo) ? undoneStack : doneStack;
@@ -216,7 +216,7 @@ UndoRedo.setDocumentNumber = function (collection, _id) {
   }
   else {
     // Just decrement the docNumber
-    var docNumber = Session.get(sessionKey);
+    var docNumber = ConstellationDict.get(sessionKey);
     if (docNumber) {
       docNumber--;
     }
@@ -224,9 +224,9 @@ UndoRedo.setDocumentNumber = function (collection, _id) {
       docNumber = 0;    
     }
   }
-  Session.set(sessionKey, docNumber);
-  if (!Session.equals("Constellation_currentTab", "constellation_actions_record")) {
-    Session.set("Constellation_currentTab", collection);
+  ConstellationDict.set(sessionKey, docNumber);
+  if (!ConstellationDict.equals("Constellation_currentTab", "constellation_actions_record")) {
+    ConstellationDict.set("Constellation_currentTab", collection);
   }
 }
 

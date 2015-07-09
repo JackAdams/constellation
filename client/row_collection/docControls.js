@@ -17,18 +17,18 @@ Constellation.resetInlineEditingTimer = function() {
   if (Constellation.inlineEditingTimer) {
     Meteor.clearTimeout(Constellation.inlineEditingTimer);
   }
-  Session.set('Constellation_noInlineEditing', true);
+  ConstellationDict.set('Constellation_noInlineEditing', true);
   Constellation.inlineEditingTimer = Meteor.setTimeout(function () {
-    Session.set('Constellation_noInlineEditing', false);  
+    ConstellationDict.set('Constellation_noInlineEditing', false);  
   },300);
 }
 
 Template.Constellation_docControls.events({
   'click .Constellation_m_new': function() {
 
-    var CollectionName = Session.get("Constellation_currentTab");
+    var CollectionName = ConstellationDict.get("Constellation_currentTab");
     var sessionKey = Constellation.sessKey(String(this));
-    var DocumentPosition = Session.get(sessionKey);
+    var DocumentPosition = ConstellationDict.get(sessionKey);
     var CurrentCollection = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName), {transform: null}).fetch();
     var CollectionCount = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).count();
 
@@ -56,7 +56,7 @@ Template.Constellation_docControls.events({
             return memo;
           },0);
 
-          Session.set(sessionKey, docIndex);  
+          ConstellationDict.set(sessionKey, docIndex);  
         
           UndoRedo.add(CollectionName, {
             action: 'insert',
@@ -74,13 +74,13 @@ Template.Constellation_docControls.events({
 
   },
   'click .Constellation_m_edit': function() {
-    Session.set("Constellation_editMode", true);
+    ConstellationDict.set("Constellation_editMode", true);
   },
   'click .Constellation_m_delete': function() {
 
-    var CollectionName = Session.get("Constellation_currentTab"),
+    var CollectionName = ConstellationDict.get("Constellation_currentTab"),
       sessionKey = Constellation.sessKey(String(this));
-      DocumentPosition = Session.get(sessionKey),
+      DocumentPosition = ConstellationDict.get(sessionKey),
       CurrentCollection = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).fetch(),
       CollectionCount = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).count(),
       self = this;
@@ -99,11 +99,11 @@ Template.Constellation_docControls.events({
         // Adjust the position
         if (DocumentPosition >= CollectionCount - 1) {
           newPosition = DocumentPosition - 1;
-          Session.set(sessionKey, newPosition);
+          ConstellationDict.set(sessionKey, newPosition);
         }
 
-        if (Session.get(sessionKey) === -1) {
-          Session.set(sessionKey, 0);
+        if (ConstellationDict.get(sessionKey) === -1) {
+          ConstellationDict.set(sessionKey, 0);
         }
         
         UndoRedo.add(String(self), {
@@ -130,23 +130,23 @@ Template.Constellation_docControls.events({
       // Grab the key
       var sessionKey = Constellation.sessKey(String(this));
 
-      var CurrentDocument = Session.get(sessionKey);
+      var CurrentDocument = ConstellationDict.get(sessionKey);
       var collectionName = String(this);
       var collectionVar = Constellation.Collection(collectionName);
       var collectionCount = collectionVar.find().count() - 1;
 
       if (CurrentDocument > collectionCount) {
-        Session.set(sessionKey, 0)
+        ConstellationDict.set(sessionKey, 0)
         return;
       }
 
       if (collectionCount === CurrentDocument) {
         // Go back to document 1 
-        Session.set(sessionKey, 0);
+        ConstellationDict.set(sessionKey, 0);
       } else {
         // Go to next document
-        var ConstellationDocNumber = Session.get(sessionKey) + 1;
-        Session.set(sessionKey, ConstellationDocNumber);
+        var ConstellationDocNumber = ConstellationDict.get(sessionKey) + 1;
+        ConstellationDict.set(sessionKey, ConstellationDocNumber);
       }
       
     }
@@ -163,22 +163,22 @@ Template.Constellation_docControls.events({
       sessionKey = Constellation.sessKey(String(this));
 
       // Get the document count
-      var CurrentDocument = Session.get(sessionKey);
+      var CurrentDocument = ConstellationDict.get(sessionKey);
       var collectionName  = String(this);
       var collectionVar   = Constellation.Collection(collectionName);
       var collectionCount = collectionVar.find().count() - 1;
 
       if (CurrentDocument > collectionCount) {
-        Session.set(sessionKey, collectionCount)
+        ConstellationDict.set(sessionKey, collectionCount)
         return;
       }
 
-      if (Session.get(sessionKey) === 0) {
+      if (ConstellationDict.get(sessionKey) === 0) {
         // Set the key to last
-        Session.set(sessionKey, collectionCount)
+        ConstellationDict.set(sessionKey, collectionCount)
       } else {
-        var ConstellationDocNumber = Session.get(sessionKey) - 1;
-        Session.set(sessionKey, ConstellationDocNumber);
+        var ConstellationDocNumber = ConstellationDict.get(sessionKey) - 1;
+        ConstellationDict.set(sessionKey, ConstellationDocNumber);
       }
       
     }
@@ -190,11 +190,11 @@ Template.Constellation_docControls.events({
     // We need to send this to the server so we know which fields are up for change
     // when applying the diffing algorithm
 
-    var collectionName = (Session.equals("Constellation_currentTab", "constellation_plugin_user_account")) ? "users" : String(this);
+    var collectionName = (ConstellationDict.equals("Constellation_currentTab", "constellation_plugin_user_account")) ? "users" : String(this);
     
     var newData = tmpl.$(evt.target).closest('.Constellation_row').find('.Constellation_documentViewer pre').text();
 
-    if (Session.equals("Constellation_currentTab", "constellation_plugin_user_account")) {
+    if (ConstellationDict.equals("Constellation_currentTab", "constellation_plugin_user_account")) {
       var newObject = Constellation.parse(newData);
       var oldObject = Meteor.user();
       // console.log(targetCollection);
@@ -202,7 +202,7 @@ Template.Constellation_docControls.events({
       // console.log(newObject);
     } else {
       var sessionKey = Constellation.sessKey(collectionName);
-      var DocumentPosition = Session.get(sessionKey);
+      var DocumentPosition = ConstellationDict.get(sessionKey);
       var CurrentCollection = Constellation.Collection(collectionName).find(Constellation.searchSelector(collectionName), {transform: null}).fetch();
       var newObject = Constellation.parse(newData);
       var oldObject = CurrentCollection[DocumentPosition];
@@ -211,7 +211,7 @@ Template.Constellation_docControls.events({
     if (newObject) {
       Meteor.call("Constellation_update", collectionName, newObject, Constellation.validateDocument(oldObject), function(error, result) {
         if (!error) {
-          Session.set('Constellation_editMode', null);    
+          ConstellationDict.set('Constellation_editMode', null);    
           UndoRedo.add(collectionName, {
             action: 'update',
             document: oldObject,
@@ -224,7 +224,7 @@ Template.Constellation_docControls.events({
     }
   },
   'click .Constellation_edit_cancel': function() {
-    Session.set('Constellation_editMode', null);
+    ConstellationDict.set('Constellation_editMode', null);
   },
   'click .Constellation_m_signout': function() {
     Meteor.logout();
@@ -235,7 +235,7 @@ Template.Constellation_docControls.events({
 Template.Constellation_docControls.helpers({
   disable: function() {
     var sessionKey = Constellation.sessKey(String(this));
-    var CurrentDocument = Session.get(sessionKey);
+    var CurrentDocument = ConstellationDict.get(sessionKey);
     var collectionName = String(this);
     var collectionVar = Constellation.Collection(collectionName);
     var collectionCount = collectionVar.find().count();
@@ -250,17 +250,17 @@ Template.Constellation_docControls.helpers({
 
   },
   editing: function() {
-    var editing = Session.get('Constellation_editMode');
+    var editing = ConstellationDict.get('Constellation_editMode');
     return editing;
   },
   editing_class: function() {
-    var edit = Session.get('Constellation_editMode');
+    var edit = ConstellationDict.get('Constellation_editMode');
     if (edit) {
       return "Constellation_m_wrapper_expand"
     }
   },
   Constellation_menuContent_editing: function() {
-    var editMode = Session.get("Constellation_editMode");
+    var editMode = ConstellationDict.get("Constellation_editMode");
 
     if (editMode) {
       return "Constellation_menuContent_editing";
@@ -268,7 +268,7 @@ Template.Constellation_docControls.helpers({
 
   },
   account: function() {
-    return Session.equals("Constellation_currentTab","constellation_plugin_user_account");
+    return ConstellationDict.equals("Constellation_currentTab","constellation_plugin_user_account");
   },
   notEmpty: function () {
     var collectionName = String(this);

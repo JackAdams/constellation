@@ -1,19 +1,19 @@
 Template.Constellation.helpers({
   rows: function () {
-    return Session.get('Constellation_tabs');
+    return ConstellationDict.get('Constellation_tabs');
   },
   active: function () {
-    if (Session.get("Constellation_fullscreen")) {
+    if (ConstellationDict.get("Constellation_fullscreen")) {
       return "Constellation_fullscreen Constellation_expand";
     }
-    var ConstellationCollection = Session.get("Constellation_currentTab");
+    var ConstellationCollection = ConstellationDict.get("Constellation_currentTab");
     if (ConstellationCollection) {
       return "Constellation_expand";
     }
     return '';
   },
   constellationActive: function () {
-    return Session.get('Constellation_active');
+    return ConstellationDict.get('Constellation_active');
   },
   visible: function () {
     return TabStates.get(this.id);  
@@ -26,23 +26,23 @@ Template.Constellation.events({
       var targetCollection = this.id;
       var sessionKey = Constellation.sessKey(targetCollection);
   
-      if (Session.equals("Constellation_currentTab", targetCollection)) {
+      if (ConstellationDict.equals("Constellation_currentTab", targetCollection)) {
   
         // either do nothing or collapse the pane
         // comment out the line below for not collapsing the pane
-        Session.set("Constellation_currentTab", null);
+        ConstellationDict.set("Constellation_currentTab", null);
   
       } else {
   
-        Session.set("Constellation_editMode", false);
+        ConstellationDict.set("Constellation_editMode", false);
   
         // If the collection doesn't have an index key set,
         // start it from the first document
-        if (!Session.get(sessionKey)) {
-          Session.set(sessionKey, 0);
+        if (!ConstellationDict.get(sessionKey)) {
+          ConstellationDict.set(sessionKey, 0);
         }
   
-        Session.set("Constellation_currentTab", targetCollection);
+        ConstellationDict.set("Constellation_currentTab", targetCollection);
   
       }
     }
@@ -58,7 +58,7 @@ Template.Constellation.events({
 Template.Constellation_row.helpers({
   active: function () {
 
-    if (Session.equals("Constellation_currentTab", this.id)) {
+    if (ConstellationDict.equals("Constellation_currentTab", this.id)) {
       return "Constellation_row_expand";
     }
 

@@ -258,7 +258,6 @@
   padding: 0 7px;
   padding-top: 3px;
   line-height: 20px;
-  z-index: 99;
   overflow: auto;
   border-radius: 0 0 5px 5px;
   z-index: 9999999998;
@@ -482,12 +481,12 @@
   opacity: 1;
 }
 
-#Constellation .Constellation_documentViewer pre, .editable-JSON {
+#Constellation .Constellation_documentViewer pre {
   white-space: pre;       /* CSS 3 */
   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
   white-space: -pre-wrap;      /* Opera 4-6 */
   white-space: -o-pre-wrap;    /* Opera 7 */
-  word-wrap: break-word; 
+  word-wrap: break-word;
 }
 
 #Constellation .undo-redo-buttons, #Constellation .constellation-menu-button-container {
@@ -569,13 +568,13 @@
   position: absolute;
   width: 14px;
   height: 14px;
-  line-height: 14px;
+  line-height: 15px;
   font-size: 12px;
-  padding: 0 0 0 4px;
   top: -12px;
   left: -22px;
   cursor: pointer;
   transition: 0.3s;
+  text-align: center;
 }
 
 .Constellation_search_button:hover {

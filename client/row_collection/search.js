@@ -13,29 +13,29 @@ Template.Constellation_search.helpers({
      },[{name:'_id',type:'string'}]);
   },
   selected: function () {
-    var field = Session.get(Constellation.searchKey(String(Template.instance().data), 'field'));
+    var field = ConstellationDict.get(Constellation.searchKey(String(Template.instance().data), 'field'));
     return field && this.name === field.name;
   },
   value: function () {
-    var value = Session.get(Constellation.searchKey(String(Template.instance().data), 'value'));
+    var value = ConstellationDict.get(Constellation.searchKey(String(Template.instance().data), 'value'));
     return (!_.isUndefined(value)) ? value : '';  
   },
   searching: function () {
-    return Session.get('Constellation_searching');  
+    return ConstellationDict.get('Constellation_searching');  
   }
 });
 
 Template.Constellation_search.events({
   'input .Constellation_search' : function (evt, tmpl) {
      var value = tmpl.$(evt.target).val();
-     Session.set(Constellation.searchKey(String(this), 'value'), value);
+     ConstellationDict.set(Constellation.searchKey(String(this), 'value'), value);
      var sessionKey = Constellation.sessKey(String(this));
-     Session.set(sessionKey, 0);
+     ConstellationDict.set(sessionKey, 0);
   },
   'change .Constellation_search_fields' : function (evt, tmpl) {
      var selected = tmpl.$('select').find(":selected");
      var data = Blaze.getData(selected[0]);
-     Session.set(Constellation.searchKey(String(this), 'field'), data);
+     ConstellationDict.set(Constellation.searchKey(String(this), 'field'), data);
      tmpl.$('input').attr('placeholder', data.type + ' value ...');
   }
 });

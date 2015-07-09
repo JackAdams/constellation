@@ -69,7 +69,7 @@ _.extend(Constellation, {
 
   },
   'toggleFullScreen' : function () {
-    Session.set('Constellation_fullscreen', !Session.get('Constellation_fullscreen'));  
+    ConstellationDict.set('Constellation_fullscreen', !ConstellationDict.get('Constellation_fullscreen'));  
   },
   'sessKey' : function (collectionName) {
     return 'Constellation_collection_' + collectionName;  
@@ -80,11 +80,11 @@ _.extend(Constellation, {
   },
   'searchSelector' : function (collectionName, exact) {
     var selector = {};
-    if (!Session.get('Constellation_searching')) {
+    if (!ConstellationDict.get('Constellation_searching')) {
       return selector;    
     }
-    var field = Session.get(Constellation.searchKey(collectionName, 'field')) || {name: '_id', type: 'string'};
-    var searchValue = Session.get(Constellation.searchKey(collectionName, 'value')), matcher;
+    var field = ConstellationDict.get(Constellation.searchKey(collectionName, 'field')) || {name: '_id', type: 'string'};
+    var searchValue = ConstellationDict.get(Constellation.searchKey(collectionName, 'value')), matcher;
     if (typeof searchValue !== 'undefined' && searchValue !== '') {
       if (exact) {
         matcher = searchValue;

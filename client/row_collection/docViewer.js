@@ -4,7 +4,7 @@ Template.Constellation_docViewer.helpers({
     var currentCollection = Constellation.Collection(collectionName);
     var documents = currentCollection.find(Constellation.searchSelector(collectionName), {transform: null}).fetch();
     var sessionKey = Constellation.sessKey(String(this));
-    var docNumber = Session.get(sessionKey);
+    var docNumber = ConstellationDict.get(sessionKey);
     var docCurrent = documents[docNumber];
     return docCurrent;
   },
@@ -23,7 +23,7 @@ Template.Constellation_docViewer.helpers({
   },
   editContent: function () {
 
-    var editMode = Session.get("Constellation_editMode");
+    var editMode = ConstellationDict.get("Constellation_editMode");
 
     if (editMode) {
       return "true";
@@ -32,7 +32,7 @@ Template.Constellation_docViewer.helpers({
   },
   editStyle: function () {
 
-    var editMode = Session.get("Constellation_editMode");
+    var editMode = ConstellationDict.get("Constellation_editMode");
 
     if (editMode) {
       return "Constellation_editable";
@@ -40,6 +40,6 @@ Template.Constellation_docViewer.helpers({
 
   },
   noInlineEditing: function () {
-    return Session.get('Constellation_noInlineEditing');  
+    return ConstellationDict.get('Constellation_noInlineEditing');  
   }
 });

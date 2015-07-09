@@ -1,4 +1,9 @@
 TabStates = new ReactiveDict('Constellation_tab_states');
+ConstellationDict = new ReactiveDict('Constellation_dict');
+
+// In case these need to be available to packages
+Constellation.TabStates = TabStates;
+Constellation.ConstellationDict = ConstellationDict;
 
 Meteor.startup(function() {
 
@@ -9,7 +14,7 @@ Meteor.startup(function() {
   $(document).keydown(function (e) {
     if (e.ctrlKey) {
       if (e.keyCode === 77) {
-        Session.set('Constellation_active', !Session.get('Constellation_active'));
+        ConstellationDict.set('Constellation_active', !ConstellationDict.get('Constellation_active'));
       }
       if (e.keyCode === 70) {
         Constellation.toggleFullScreen();
@@ -40,7 +45,7 @@ Meteor.startup(function() {
     
     Constellation.tabs = Constellation.defaultTabs.concat(_.map(Constellation._tabs, function (tab) { var id = tab.id || tab.name; var thisTab = _.clone(tab); return _.extend(thisTab, {id: 'constellation_plugin_' + id}) }) || []);
     
-    var ConstellationConfig = Session.get("Constellation");
+    var ConstellationConfig = ConstellationDict.get("Constellation");
     var collections = ConstellationConfig && _.without(ConstellationConfig.collections, null) || [];
     
     if (collections.length) {
@@ -75,7 +80,7 @@ Meteor.startup(function() {
       TabStates.set(tab.id, state);
     });
     
-    Session.set('Constellation_tabs', Constellation.tabs);
+    ConstellationDict.set('Constellation_tabs', Constellation.tabs);
   
   });
   
@@ -84,9 +89,9 @@ Meteor.startup(function() {
   // Auto detect collections
   // ***********************
   
-  // If the user hasn't done a Session.set('Constellation',{ ... });
+  // If the user hasn't done a ConstellationDict.set('Constellation',{ ... });
   // set some default values
-  if (Session.get('Constellation') === undefined) {
+  if (ConstellationDict.get('Constellation') === undefined) {
 
   // Build a default config object
   // Build a default config object
@@ -102,7 +107,7 @@ Meteor.startup(function() {
       'collections': collections,
     };
 
-    Session.set("Constellation", defaults);
+    ConstellationDict.set("Constellation", defaults);
 
   }
   
