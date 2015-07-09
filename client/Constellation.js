@@ -17,6 +17,9 @@ Template.Constellation.helpers({
   },
   visible: function () {
     return TabStates.get(this.id);  
+  },
+  constellationClass: function () {
+	return ConstellationDict.get('Constellation_baseClasses');
   }
 });
 

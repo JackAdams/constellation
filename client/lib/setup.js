@@ -72,15 +72,21 @@ Meteor.startup(function() {
     
     // Config goes at the bottom
     Constellation.tabs.push({name: 'Config ...', id: 'constellation_plugin_config', headerContentTemplate: 'Constellation_config_header', menuContentTemplate: 'Constellation_config_menu', mainContentTemplate: 'Constellation_config_view', active: true});
-    
+
+    var constellationClasses = '';
+
     _.each(Constellation.tabs, function (tab) {
       var key = tab.id.replace(/_/g,"-"); // All tabs already have namespaced id values beginning with constellation_ and a prefix
       var storedValue = localStorage[key]; // localStorage just does string values, not booleans
       var state = (typeof storedValue !== 'undefined') ? ((storedValue === "false") ? false : true) : ((typeof tab.active !== 'undefined') ? tab.active : true);
       TabStates.set(tab.id, state);
+	  if (tab.addBaseClass && _.isString(tab.addBaseClass)) {
+        constellationClasses+= tab.addBaseClass + ' '; 
+	  }
     });
     
     ConstellationDict.set('Constellation_tabs', Constellation.tabs);
+	ConstellationDict.set('Constellation_baseClasses', constellationClasses);
   
   });
   
@@ -117,7 +123,7 @@ Meteor.startup(function() {
   
   // Note: there is also an `EditableJSON.afterUpdate` callback in /client/row_actions/undoRedo.js
   
-  EditableJSON.onUnpublishedFieldAdded(function (collection, field, value) { console.log(this, collection,field, value);
+  EditableJSON.onUnpublishedFieldAdded(function (collection, field, value) {
     alert("Are you sure you the new field '" + field + "' is published?" + ((!Package["constellation:console-autopublish"]) ? "\n\nmeteor add constellation:console-autopublish\n\nwill allow you to switch autopublish on and off from the Constellation UI for easy checking." : "\n\nSwitch on autopublish to check."));
   });
   

@@ -4,7 +4,7 @@
 
 <template name="Constellation">
   {{#if constellationActive}}
-    <div id="Constellation" class="{{active}} Constellation">
+    <div id="Constellation" class="{{active}} Constellation {{constellationClass}}">
       {{#each rows}}
         {{#if visible}}
           {{> Constellation_row}}

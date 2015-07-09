@@ -21,8 +21,8 @@
 </template>
 
 <template name="Constellation_global_undo_redo">
-  <span class="undo-redo-buttons">
-    {{#with stack 'undo'}}<span class="undo-button"><span title="Undo {{action}} {{collection}}: {{json}}">undo</span></span>{{/with}}{{#with stack 'redo'}}<span class="redo-button"><span title="Redo {{action}} {{collection}}: {{json}}">redo</span></span>{{/with}}
+  <span class="constellation-menu-button-container">
+    {{#with stack 'undo'}}<span class="undo-button constellation-menu-button"><span title="Undo {{action}} {{collection}}: {{json}}">undo</span></span>{{/with}}{{#with stack 'redo'}}<span class="redo-button constellation-menu-button"><span title="Redo {{action}} {{collection}}: {{json}}">redo</span></span>{{/with}}
   </span>
 </template>
 

@@ -489,14 +489,14 @@
   word-wrap: break-word;
 }
 
-#Constellation .undo-redo-buttons, #Constellation .constellation-menu-button-container {
+#Constellation .constellation-menu-button-container {
   float: right;
   vertical-align: middle;
   display: inline-block;
   margin: -2px 0 0 0;
 }
 
-#Constellation .undo-button, #Constellation .redo-button, #Constellation .constellation-menu-button {
+#Constellation .constellation-menu-button {
   cursor: pointer !important;
   font-size: 9px;
   padding: 1px 1px 0px 1px;
@@ -507,7 +507,7 @@
   margin-right: 2px;
 }
 
-#Constellation .undo-button:hover, #Constellation .redo-button:hover, #Constellation .constellation-menu-button:hover, #Constellation .constellation-menu-button-active {
+#Constellation .constellation-menu-button:hover, #Constellation .constellation-menu-button-active {
   transition: 0.3s;
   background: rgba(255,255,255,.1);
   color: #2CA6E2;

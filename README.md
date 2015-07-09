@@ -21,7 +21,7 @@ Examples of plugins are:
 - [constellation:session](https://github.com/JackAdams/constellation-session) (for viewing / manipulating data in the Session variable)
 - [constellation:subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
 - [constellation:autopublish](https://github.com/JackAdams/constellation-autopublish) (for toggling autopublish behaviour)
-- [constellation:tiny](https://github.com/JackAdams/constellation-tiny) (for really minimizing the UI)
+- [constellation:tiny](https://github.com/JackAdams/constellation-tiny) (for _really_ minimizing the UI)
 
 If you want to write a plugin, take a look at the source of the packages above.
 
