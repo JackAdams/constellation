@@ -45,7 +45,7 @@ API.setCurrentTab = function (id, type) {
 
 API.isCurrentTab = function (id, type) {
   var tab = API.getCurrentTab();
-  return id === tab.id && type === tab.type;
+  return tab && id === tab.id && type === tab.type;
 }
 
 // Check whether a tab is available via the user's UI (have they closed it via the "Config ..." panel or not)
