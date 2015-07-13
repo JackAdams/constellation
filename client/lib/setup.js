@@ -4,6 +4,7 @@ ConstellationDict = new ReactiveDict('Constellation_dict');
 // In case these need to be available to packages
 Constellation.TabStates = TabStates;
 Constellation.ConstellationDict = ConstellationDict;
+Constellation._keyCode = 67;
 
 Meteor.startup(function() {
 
@@ -13,7 +14,7 @@ Meteor.startup(function() {
 
   $(document).keydown(function (e) {
     if (e.ctrlKey) {
-      if (e.keyCode === 77) {
+      if (e.keyCode === Constellation._keyCode) {
         ConstellationDict.set('Constellation_active', !ConstellationDict.get('Constellation_active'));
       }
       if (e.keyCode === 70) {

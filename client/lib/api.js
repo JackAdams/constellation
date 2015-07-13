@@ -113,4 +113,8 @@ API.registerCallbacks = function(obj) {
     throw new Meteor.Error('You must pass an object to register callbacks');  
   }
 }
-    
+
+API.setKeyCode = function(keyCode) {
+  check(keyCode, Number);
+  Constellation._keyCode = keyCode;	
+}

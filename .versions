@@ -1,12 +1,12 @@
 aldeed:template-extension@3.4.3
-babrahams:editable-json@0.5.1
+babrahams:editable-json@0.5.2
 base64@1.0.3
 binary-heap@1.0.3
 blaze@2.1.2
 blaze-tools@1.0.3
 callback-hook@1.0.3
 check@1.0.5
-constellation:console@1.0.0
+constellation:console@1.0.3
 dburles:mongo-collection-instances@0.3.3
 ddp@1.1.0
 deps@1.0.7

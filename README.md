@@ -11,7 +11,7 @@ Usage
 meteor add constellation:console
 ```
 
-After installation, press <strong>Control + M</strong> to toggle it.
+After installation, press <strong>Control + C</strong> to toggle it.
 
 Plugins
 -------
@@ -93,6 +93,8 @@ The `type` field/param in the three methods below will be:
 `Constellaton.hideCollection('collectionName')` to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab - they won't even appear there)
 
 `Constellaton.showCollection('collectionName')` to show collections programatically
+
+`Constellation.setKeyCode(keyCode)` to change the default toggle key from CTRL + C to CTRL + <whichever key's keycode you set> (Note: this should only be used in app code, as a last-resort config option, and not in plugin package code)
 
 If you put a `callback` in your `addTab({ ... })` (e.g. `Constellation.addTab({name: "my-plugin", callback: "myCallBack", ...});`) you need to register it as follows:
 ```
