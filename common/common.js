@@ -15,7 +15,7 @@ if (Constellation === undefined) {
 Constellation.Collection = function (collectionName) {
   
   if (!collectionName) {
-	return null;  
+    return null;  
   }
   
   return Mongo.Collection.get(collectionName)

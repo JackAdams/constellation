@@ -81,13 +81,13 @@ Meteor.startup(function() {
       var storedValue = localStorage[key]; // localStorage just does string values, not booleans
       var state = (typeof storedValue !== 'undefined') ? ((storedValue === "false") ? false : true) : ((typeof tab.active !== 'undefined') ? tab.active : true);
       TabStates.set(tab.id, state);
-	  if (tab.addBaseClass && _.isString(tab.addBaseClass)) {
+      if (tab.addBaseClass && _.isString(tab.addBaseClass)) {
         constellationClasses+= tab.addBaseClass + ' '; 
-	  }
+      }
     });
     
     ConstellationDict.set('Constellation_tabs', Constellation.tabs);
-	ConstellationDict.set('Constellation_baseClasses', constellationClasses);
+    ConstellationDict.set('Constellation_baseClasses', constellationClasses);
   
   });
   
@@ -98,17 +98,24 @@ Meteor.startup(function() {
   
   // If the user hasn't done a ConstellationDict.set('Constellation',{ ... });
   // set some default values
-  if (ConstellationDict.get('Constellation') === undefined) {
+
+  if (ConstellationDict.get('Constellation') === undefined || ConstellationDict.get('Constellation').collections === undefined) {
 
   // Build a default config object
   // Build a default config object
 
-    var collections = _.map(Mongo.Collection.getAll(), function (collection) {
+    var collections = _.reduce(Mongo.Collection.getAll(), function (memo, collection) {
 
       // Note this returns the actual mongo collection name, not Meteor's Mongo.Collection name
-      return collection.name;
+      if (collection.name) {
 
-    });
+        memo.push(collection.name);
+
+      }
+      
+      return memo;
+
+    }, []);
 
     var defaults = {
       'collections': collections,

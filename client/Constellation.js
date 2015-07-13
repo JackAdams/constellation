@@ -19,7 +19,7 @@ Template.Constellation.helpers({
     return TabStates.get(this.id);  
   },
   constellationClass: function () {
-	return ConstellationDict.get('Constellation_baseClasses');
+    return ConstellationDict.get('Constellation_baseClasses');
   }
 });
 

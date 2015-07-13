@@ -16,7 +16,7 @@ API.addTab = function (tab) {
 API.getCurrentTab = function () {
   var tabName = ConstellationDict.get("Constellation_currentTab");
   if (!tabName) {
-	return null;  
+    return null;  
   }
   var tabData = tabName.split('_');
   if (tabData[0] === 'constellation' && tabData[1] === 'plugin') {
@@ -85,6 +85,8 @@ API.showCollection = function (collectionName) {
 
   collections.push(collectionName);
   
+  ConstellationConfig.collections = collections;
+  
   ConstellationDict.set("Constellation", ConstellationConfig);
 
 }
@@ -116,5 +118,5 @@ API.registerCallbacks = function(obj) {
 
 API.setKeyCode = function(keyCode) {
   check(keyCode, Number);
-  Constellation._keyCode = keyCode;	
+  Constellation._keyCode = keyCode;
 }
