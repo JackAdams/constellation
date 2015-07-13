@@ -1,5 +1,6 @@
 // Strip out functions in case documents have had methods added to them
 
+// validateDocument is probably unnecessary now that we've got {transform: null} in the queries
 Constellation.validateDocument = function (doc) {
   var validatedDoc = {};
   _.each(doc, function (val, key) {

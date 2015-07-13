@@ -13,16 +13,20 @@ if (Constellation === undefined) {
 // Go through a variety of means of trying to return the correct collection
 
 Constellation.Collection = function (collectionName) {
-
+  
+  if (!collectionName) {
+	return null;  
+  }
+  
   return Mongo.Collection.get(collectionName)
     // This should automatically match all collections by default
     // including namespaced collections
 
-  || ((Meteor.isServer) ? eval(collectionName) : Meteor._get.apply(null,[window].concat(collectionName.split('.'))))
+  || ((Meteor.isServer) ? global[collectionName] : Meteor._get.apply(null,[window].concat((collectionName || '').split('.'))))
   // For user defined collection names
   // in the form of Meteor's Mongo.Collection names as strings
 
-  || ((Meteor.isServer) ? eval(firstToUpper(collectionName)) : Meteor._get.apply(null,[window].concat(firstToUpper(collectionName).split('.'))))
+  || ((Meteor.isServer) ? global[firstToUpper(collectionName)] : Meteor._get.apply(null,[window].concat(firstToUpper((collectionName || '')).split('.'))))
   // For user defined collections where the user has typical upper-case collection names
   // but they've put actual mongodb collection names into the Constellation config instead of Meteor's Mongo.Collection names as strings
 
