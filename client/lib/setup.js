@@ -100,7 +100,7 @@ Meteor.startup(function() {
   // If the user hasn't done a ConstellationDict.set('Constellation',{ ... });
   // set some default values
 
-  var shownCollections = ConstellationDict.get("Constellation").collections;
+  var shownCollections = ConstellationDict.get("Constellation") && ConstellationDict.get("Constellation").collections || [];
 
   // Build a default config object
   // Build a default config object

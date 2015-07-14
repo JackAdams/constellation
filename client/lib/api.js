@@ -120,6 +120,8 @@ API.showCollection = function (collections) {
     ConstellationConfig.collections = collections;
     
     ConstellationDict.set("Constellation", ConstellationConfig);
+	
+	Constellation._hiddenCollections = _.without(Constellation._hiddenCollections, collectionName);
   
   });
 
