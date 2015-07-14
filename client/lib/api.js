@@ -4,6 +4,7 @@ API = {};
 
 Constellation._tabs = [];
 Constellation._callbacks = {};
+Constellation._hiddenCollections = [];
 
 // Lets external packages plug a tab into Constellation
 
@@ -62,32 +63,64 @@ API.isFullScreen = function () {
 
 // Lets external packages hide collections
 
-API.hideCollection = function (collectionName) {
+API.hideCollection = function (collections) {
 
-  var ConstellationConfig = ConstellationDict.get("Constellation") || {};
+  if (!(_.isString(collections) || _.isArray(collections))) {
+     
+     return;  
   
-  var collections = _.without(ConstellationConfig.collections || [], collectionName);
+  }
 
-  ConstellationConfig.collections = collections;
+  if (_.isString(collections)) {
+     collections = [collections];  
+  }
 
-  ConstellationDict.set("Constellation", ConstellationConfig);
+  _.each(collections, function (collectionName) {
+
+    var ConstellationConfig = ConstellationDict.get("Constellation") || {};
+    
+    var collections = _.without(ConstellationConfig.collections || [], collectionName);
+  
+    ConstellationConfig.collections = collections;
+  
+    ConstellationDict.set("Constellation", ConstellationConfig);
+  
+    // For the first run (auto-detection) we need to know what was hidden by packages / app code
+    Constellation._hiddenCollections.push(collectionName);
+  
+  });
   
 }
 
 // Lets external packages show collections
 
-API.showCollection = function (collectionName) {
+API.showCollection = function (collections) {
+    
+  
+  if (!(_.isString(collections) || _.isArray(collections))) {
+     
+     return;  
+  
+  }
 
-  // In case a collection does not get detected, like a local one
-  var ConstellationConfig = ConstellationDict.get("Constellation") || {};
-  
-  var collections = ConstellationConfig.collections || [];
+  if (_.isString(collections)) {
+     collections = [collections];  
+  }
 
-  collections.push(collectionName);
+  _.each(collections, function (collectionName) {
   
-  ConstellationConfig.collections = collections;
+    // In case a collection does not get detected, like a local one
+    var ConstellationConfig = ConstellationDict.get("Constellation") || {};
+    
+    var collections = ConstellationConfig.collections || [];
   
-  ConstellationDict.set("Constellation", ConstellationConfig);
+    collections.push(collectionName);
+    
+    ConstellationConfig.collections = collections;
+    
+    ConstellationDict.set("Constellation", ConstellationConfig);
+  
+  });
 
 }
 

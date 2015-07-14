@@ -90,9 +90,9 @@ The `type` field/param in the three methods below will be:
 
 `Constellation.isFullScreen()` to see if Constellation is in fullscreen mode
 
-`Constellaton.hideCollection('collectionName')` to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab - they won't even appear there)
+`Constellaton.hideCollection('collectionName')` to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab - they won't even appear there) - accepts an array or a string
 
-`Constellaton.showCollection('collectionName')` to show collections programatically
+`Constellaton.showCollection('collectionName')` to show collections programatically - accepts an array or a string
 
 `Constellation.setKeyCode(keyCode)` to change the default toggle key from CTRL + C to CTRL + <whichever key's keycode you set> (Note: this should only be used in app code, as a last-resort config option, and not in plugin package code)
 

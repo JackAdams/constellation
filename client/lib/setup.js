@@ -85,9 +85,10 @@ Meteor.startup(function() {
         constellationClasses+= tab.addBaseClass + ' '; 
       }
     });
-    
+
     ConstellationDict.set('Constellation_tabs', Constellation.tabs);
     ConstellationDict.set('Constellation_baseClasses', constellationClasses);
+
   
   });
   
@@ -99,31 +100,31 @@ Meteor.startup(function() {
   // If the user hasn't done a ConstellationDict.set('Constellation',{ ... });
   // set some default values
 
-  if (ConstellationDict.get('Constellation') === undefined || ConstellationDict.get('Constellation').collections === undefined) {
+  var shownCollections = ConstellationDict.get("Constellation").collections;
 
   // Build a default config object
   // Build a default config object
 
-    var collections = _.reduce(Mongo.Collection.getAll(), function (memo, collection) {
+  var collections = _.reduce(Mongo.Collection.getAll(), function (memo, collection) {
 
-      // Note this returns the actual mongo collection name, not Meteor's Mongo.Collection name
-      if (collection.name) {
+    // Note this returns the actual mongo collection name, not Meteor's Mongo.Collection name
+    if (collection.name) {
 
-        memo.push(collection.name);
+      memo.push(collection.name);
 
-      }
+    }
       
-      return memo;
+    return memo;
 
-    }, []);
+  }, []);
 
-    var defaults = {
-      'collections': collections,
-    };
+  var defaults = {
+    'collections': _.difference(_.union(collections, shownCollections), Constellation._hiddenCollections),
+  };
 
-    ConstellationDict.set("Constellation", defaults);
+  ConstellationDict.set("Constellation", defaults);
+  Tracker.flush();
 
-  }
   
   // *****************************
   // Set up EditableJSON collbacks
