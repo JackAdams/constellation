@@ -5,6 +5,7 @@ API = {};
 Constellation._tabs = [];
 Constellation._callbacks = {};
 Constellation._hiddenCollections = [];
+Constellation._excludedSessionVariables = ['Constellation_', 'Meteor'];
 
 // Lets external packages plug a tab into Constellation
 
@@ -133,7 +134,7 @@ API.isActive = function () {
 // Register callbacks to be fired on toggling certain tabs
 // Name the callback here (field name) and when adding the tab using { ..., "callback" : fieldName, ... }
 
-API.registerCallbacks = function(obj) {
+API.registerCallbacks = function (obj) {
   if (_.isObject(obj)) {
     _.each(obj,function(val,key) {
       if (_.isFunction(val)) {
@@ -149,7 +150,15 @@ API.registerCallbacks = function(obj) {
   }
 }
 
-API.setKeyCode = function(keyCode) {
+API.setKeyCode = function (keyCode) {
   check(keyCode, Number);
   Constellation._keyCode = keyCode;
+}
+
+API.excludedSessionKeys = function () {
+  return Constellation._excludedSessionVariables;	
+}
+
+API.excludeSessionKeysContaining = function (prefix) {
+  Constellation._excludedSessionVariables.push(prefix);
 }

@@ -96,6 +96,10 @@ The `type` field/param in the three methods below will be:
 
 `Constellation.setKeyCode(keyCode)` to change the default toggle key from CTRL + C to CTRL + <whichever key's keycode you set> (Note: this should only be used in app code, as a last-resort config option, and not in plugin package code)
 
+`Constellation.excludeSessionKeysContaining(prefix)` to hide any `Session` keys containing the given string (`prefix`) from the `constellation:session` package
+
+`Constellation.excludedSessionKeys` to get an array of the strings that will be tested against `Session` keys to exclude them from display in the `constellation:session` package
+
 If you put a `callback` in your `addTab({ ... })` (e.g. `Constellation.addTab({name: "my-plugin", callback: "myCallBack", ...});`) you need to register it as follows:
 ```
 Constellaton.registerCallbacks({
