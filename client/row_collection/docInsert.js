@@ -11,15 +11,18 @@ Template.Constellation_docInsert.events({
 
     if (newObject) {
       Meteor.call('Constellation_insert', CollectionName, newObject, function (error, result) {
-        if (!error) {
+        if (!error && result) {
           // if successful, set the proper session variable value
           sessionKey = Constellation.sessKey(CollectionName);
           ConstellationDict.set(sessionKey, 0);
-          var newDoc = Mongo.Collection.get(CollectionName).findOne(result, {transform: null});
-          UndoRedo.add(CollectionName, {
-            action: 'insert',
-            document: newDoc
-          });
+          var newDoc = Mongo.Collection.get(CollectionName).findOne(result._id, {transform: null});
+		  UndoRedo.add(CollectionName, {
+			action: 'insert',
+			document: result
+		  });
+		  if (!newDoc) {
+			alert("Insert was successful, but this document doesn't seem to be published." + ((!!Package["constellation:autopublish"]) ? '\n\nSwitch on autopublish to check.' : ''));  
+		  }
         } else {
           Constellation.error("insert");
         }

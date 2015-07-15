@@ -32,6 +32,10 @@
         {{> Constellation_menuContent}}
       </div>
       
+      <div class="Constellation_subMenuContent">
+        {{> Constellation_subMenuContent}}
+      </div>
+      
       <div class="Constellation_documentViewer">
         {{> Constellation_mainContent}}
       </div>
@@ -55,6 +59,10 @@
 </template>
 
 <template name="Constellation_searchContent">
+  {{> Template.dynamic template=template data=id}}
+</template>
+
+<template name="Constellation_subMenuContent">
   {{> Template.dynamic template=template data=id}}
 </template>
 

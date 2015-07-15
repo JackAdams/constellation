@@ -510,7 +510,7 @@
 #Constellation .constellation-menu-button:hover, #Constellation .constellation-menu-button-active {
   transition: 0.3s;
   background: rgba(255,255,255,.1);
-  color: #2CA6E2;
+  color: #2CA6E2 !important;
 }
 
 .Constellation_action {

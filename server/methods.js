@@ -119,7 +119,7 @@ Meteor.methods({
         
     var newId = insertDoc(ConstellationCollection, documentData);
     
-    return newId;
+    return ConstellationCollection.findOne({_id: newId});
 
   }
   

@@ -91,3 +91,9 @@ Template.Constellation_mainContent.helpers({
     return this.mainContentTemplate || null;
   }
 });
+
+Template.Constellation_subMenuContent.helpers({
+  template: function () {
+    return this.subMenuContentTemplate || null;
+  }
+});
