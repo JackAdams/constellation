@@ -23,6 +23,7 @@ Examples of plugins are:
 - [constellation:subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
 - [constellation:autopublish](https://github.com/JackAdams/constellation-autopublish) (for toggling autopublish behaviour)
 - [constellation:tiny](https://github.com/JackAdams/constellation-tiny) (for _really_ minimizing the UI)
+- [constellation:velocity](https://github.com/JackAdams/constellation-velocity) (`velocity:html-reporter` miniturized for Constellation)
 
 If you want to write a plugin, take a look at the source of the packages above.
 
@@ -34,7 +35,14 @@ meteor add constellation:console constellation:subscriptions constellation:autop
 Making plugins
 --------------
 
-Make a package with `api.use('constellation:console@1.0.0', 'client')` in the `package.js` file. And put something like this in a js file on the client:
+Make a package with the following in the `package.js` file:
+
+```
+api.use('constellation:console@1.0.7');
+api.imply('constellation:console');
+```
+
+And put something like this in a js file on the client:
 
 ```
 Package["constellation:console"].API.addTab({
