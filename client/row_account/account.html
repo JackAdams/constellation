@@ -1,12 +1,18 @@
 <template name="Constellation_account_status">
-    
-  {{> Constellation_onOffLight currentUser}}
+  
+  {{#unless Constellation_switching_account}}  
+    {{> Constellation_onOffLight currentUser}}
+  {{else}}
+    {{#with "users"}}
+      {{> Constellation_collection_count}}
+    {{/with}}
+  {{/unless}}
 
 </template>
 
 <template name="Constellation_account_view">
   
-  {{#if currentUser}}
+  {{#if currentUserOrSwitchingAccount}}
     {{> Constellation_accountViewer}}
   {{else}}
     <div class="Constellation_docBar1">
@@ -18,8 +24,15 @@
 
 <template name="Constellation_account_controls">
   
-  {{#if currentUser}}
-    {{> Constellation_docControls}}
-  {{/if}}
+  {{> Constellation_docControls}}
   
+</template>
+
+<template name="Constellation_account_search">
+  {{#if Constellation_switching_account}}
+    {{#with "users"}}
+      {{> Constellation_search}}
+    {{/with}}
+  {{/if}}
+
 </template>

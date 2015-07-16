@@ -121,6 +121,15 @@ Meteor.methods({
     
     return ConstellationCollection.findOne({_id: newId});
 
+  },
+  
+  Constellation_impersonate: function(userId) {
+    check(userId, String);
+
+    if (!Meteor.users.findOne(userId))
+      throw new Meteor.Error(404, 'User not found');
+
+    this.setUserId(userId);
   }
   
 });

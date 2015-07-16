@@ -2,6 +2,9 @@ Template.Constellation_docViewer.helpers({
   activeDocument: function () {
     var collectionName = String(this);
     var currentCollection = Constellation.Collection(collectionName);
+	if (!currentCollection) {
+	  return null;	
+	}
     var documents = currentCollection.find(Constellation.searchSelector(collectionName), {transform: null}).fetch();
     var sessionKey = Constellation.sessKey(String(this));
     var docNumber = ConstellationDict.get(sessionKey);

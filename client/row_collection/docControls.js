@@ -224,11 +224,36 @@ Template.Constellation_docControls.events({
       });
     }
   },
-  'click .Constellation_edit_cancel': function() {
+  'click .Constellation_edit_cancel': function () {
     ConstellationDict.set('Constellation_editMode', null);
+	ConstellationDict.set('Constellation_switchingAccount', null);
   },
-  'click .Constellation_m_signout': function() {
+  'click .Constellation_m_signout': function () {
     Meteor.logout();
+  },
+  'click .Constellation_switchAccount' : function () {
+	ConstellationDict.set('Constellation_switchingAccount', true);
+    var sessionKey = Constellation.sessKey("users");
+    var current = ConstellationDict.get(sessionKey);
+	if (_.isUndefined(current)) {
+      ConstellationDict.set(sessionKey, 0);
+	}
+  },
+  'click .Constellation_useAccount' : function (evt, tmpl) {
+	  
+	var collectionName = String(this);
+	var sessionKey = Constellation.sessKey(collectionName);
+	var DocumentPosition = ConstellationDict.get(sessionKey);
+	var CurrentCollection = Constellation.Collection(collectionName).find(Constellation.searchSelector(collectionName), {transform: null}).fetch();
+	var userDoc = CurrentCollection[DocumentPosition];
+	var userId = userDoc._id;
+
+    Meteor.call('Constellation_impersonate', userId, function(err) {
+      if (!err) {
+        Meteor.connection.setUserId(userId);
+		ConstellationDict.set('Constellation_switchingAccount', null);
+      }
+    });  
   }
 });
 
@@ -239,6 +264,9 @@ Template.Constellation_docControls.helpers({
     var CurrentDocument = ConstellationDict.get(sessionKey);
     var collectionName = String(this);
     var collectionVar = Constellation.Collection(collectionName);
+	if (!collectionVar) {
+	  return;	
+	}
     var collectionCount = collectionVar.find().count();
     
     if (CurrentDocument >= 1) {
@@ -268,8 +296,14 @@ Template.Constellation_docControls.helpers({
     }
 
   },
-  account: function() {
+  account: function () {
     return ConstellationDict.equals("Constellation_currentTab","constellation_plugin_user_account");
+  },
+  accountCount: function () {
+	return Meteor.users && Meteor.users.find().count();  
+  },
+  currentUserOrSwitchingAccount: function () {
+	return Meteor.user() || ConstellationDict.get('Constellation_switchingAccount');
   },
   notEmpty: function () {
     var collectionName = String(this);
@@ -278,4 +312,8 @@ Template.Constellation_docControls.helpers({
       return true;
     }
   }
+});
+
+Blaze.registerHelper("Constellation_switching_account", function () {
+  return ConstellationDict.get('Constellation_switchingAccount') && ConstellationDict.equals("Constellation_currentTab","constellation_plugin_user_account");
 });

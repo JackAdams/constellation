@@ -36,7 +36,7 @@ Meteor.startup(function() {
   
   Constellation.defaultTabs = [
     {name: 'Full screen', id: 'constellation_plugin_fullscreen', active:false, noOpen:true, onClick: "toggleFullScreen", headerContentTemplate: 'Constellation_fullscreen_header'},
-    {name: 'Account', id: 'constellation_plugin_user_account', mainContentTemplate: 'Constellation_account_view', headerContentTemplate: 'Constellation_account_status', menuContentTemplate: 'Constellation_account_controls', active:false},
+    {name: 'Account', id: 'constellation_plugin_user_account', mainContentTemplate: 'Constellation_account_view', headerContentTemplate: 'Constellation_account_status', menuContentTemplate: 'Constellation_account_controls', searchContentTemplate: 'Constellation_account_search', active:false},
     {name: 'Actions', id: 'constellation_plugin_actions', mainContentTemplate:'Constellation_actions_main', headerContentTemplate: 'Constellation_actions_header', menuContentTemplate: 'Constellation_actions_menu', active:true}
   ];
   

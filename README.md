@@ -59,6 +59,8 @@ Package["constellation:console"].API.addTab({
 
 `menuContentTemplate` is rendered in the strip at the top of the main content area of the tab that appears when the tab is open.
 
+`subMenuContentTemplate` is rendered just below the menu strip of the tab, but above the main content. This part is fixed, while the main content scrolls. It gives some extra space to work with if you can't fit everything you need in the menu content strip.
+
 `mainContentTemplate` is rendered in the space for the main content when a tab is open.
 
 You can set `active: false` in the object above if you don't want your plugin to be shown automatically (the user can make it visible through the "Config" tab).

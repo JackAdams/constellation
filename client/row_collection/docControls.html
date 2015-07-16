@@ -3,13 +3,31 @@
   <div class="{{Constellation_menuContent_editing}}">
     {{#if account}}
       <div class="Constellation_docBar1">
-        {{#if editing}}
-          <div class="Constellation_edit_title">Update Document</div>
-          <div class="Constellation_edit_save">Save</div>
-          <div class="Constellation_edit_cancel">Cancel</div>
+        {{#if currentUserOrSwitchingAccount}}
+          {{#unless Constellation_switching_account}}
+            {{#if editing}}
+              <div class="Constellation_edit_title">Update Document</div>
+              <div class="Constellation_edit_save">Save</div>
+              <div class="Constellation_edit_cancel">Cancel</div>
+            {{else}}
+              <div class="Constellation_m_edit Constellation_m_updateAccount">Update</div>
+              <div class="Constellation_switchAccount">Switch</div>
+              <div class="Constellation_m_signout">Sign Out</div>
+            {{/if}}
+          {{else}}
+            {{#with "users"}}
+              <div class="Constellation_useAccount">Impersonate now</div>
+              <div class="{{disable}} Constellation_m_right"><strong>&rsaquo;</strong></div>
+              <div class="{{disable}} Constellation_m_left"><strong>&lsaquo;</strong></div>
+              <div class="Constellation_edit_cancel">Cancel</div>
+            {{/with}}
+          {{/unless}}
         {{else}}
-          <div class="Constellation_m_edit Constellation_m_updateAccount">Update</div>
-          <div class="Constellation_m_signout">Sign Out</div>
+          {{#if accountCount}}
+            <div class="Constellation_switchAccount">Choose account</div>
+          {{else}}
+            {{> Constellation_docInsert}}
+          {{/if}}
         {{/if}}
       </div>
     {{else}}
