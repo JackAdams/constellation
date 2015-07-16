@@ -92,7 +92,7 @@ _.extend(Constellation, {
     return 'Constellation_collection_' + collectionName;  
   },
   'searchKey' : function (collectionName, type) {
-    // type is one of: "object", "string", "boolean", "date", "array", "null", "number"
+	// type is "field" or "value"
     return 'Constellation_' + collectionName + '_' + type;
   },
   'searchSelector' : function (collectionName, exact) {

@@ -134,7 +134,7 @@ Template.Constellation_docControls.events({
       var CurrentDocument = ConstellationDict.get(sessionKey);
       var collectionName = String(this);
       var collectionVar = Constellation.Collection(collectionName);
-      var collectionCount = collectionVar.find().count() - 1;
+      var collectionCount = collectionVar.find(Constellation.searchSelector(collectionName)).count() - 1;
 
       if (CurrentDocument > collectionCount) {
         ConstellationDict.set(sessionKey, 0)
@@ -167,7 +167,7 @@ Template.Constellation_docControls.events({
       var CurrentDocument = ConstellationDict.get(sessionKey);
       var collectionName  = String(this);
       var collectionVar   = Constellation.Collection(collectionName);
-      var collectionCount = collectionVar.find().count() - 1;
+      var collectionCount = collectionVar.find(Constellation.searchSelector(collectionName)).count() - 1;
 
       if (CurrentDocument > collectionCount) {
         ConstellationDict.set(sessionKey, collectionCount)
