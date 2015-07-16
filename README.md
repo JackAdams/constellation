@@ -5,6 +5,8 @@ This is a fork of the open source part of the __Meteortoys__ project (i.e. [msav
 
 The main difference is that __Constellation__ provides an API for adding plugins (custom tabs) to the existing UI.
 
+[Demo on Meteorpad](http://meteorpad.com/pad/Wm7SreoMmL8QTMKkT/Constellation_Demo)
+
 Usage
 -----
 ```

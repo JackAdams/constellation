@@ -2,6 +2,9 @@ Template.Constellation_search.helpers({
   fields: function () {
      // Take a sample of up to 10 documents
      var Collection = Constellation.Collection(String(this));
+	 if (!Collection) {
+	   return [];
+	 }
      docs = Collection.find({}, {limit: 10}, {transform: null}).fetch();
      return _.reduce(docs, function (memo, doc) {
        _.each(doc, function (val,key) {
