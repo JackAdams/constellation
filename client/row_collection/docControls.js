@@ -1,6 +1,7 @@
 // Strip out functions in case documents have had methods added to them
 
 // validateDocument is probably unnecessary now that we've got {transform: null} in the queries
+// TODO -- it also should recurse
 Constellation.validateDocument = function (doc) {
   var validatedDoc = {};
   _.each(doc, function (val, key) {
@@ -24,6 +25,79 @@ Constellation.resetInlineEditingTimer = function() {
   },300);
 }
 
+// Callbacks to keep the console state up to date after mutator methods have run
+
+var afterDuplicate = function (error, result, CollectionName, sessionKey) {
+  if (!error) {
+
+	var newDoc = Constellation.Collection(CollectionName).findOne(result, {transform: null});
+
+	if (newDoc) {
+
+	  // Get position of new document
+	  var list = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName), {transform: null}).fetch();
+	  var docID = result;
+
+	  docIndex = _.reduce(list, function(memo, obj, index) {
+		if (obj._id === docID) {
+		  memo = index;
+		}
+		return memo;
+	  },0);
+
+	  ConstellationDict.set(sessionKey, docIndex);  
+	
+	  UndoRedo.add(CollectionName, {
+		action: 'insert',
+		document: newDoc
+	  });
+	  
+	}
+
+  } else {
+	Constellation.error("duplicate");
+  }	
+}
+
+var afterRemove = function (error, result, CollectionName, sessionKey, CollectionCount, DocumentPosition, DocumentID) {
+  if (!error) {
+	// Log the action
+	console.log("Removed " + DocumentID + " from " + CollectionName + ". Back-up below:");
+	console.log(result);
+  
+	// Adjust the position
+	if (DocumentPosition >= CollectionCount - 1) {
+	  newPosition = DocumentPosition - 1;
+	  ConstellationDict.set(sessionKey, newPosition);
+	}
+  
+	if (ConstellationDict.get(sessionKey) === -1) {
+	  ConstellationDict.set(sessionKey, 0);
+	}
+	
+	UndoRedo.add(CollectionName, {
+	  action: 'remove',
+	  document: result
+	});
+  
+  } else {
+	Constellation.error("remove");
+  }	
+}
+
+var afterUpdate = function (error, result, collectionName, oldObject, newObject) {
+  if (!error) {
+	ConstellationDict.set('Constellation_editMode', null);    
+	UndoRedo.add(collectionName, {
+	  action: 'update',
+	  document: oldObject,
+	  updatedDocument: newObject
+	});
+  } else {
+	Constellation.error('update')
+  }
+}
+
 Template.Constellation_docControls.events({
   'click .Constellation_m_new': function() {
 
@@ -33,45 +107,31 @@ Template.Constellation_docControls.events({
     var CurrentCollection = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName), {transform: null}).fetch();
     var CollectionCount = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).count();
 
-    var CurrentDocument = CurrentCollection[DocumentPosition],
-      DocumentID = CurrentDocument._id,
-      sessionKey = Constellation.sessKey(String(this));
+    var CurrentDocument = CurrentCollection[DocumentPosition];
+    var DocumentID = CurrentDocument._id;
+    var sessionKey = Constellation.sessKey(String(this));
 
     var ValidatedCurrentDocument = Constellation.validateDocument(CurrentDocument);
+	
+	if (Constellation.collectionIsLocal(CollectionName)) {
+	  // Just make a duplicate on the client
+	  var error = null;
+	  var result = null;
+	  try {
+	    result = Constellation.makeDuplicate(CollectionName, ValidatedCurrentDocument._id);
+	  }
+	  catch (err) {
+		error = err;  
+	  }
+	  if (!error) {
+	    afterDuplicate.call(null, error, result, CollectionName, sessionKey);
+	  }
+	  return;	
+	}
 
     Meteor.call("Constellation_duplicate", CollectionName, ValidatedCurrentDocument._id, function(error, result) {
-      if (!error) {
-
-        var newDoc = Constellation.Collection(CollectionName).findOne(result, {transform: null});
-
-        if (newDoc) {
-
-          // Get position of new document
-          var list = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName), {transform: null}).fetch();
-          var docID = result;
-
-          docIndex = _.reduce(list, function(memo, obj, index) {
-            if (obj._id == docID) {
-              memo = index;
-            }
-            return memo;
-          },0);
-
-          ConstellationDict.set(sessionKey, docIndex);  
-        
-          UndoRedo.add(CollectionName, {
-            action: 'insert',
-            document: newDoc
-          });
-          
-        }
-
-      } else {
-        Constellation.error("duplicate");
-      }
+      afterDuplicate.call(null, error, result, CollectionName, sessionKey);
     });
-
-
 
   },
   'click .Constellation_m_edit': function() {
@@ -79,46 +139,37 @@ Template.Constellation_docControls.events({
   },
   'click .Constellation_m_delete': function() {
 
-    var CollectionName = ConstellationDict.get("Constellation_currentTab"),
-      sessionKey = Constellation.sessKey(String(this));
-      DocumentPosition = ConstellationDict.get(sessionKey),
-      CurrentCollection = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).fetch(),
-      CollectionCount = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).count(),
-      self = this;
+    var CollectionName = ConstellationDict.get("Constellation_currentTab");
+	var sessionKey = Constellation.sessKey(String(this));
+    var DocumentPosition = ConstellationDict.get(sessionKey);
+    var CurrentCollection = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).fetch();
+    var CollectionCount = Constellation.Collection(CollectionName).find(Constellation.searchSelector(CollectionName)).count();
+    var self = this;
 
-    var CurrentDocument = CurrentCollection[DocumentPosition],
-      DocumentID = CurrentDocument._id;
+    var CurrentDocument = CurrentCollection[DocumentPosition];
+    var DocumentID = CurrentDocument._id;
 
+    if (Constellation.collectionIsLocal(CollectionName)) {
+	  // Just make a duplicate on the client
+	  var error = null;
+	  var result = null;
+	  try {
+        result = Constellation.removeDocument(CollectionName, DocumentID);
+	  }
+      catch (err) {
+		error = err;  
+	  }
+	  if (!error) {
+	    afterRemove.call(null, error, result, CollectionName, sessionKey, CollectionCount, DocumentPosition, DocumentID);
+	  }
+	  return;	
+	}
 
-    Meteor.call('Constellation_remove', CollectionName, DocumentID, function(error, result) {
+    Meteor.call('Constellation_remove', CollectionName, DocumentID, function (error, result) {
 
-      if (!error) {
-        // Log the action
-        console.log("Removed " + DocumentID + " from " + CollectionName + ". Back-up below:");
-        console.log(result);
-
-        // Adjust the position
-        if (DocumentPosition >= CollectionCount - 1) {
-          newPosition = DocumentPosition - 1;
-          ConstellationDict.set(sessionKey, newPosition);
-        }
-
-        if (ConstellationDict.get(sessionKey) === -1) {
-          ConstellationDict.set(sessionKey, 0);
-        }
-        
-        UndoRedo.add(String(self), {
-          action: 'remove',
-          document: result
-        });
-
-      } else {
-        Constellation.error("remove");
-      }
+      afterRemove.call(null, error, result, CollectionName, sessionKey, CollectionCount, DocumentPosition, DocumentID);
 
     });
-
-
 
   },
   'click .Constellation_m_right': function(evt, tmpl) {
@@ -201,7 +252,8 @@ Template.Constellation_docControls.events({
       // console.log(targetCollection);
       // console.log(newData);
       // console.log(newObject);
-    } else {
+    }
+	else {
       var sessionKey = Constellation.sessKey(collectionName);
       var DocumentPosition = ConstellationDict.get(sessionKey);
       var CurrentCollection = Constellation.Collection(collectionName).find(Constellation.searchSelector(collectionName), {transform: null}).fetch();
@@ -210,17 +262,23 @@ Template.Constellation_docControls.events({
     }
 
     if (newObject) {
+	  if (Constellation.collectionIsLocal(collectionName)) {
+		// Just make a duplicate on the client
+		var error = null;
+		var result = null;
+		try {
+		  result = Constellation.updateDocument(collectionName, newObject, Constellation.validateDocument(oldObject));
+		}
+		catch (err) {
+		  error = err;  
+		}
+		if (!error) {
+		  afterUpdate.call(null, error, result, collectionName, oldObject, _.extend({_id: oldObject._id}, newObject));
+		}
+		return;	
+	  }	
       Meteor.call("Constellation_update", collectionName, newObject, Constellation.validateDocument(oldObject), function(error, result) {
-        if (!error) {
-          ConstellationDict.set('Constellation_editMode', null);    
-          UndoRedo.add(collectionName, {
-            action: 'update',
-            document: oldObject,
-            updatedDocument: newObject
-          });
-        } else {
-          Constellation.error('update')
-        }
+        afterUpdate.call(null, error, result, collectionName, oldObject, newObject);
       });
     }
   },

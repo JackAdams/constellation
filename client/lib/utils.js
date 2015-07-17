@@ -165,5 +165,9 @@ _.extend(Constellation, {
       return 'null';  
     }
     return 'undefined';
+  },
+  collectionIsLocal : function (collectionName) {
+	var collection = Constellation.Collection(collectionName);
+	return collection && !collection._name;
   }
 });

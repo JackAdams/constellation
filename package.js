@@ -1,7 +1,7 @@
 Package.describe({
   name:    'constellation:console',
   summary: 'An extensible development console for Meteor',
-  version: '1.0.7',
+  version: '1.1.0',
   git:     'https://github.com/JackAdams/constellation.git',
   documentation: 'README.md',
   debugOnly: true
@@ -41,20 +41,21 @@ Package.onUse(function(api) {
   ];
 
   var serverFiles = [
-    "server/methods.js",
-    "server/utility_functions.js"
+    "server/methods.js"
   ];
   
   var commonFiles = [
-    "common/common.js"
+    "common/common.js",
+    "common/utility_functions.js",
+	"common/mutators.js"
   ];
 
   api.versionsFrom('1.1');
   api.use(['templating','tracker','mongo','session','underscore','reactive-var','reactive-dict','blaze'], 'client');
   api.use('aldeed:collection2@2.3.3', {weak: true}); // This must go before: api.use('dburles:mongo-collection-instances@0.3.3');
-  api.use('dburles:mongo-collection-instances@0.3.3', 'client');
+  api.use('dburles:mongo-collection-instances@0.3.4');
   api.use('gwendall:session-json@0.1.7', 'client');
-  api.use('babrahams:editable-json@0.5.2');
+  api.use('babrahams:editable-json@0.5.3');
 
   api.add_files(commonFiles);
   api.add_files(clientFiles, "client");

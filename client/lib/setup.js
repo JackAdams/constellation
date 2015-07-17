@@ -102,10 +102,20 @@ Meteor.startup(function() {
 
   var shownCollections = ConstellationDict.get("Constellation") && ConstellationDict.get("Constellation").collections || [];
 
+  var localCollections = function () {
+	var locals = [];
+	for (var member in window) {
+      if (window[member] instanceof Mongo.Collection && !window[member]._name) {
+        locals.push({name: member});
+      }
+    }
+	return locals;  
+  }
+
   // Build a default config object
   // Build a default config object
 
-  var collections = _.reduce(Mongo.Collection.getAll(), function (memo, collection) {
+  var collections = _.reduce((Mongo.Collection.getAll() || []).concat(localCollections()), function (memo, collection) {
 
     // Note this returns the actual mongo collection name, not Meteor's Mongo.Collection name
     if (collection.name) {

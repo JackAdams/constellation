@@ -44,3 +44,6 @@ Constellation.Collection = function (collectionName) {
   }
   
 };
+
+// Patches editable-json's collection detection with Constellation's more robust method
+Package["babrahams:editable-json"].EditableJSON.collection = Constellation.Collection;
