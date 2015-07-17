@@ -16,7 +16,10 @@
     {{> Constellation_accountViewer}}
   {{else}}
     <div class="Constellation_docBar1">
-      Not Signed In
+      {{! Not Signed In}}
+      {{#with "users"}}
+        {{> Constellation_docInsert_main}}
+      {{/with}}
     </div>
   {{/if}}
 

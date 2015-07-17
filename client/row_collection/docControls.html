@@ -26,7 +26,9 @@
           {{#if accountCount}}
             <div class="Constellation_switchAccount">Choose account</div>
           {{else}}
-            {{> Constellation_docInsert}}
+            {{#with "users"}}
+              {{> Constellation_docInsert}}
+            {{/with}}
           {{/if}}
         {{/if}}
       </div>
