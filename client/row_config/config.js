@@ -28,3 +28,22 @@ Template.Constellation_config_view.events({
     });
   }
 });
+
+Template.Constellation_config_menu.events({
+
+  'click .Constellation_config_all, click .Constellation_config_none' : function (evt, tmpl) {
+	// Change the state of all collections
+	var cdict = ConstellationDict.get('Constellation_tabs');
+	var show = tmpl.$(evt.target).hasClass('Constellation_config_all');
+	var collections = _.each(cdict, function (tab) {
+	  if (tab.collection) {
+		var key = tab.id.replace(/_/g,"-");
+		TabStates.set(tab.id, show);
+		Meteor.defer(function() {
+		  localStorage[key] = show;
+		});
+	  }
+	});
+  }
+
+});

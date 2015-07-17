@@ -354,7 +354,7 @@
   transition: 0.2s;
 }
 
-.Constellation_m_left, .Constellation_m_right, .Constellation_m_new, .Constellation_m_edit, .Constellation_m_delete, .Constellation_menuContent_insert, .Constellation_log_purge, .Constellation_switchAccount, .Constellation_useAccount {
+.Constellation_m_left, .Constellation_m_right, .Constellation_m_new, .Constellation_m_edit, .Constellation_m_delete, .Constellation_menuContent_insert, .Constellation_log_purge, .Constellation_switchAccount, .Constellation_useAccount, .Constellation_config_all, .Constellation_config_none {
   float: left;
   border-left: 1px solid rgba(0,0,0,.4);
   padding: 0 6px;
@@ -407,7 +407,7 @@
   border-right: 1px solid rgba(0,0,0,.4);
 }
 
-.Constellation_edit_save:hover, .Constellation_edit_cancel:hover, .Constellation_menuContent_insert:hover, .Constellation_m_signout:hover, .Constellation_m_signin:hover, .Constellation_m_left:hover, .Constellation_m_right:hover, .Constellation_m_new:hover, .Constellation_m_edit:hover, .Constellation_m_delete:hover, .Constellation_log_purge:hover, .Constellation_switchAccount:hover, .Constellation_useAccount:hover {
+.Constellation_edit_save:hover, .Constellation_edit_cancel:hover, .Constellation_menuContent_insert:hover, .Constellation_m_signout:hover, .Constellation_m_signin:hover, .Constellation_m_left:hover, .Constellation_m_right:hover, .Constellation_m_new:hover, .Constellation_m_edit:hover, .Constellation_m_delete:hover, .Constellation_log_purge:hover, .Constellation_switchAccount:hover, .Constellation_useAccount:hover, .Constellation_config_all:hover, .Constellation_config_none:hover {
   color: #2CA6E2;
   transition: .2s;
   cursor: pointer;
