@@ -16,6 +16,12 @@ var afterInsert = function (error, result, CollectionName) {
   }
 }
 
+Template.Constellation_docInsert.helpers({
+  account: function () {
+	return API.isCurrentTab('user_account','plugin');  
+  }
+});
+
 Template.Constellation_docInsert.events({
     
   'click .Constellation_menuContent_insert': function (evt,tmpl) {
