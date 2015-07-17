@@ -92,7 +92,7 @@ _.extend(Constellation, {
     return 'Constellation_collection_' + collectionName;  
   },
   'searchKey' : function (collectionName, type) {
-	// type is "field" or "value"
+    // type is "field" or "value"
     return 'Constellation_' + collectionName + '_' + type;
   },
   'searchSelector' : function (collectionName, exact) {
@@ -167,7 +167,7 @@ _.extend(Constellation, {
     return 'undefined';
   },
   collectionIsLocal : function (collectionName) {
-	var collection = Constellation.Collection(collectionName);
-	return collection && !collection._name;
+    var collection = Constellation.Collection(collectionName);
+    return collection && !collection._name;
   }
 });

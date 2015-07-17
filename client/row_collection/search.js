@@ -2,12 +2,12 @@ Template.Constellation_search.helpers({
   fields: function () {
      // Take a sample of up to 10 documents
      var Collection = Constellation.Collection(String(this));
-	 if (!Collection) {
-	   // This prevents a bug that is caused by Blaze and array indexes and redraws with inconsistent data
-	   // In short, it thinks that "constellation_plugin_Config ..." is a collection name when a collection is hidden (or shown? -- can't remember) programatically
-	   // There are a couple of other fixes like this in docControls.js
-	   return [];
-	 }
+     if (!Collection) {
+       // This prevents a bug that is caused by Blaze and array indexes and redraws with inconsistent data
+       // In short, it thinks that "constellation_plugin_Config ..." is a collection name when a collection is hidden (or shown? -- can't remember) programatically
+       // There are a couple of other fixes like this in docControls.js
+       return [];
+     }
      docs = Collection.find({}, {limit: 10}, {transform: null}).fetch();
      return _.reduce(docs, function (memo, doc) {
        _.each(doc, function (val,key) {

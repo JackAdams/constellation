@@ -1,18 +1,18 @@
 var afterInsert = function (error, result, CollectionName) {
   if (!error && result) {
-	// if successful, set the proper session variable value
-	var sessionKey = Constellation.sessKey(CollectionName);
-	ConstellationDict.set(sessionKey, 0);
-	var newDoc = Constellation.Collection(CollectionName).findOne(result._id, {transform: null});
-	UndoRedo.add(CollectionName, {
-	  action: 'insert',
-	  document: result
-	});
-	if (!newDoc) {
-	  alert("Insert was successful, but this document doesn't seem to be published." + ((!!Package["constellation:autopublish"]) ? '\n\nSwitch on autopublish to check.' : ''));  
-	}
+    // if successful, set the proper session variable value
+    var sessionKey = Constellation.sessKey(CollectionName);
+    ConstellationDict.set(sessionKey, 0);
+    var newDoc = Constellation.Collection(CollectionName).findOne(result._id, {transform: null});
+    UndoRedo.add(CollectionName, {
+      action: 'insert',
+      document: result
+    });
+    if (!newDoc) {
+      alert("Insert was successful, but this document doesn't seem to be published." + ((!!Package["constellation:autopublish"]) ? '\n\nSwitch on autopublish to check.' : ''));  
+    }
   } else {
-	Constellation.error("insert");
+    Constellation.error("insert");
   }
 }
 
@@ -28,22 +28,22 @@ Template.Constellation_docInsert.events({
     _.extend(newObject, searchSelector);
 
     if (newObject) {
-	  if (Constellation.collectionIsLocal(CollectionName)) {
-		// Just do the insert on the client
-		var error = null;
-		var result = null;
-		try {
-		  result = Constellation.insertDocument(CollectionName, newObject);
-		}
-		catch (err) {
-		  error = err;	
-		}
-		afterInsert.call(null, error, result, CollectionName);
-		return;
-	  }
+      if (Constellation.collectionIsLocal(CollectionName)) {
+        // Just do the insert on the client
+        var error = null;
+        var result = null;
+        try {
+          result = Constellation.insertDocument(CollectionName, newObject);
+        }
+        catch (err) {
+          error = err;    
+        }
+        afterInsert.call(null, error, result, CollectionName);
+        return;
+      }
       Meteor.call('Constellation_insert', CollectionName, newObject, function (error, result) {
-		afterInsert.call(null, error, result, CollectionName);
-	  });
+        afterInsert.call(null, error, result, CollectionName);
+      });
     }
 
   }

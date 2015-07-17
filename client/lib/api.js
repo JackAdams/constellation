@@ -120,8 +120,8 @@ API.showCollection = function (collections) {
     ConstellationConfig.collections = collections;
     
     ConstellationDict.set("Constellation", ConstellationConfig);
-	
-	Constellation._hiddenCollections = _.without(Constellation._hiddenCollections, collectionName);
+    
+    Constellation._hiddenCollections = _.without(Constellation._hiddenCollections, collectionName);
   
   });
 
@@ -158,7 +158,7 @@ API.setKeyCode = function (keyCode) {
 }
 
 API.excludedSessionKeys = function () {
-  return Constellation._excludedSessionVariables;	
+  return Constellation._excludedSessionVariables;    
 }
 
 API.excludeSessionKeysContaining = function (prefix) {

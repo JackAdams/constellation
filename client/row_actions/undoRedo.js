@@ -134,17 +134,17 @@ UndoRedo.undo = function (action, redo) {
     case 'insert' :
       var call = (redo) ? 'Constellation_insert' : 'Constellation_remove';
       var param = (redo) ? doc : doc._id;
-	  if (Constellation.collectionIsLocal(collection)) {
-		if (call === 'Constellation_remove') {
-		  var res = Constellation.removeDocument(collection, param);
-		}
-		else {
-		  var res = Constellation.insertDocument(collection, param);
-		}
+      if (Constellation.collectionIsLocal(collection)) {
+        if (call === 'Constellation_remove') {
+          var res = Constellation.removeDocument(collection, param);
+        }
+        else {
+          var res = Constellation.insertDocument(collection, param);
+        }
         UndoRedo.setDocumentNumber(collection, res || null);
         setStacks();
-		break;
-	  }
+        break;
+      }
       Meteor.call(call, collection, param, function (err, res) {
         UndoRedo.setDocumentNumber(collection, res || null);
         setStacks();
@@ -179,12 +179,12 @@ UndoRedo.undo = function (action, redo) {
           var diffedVersion = diffedVersionData.diffedDocument; 
         }
       }
-	  if (Constellation.collectionIsLocal(collection)) {
-		Constellation.updateDocument(collection, diffedVersion, currentDoc);
-		UndoRedo.setDocumentNumber(collection, doc._id);
+      if (Constellation.collectionIsLocal(collection)) {
+        Constellation.updateDocument(collection, diffedVersion, currentDoc);
+        UndoRedo.setDocumentNumber(collection, doc._id);
         setStacks(); 
-		break;
-	  }
+        break;
+      }
       Meteor.call('Constellation_update', collection, diffedVersion, currentDoc, function (err, res) {
         UndoRedo.setDocumentNumber(collection, doc._id);
         setStacks(); 
@@ -193,17 +193,17 @@ UndoRedo.undo = function (action, redo) {
     case 'remove' :
       var call = (redo) ? 'Constellation_remove' : 'Constellation_insert';
       var param = (redo) ? doc._id : doc;
-	  if (Constellation.collectionIsLocal(collection)) {
-		if (call === 'Constellation_remove') {
-		  var res = Constellation.removeDocument(collection, param);
-		}
-		else {
-		  var res = Constellation.insertDocument(collection, param);
-		}
+      if (Constellation.collectionIsLocal(collection)) {
+        if (call === 'Constellation_remove') {
+          var res = Constellation.removeDocument(collection, param);
+        }
+        else {
+          var res = Constellation.insertDocument(collection, param);
+        }
         UndoRedo.setDocumentNumber(collection, res || null);
         setStacks();
-		break;
-	  }
+        break;
+      }
       Meteor.call(call, collection, param, function (err, res) { // res is the _id of the inserted document
         UndoRedo.setDocumentNumber(collection, res || null);
         setStacks(); 

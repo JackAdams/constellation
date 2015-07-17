@@ -103,13 +103,13 @@ Meteor.startup(function() {
   var shownCollections = ConstellationDict.get("Constellation") && ConstellationDict.get("Constellation").collections || [];
 
   var localCollections = function () {
-	var locals = [];
-	for (var member in window) {
+    var locals = [];
+    for (var member in window) {
       if (window[member] instanceof Mongo.Collection && !window[member]._name) {
         locals.push({name: member});
       }
     }
-	return locals;  
+    return locals;  
   }
 
   // Build a default config object

@@ -47,7 +47,7 @@ Package.onUse(function(api) {
   var commonFiles = [
     "common/common.js",
     "common/utility_functions.js",
-	"common/mutators.js"
+    "common/mutators.js"
   ];
 
   api.versionsFrom('1.1');
