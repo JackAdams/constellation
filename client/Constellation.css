@@ -600,6 +600,7 @@
   border-radius: 3px;
   vertical-align: middle;
   line-height: 16px !important;
+  display: inline-block;
 }
 
 #Constellation .Constellation_search_fields {

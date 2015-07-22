@@ -6,7 +6,7 @@
         {{#if currentUserOrSwitchingAccount}}
           {{#unless Constellation_switching_account}}
             {{#if editing}}
-              <div class="Constellation_edit_title">Update Document</div>
+              <div class="Constellation_edit_title">Update Account</div>
               <div class="Constellation_edit_save">Save</div>
               <div class="Constellation_edit_cancel">Cancel</div>
             {{else}}
@@ -16,10 +16,14 @@
             {{/if}}
           {{else}}
             {{#with "users"}}
-              <div class="Constellation_useAccount">Impersonate</div>
-              <div class="{{disable}} Constellation_m_right"><strong>&rsaquo;</strong></div>
-              <div class="{{disable}} Constellation_m_left"><strong>&lsaquo;</strong></div>
-              <div class="Constellation_edit_cancel">Cancel</div>
+              {{#if accountCount}}
+                <div class="Constellation_useAccount">Impersonate</div>
+                <div class="{{disable}} Constellation_m_right"><strong>&rsaquo;</strong></div>
+                <div class="{{disable}} Constellation_m_left"><strong>&lsaquo;</strong></div>
+                <div class="Constellation_edit_cancel">Cancel</div>
+              {{else}}
+                {{> Constellation_docInsert}}
+              {{/if}}
             {{/with}}
           {{/unless}}
         {{else}}
