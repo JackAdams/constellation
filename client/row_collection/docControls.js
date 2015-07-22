@@ -305,11 +305,24 @@ Template.Constellation_docControls.events({
     var CurrentCollection = Constellation.Collection(collectionName).find(Constellation.searchSelector(collectionName), {transform: null}).fetch();
     var userDoc = CurrentCollection[DocumentPosition];
     var userId = userDoc._id;
+	var currentUser = Meteor.user();
 
     Meteor.call('Constellation_impersonate', userId, function(err) {
       if (!err) {
         Meteor.connection.setUserId(userId);
         ConstellationDict.set('Constellation_switchingAccount', null);
+		if (!currentUser) {
+		  // We need to call the impersonate method again
+		  // As the client will be okay, but the server won't
+		  Tracker.autorun(function () {
+			if (!Meteor.loggingIn()) {
+			  Tracker.currentComputation.stop();
+			  Meteor.defer(function () { console.log('winner');
+				Meteor.call('Constellation_impersonate', userId);
+			  });
+			}
+		  });
+		}
       }
     });  
   }
