@@ -311,8 +311,7 @@ Template.Constellation_docControls.events({
       if (!err) {
         Meteor.connection.setUserId(userId);
         ConstellationDict.set('Constellation_switchingAccount', null);
-		if (!currentUser) {
-		  // If the user wasn't logged in before they started impersonating
+		if (!currentUser) {// If the user wasn't logged in before they started impersonating
 		  // we need to call the impersonate method again,
 		  // as the client will be okay, but the server won't.
 		  // Not sure why
