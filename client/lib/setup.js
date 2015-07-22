@@ -147,4 +147,8 @@ Meteor.startup(function() {
     alert("Are you sure you the new field '" + field + "' is published?" + ((!Package["constellation:console-autopublish"]) ? "\n\nmeteor add constellation:console-autopublish\n\nwill allow you to switch autopublish on and off from the Constellation UI for easy checking." : "\n\nSwitch on autopublish to check."));
   });
   
+  Meteor.defer(function () {
+    Blaze.render(Template.Constellation, document.body);
+  });
+  
 });
