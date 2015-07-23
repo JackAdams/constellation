@@ -164,3 +164,19 @@ API.excludedSessionKeys = function () {
 API.excludeSessionKeysContaining = function (prefix) {
   Constellation._excludedSessionVariables.push(prefix);
 }
+
+API.toggleConsole = function () {
+  ConstellationDict.set('Constellation_active', !ConstellationDict.get('Constellation_active'));
+}
+
+API.addBaseClass = function (className) {
+  var constellationClasses = ConstellationDict.get('Constellation_baseClasses') || '';
+  constellationClasses+= className + ' ';
+  ConstellationDict.set('Constellation_baseClasses', constellationClasses);
+}
+
+API.removeBaseClass = function (className) {
+  var constellationClasses = ConstellationDict.get('Constellation_baseClasses') || '';
+  constellationClasses = constellationClasses.replace(className + ' ', '');
+  ConstellationDict.set('Constellation_baseClasses', constellationClasses);
+}

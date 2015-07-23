@@ -14,9 +14,13 @@
 
   <div class="Constellation_row {{#unless noOpen}}{{active}}{{/unless}} {{#unless collection}}Constellation_tool{{/unless}}">
     
-    {{> Constellation_headerContent}}
+    <div class="Constellation_tab_{{id}}" title="{{title}}">
+    
+      {{> Constellation_headerContent}}
 
-    <strong>{{name}}</strong>
+      <strong>{{name}}</strong>
+      
+    </div>
     
     <div class="Constellation_contentView">
 

@@ -26,6 +26,7 @@ Examples of plugins are:
 - [constellation:autopublish](https://github.com/JackAdams/constellation-autopublish) (for toggling autopublish behaviour)
 - [constellation:tiny](https://github.com/JackAdams/constellation-tiny) (for _really_ minimizing the UI)
 - [constellation:velocity](https://github.com/JackAdams/constellation-velocity) (`velocity:html-reporter` miniturized for Constellation)
+- [constellation:position](https://github.com/JackAdams/constellation-position) (allows you to change the Constellation console position)
 
 If you want to write a plugin, take a look at the source of the packages above.
 
@@ -71,6 +72,10 @@ You can set `active: false` in the object above if you don't want your plugin to
 
 `callback: "myCallBack"` will fire the `"myCallBack"` function every time the tab header is clicked. `"myCallBack"` must be registered as shown in the API section below.
 
+`addBaseClass: "my-custom-class"` will add `my-custom-class` to the container `<div>` of the Constellation widget. [constellation:position](https://github.com/JackAdams/constellation-position) is an example of a plugin that uses this.
+
+`title: "Title when I hover over tab"` will give the tab a title. But use this sparingly -- a descriptive tab name is far better. (Note: the tab name bar also gets the class `Constellation_tab_constellation_plugin_<name>` automatically, so you can target it for styling if you need to.)
+
 You can also set `id: "unique-id-for-my-tab"` if you like, but unless two plugins share the same name, this isn't going to be necessary.
 
 __Note__: make sure you put `debugOnly: true` in your package's `Package.describe({ ... });`
@@ -111,6 +116,12 @@ The `type` field/param in the three methods below will be:
 `Constellation.excludeSessionKeysContaining(prefix)` to hide any `Session` keys containing the given string (`prefix`) from the `constellation:session` package
 
 `Constellation.excludedSessionKeys` to get an array of the strings that will be tested against `Session` keys to exclude them from display in the `constellation:session` package
+
+`Constellation.toggleConsole()` toggles the Constellation console (same effect as CTRL + C, but can be called programatically)
+
+`Constellation.addBaseClass(className)` lets you add a class to the Constellation container element programatically
+
+`Constellation.removeBaseClass(className)` lets you remove a class from the Constellation container element programatically
 
 If you put a `callback` in your `addTab({ ... })` (e.g. `Constellation.addTab({name: "my-plugin", callback: "myCallBack", ...});`) you need to register it as follows:
 ```

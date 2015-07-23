@@ -15,7 +15,7 @@ Meteor.startup(function() {
   $(document).keydown(function (e) {
     if (e.ctrlKey) {
       if (e.keyCode === Constellation._keyCode) {
-        ConstellationDict.set('Constellation_active', !ConstellationDict.get('Constellation_active'));
+        API.toggleConsole();
       }
       if (e.keyCode === 70) {
         Constellation.toggleFullScreen();
