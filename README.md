@@ -89,7 +89,7 @@ var Constellation = Package["constellation:console"].API;
 ```
 then you can write:
 
-`Constellaton.isActive()` to check whether Constellation's UI is active or closed (i.e. has the user pressed __Control + M__ or not)
+`Constellaton.isActive()` to check whether Constellation's UI is active or closed (i.e. has the user pressed __Control + C__ or not)
 
 `Constellaton.addTab({name: "my-plugin"})` to register a new tab called "my-plugin" in Constellation's UI - see above for the fields the object can have when adding a tab.
 
@@ -111,7 +111,7 @@ The `type` field/param in the three methods below will be:
 
 `Constellaton.showCollection('collectionName')` to show collections programatically - accepts an array or a string
 
-`Constellation.setKeyCode(keyCode)` to change the default toggle key from CTRL + C to CTRL + <whichever key's keycode you set> (Note: this should only be used in app code, as a last-resort config option, and not in plugin package code)
+`Constellation.setKeyCode(keyCode)` to change the default toggle key from CTRL + C to CTRL + [whichever key's keycode you set] (Note: this should only be used in app code, as a last-resort config option, and not in plugin package code)
 
 `Constellation.excludeSessionKeysContaining(prefix)` to hide any `Session` keys containing the given string (`prefix`) from the `constellation:session` package
 
