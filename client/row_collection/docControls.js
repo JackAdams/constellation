@@ -369,7 +369,7 @@ Template.Constellation_docControls.helpers({
     return Meteor.users && Meteor.users.find().count();  
   },
   currentUserOrSwitchingAccount: function () {
-    return Meteor.user() || ConstellationDict.get('Constellation_switchingAccount');
+    return (Package['accounts-base'] && Meteor.user()) || ConstellationDict.get('Constellation_switchingAccount');
   },
   notEmpty: function () {
     var collectionName = String(this);
