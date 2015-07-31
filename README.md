@@ -123,6 +123,8 @@ The `type` field/param in the three methods below will be:
 
 `Constellation.removeBaseClass(className)` lets you remove a class from the Constellation container element programatically
 
+`Constellation.getCollections()` returns a list of the collections visible in the "Config ..." tab (including those hidden by unchecking them), but not the ones hidden using `Constellation.hideCollection('collectionName')`
+
 If you put a `callback` in your `addTab({ ... })` (e.g. `Constellation.addTab({name: "my-plugin", callback: "myCallBack", ...});`) you need to register it as follows:
 ```
 Constellaton.registerCallbacks({
