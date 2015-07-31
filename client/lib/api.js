@@ -180,3 +180,10 @@ API.removeBaseClass = function (className) {
   constellationClasses = constellationClasses.replace(className + ' ', '');
   ConstellationDict.set('Constellation_baseClasses', constellationClasses);
 }
+
+API.getCollections = function () {
+  getCollectionsDep.depend();
+  var ConstellationConfig = ConstellationDict.get("Constellation") || {};
+  var collections = ConstellationConfig.collections || [];
+  return collections;
+}

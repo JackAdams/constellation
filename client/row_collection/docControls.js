@@ -248,7 +248,7 @@ Template.Constellation_docControls.events({
 
     if (ConstellationDict.equals("Constellation_currentTab", "constellation_plugin_user_account")) {
       var newObject = Constellation.parse(newData);
-      var oldObject = Meteor.user();
+      var oldObject = !!Package["accounts-base"] && Meteor.user() || {};
       // console.log(targetCollection);
       // console.log(newData);
       // console.log(newObject);
@@ -305,7 +305,7 @@ Template.Constellation_docControls.events({
     var CurrentCollection = Constellation.Collection(collectionName).find(Constellation.searchSelector(collectionName), {transform: null}).fetch();
     var userDoc = CurrentCollection[DocumentPosition];
     var userId = userDoc._id;
-	var currentUser = Meteor.user();
+	var currentUser = !!Package["accounts-base"] && Meteor.user() || {};
 
     Meteor.call('Constellation_impersonate', userId, function(err) {
       if (!err) {
@@ -369,7 +369,7 @@ Template.Constellation_docControls.helpers({
     return Meteor.users && Meteor.users.find().count();  
   },
   currentUserOrSwitchingAccount: function () {
-    return (Package['accounts-base'] && Meteor.user()) || ConstellationDict.get('Constellation_switchingAccount');
+    return (!!Package['accounts-base'] && Meteor.user()) || ConstellationDict.get('Constellation_switchingAccount');
   },
   notEmpty: function () {
     var collectionName = String(this);

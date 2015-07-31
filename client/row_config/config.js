@@ -15,17 +15,28 @@ Template.Constellation_config_view.helpers({
   },
   tabActive: function () {
     return this.id === 'constellation_plugin_config' || TabStates.get(this.id);
+  },
+  hotkey : function () {
+	return String.fromCharCode(Constellation._keyCode);  
   }
 });
 
 Template.Constellation_config_view.events({
-  'change input' : function (evt, tmpl) {
+  'change input.Constellation_config_tab_toggle' : function (evt, tmpl) {
     var key = this.id.replace(/_/g,"-");
     var value = evt.target.checked;
     TabStates.set(this.id, value);
     Meteor.defer(function() {
       localStorage[key] = value;
     });
+  },
+  'input .Constellation_hotkey_chooser' : function (evt, tmpl) {
+	var letter = tmpl.$(evt.target).val().toUpperCase();
+	if (letter.length === 1) {
+	  var keyCode = letter.charCodeAt(0);
+	  API.setKeyCode(keyCode);
+	  localStorage.constellation_hotkey = keyCode;
+	}
   }
 });
 

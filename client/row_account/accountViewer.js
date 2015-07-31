@@ -19,7 +19,7 @@ Template.Constellation_accountViewer.helpers({
 
   },
   accountData: function () {
-    var docCurrent = Meteor.user();
+    var docCurrent = !!Package["accounts-base"] && Meteor.user() || {};
     var json_output = JSON.stringify(docCurrent, null, 2), colorize;
 
     if (!(json_output === undefined)) {

@@ -263,16 +263,16 @@ Constellation.diffUpdateData = function (dbDoc, newData, oldData) {
   var finalData = {};
   var cancel = false;
 
-  var dbDocFields = _.keys(dbDoc),
-    newDataFields = _.keys(newData);
+  var dbDocFields = _.keys(dbDoc);
+  var newDataFields = _.keys(newData);
     // oldDataFields = _.keys(oldData);
     
-    // console.log("dbDocFields",dbDocFields); console.log("newDataFields",newDataFields); console.log("oldDataFields",oldDataFields);
+    // console.log("dbDocFields",dbDocFields); console.log("newDataFields",newDataFields); // console.log("oldDataFields",oldDataFields);
     // console.log("dbDoc",dbDoc); console.log("newData",newData); console.log("oldData",oldData);
 
   var oldAndNewFields = _.union(dbDocFields, newDataFields);
 
-  _.each(oldAndNewFields, function(field) { // console.log(field);
+  _.each(oldAndNewFields, function(field) { // console.log("Field: ", field);
     // console.log("Old data:",oldData[field]);console.log("New data:",newData[field]);
     if (_.isEqual(oldData[field], newData[field])) { // console.log("Equal");
       
@@ -297,8 +297,15 @@ Constellation.diffUpdateData = function (dbDoc, newData, oldData) {
       if (_.isObject(newData[field]) && !_.isArray(newData[field]) && !_.isDate(newData[field])) {
         // console.log("Is object:", newData[field]);
         // Recurse into subdocuments
-        var diffedSubdocument = Constellation.diffUpdateData(dbDoc[field] || {}, newData[field], oldData[field] || {}); 
-        finalData[field] = diffedSubdocument.finalData;
+        var diffedSubdocument = Constellation.diffUpdateData(dbDoc[field] || {}, newData[field], oldData[field] || {});
+		// console.log("Diffed subdocument:", diffedSubdocument);
+		if (!diffedSubdocument.cancel) {
+          finalData[field] = diffedSubdocument.diffedDocument;
+		}
+		else {
+		  // Allow subdocuments to cancel
+		  cancel = true;	
+		}
         
       }
       else {

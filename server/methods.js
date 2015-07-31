@@ -40,8 +40,9 @@ Meteor.methods({
   Constellation_impersonate: function(userId) {
     check(userId, String);
 
-    if (!Meteor.users.findOne(userId))
+    if (!(Meteor.users && Meteor.users.findOne(userId))) {
       throw new Meteor.Error(404, 'User not found');
+	}
 
     this.setUserId(userId);
   }

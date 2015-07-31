@@ -2,7 +2,7 @@
   {{#with activeDocument}}
     <div class="{{editStyle}}">
       {{#if editStyle}}  
-        <pre contenteditable="{{editContent}}">{{{documentJSON}}}</pre>
+        <pre contenteditable="{{editContent}}" tabindex="-1" >{{{documentJSON}}}</pre>
       {{else}}
         {{#if noInlineEditing}}
           <pre>{{{documentJSON}}}</pre>

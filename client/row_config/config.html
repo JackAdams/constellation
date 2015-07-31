@@ -19,10 +19,14 @@
   <ul class="Constellation_installed_tabs">
     {{#each installedTabs}}
       <li class="Constellation_config_item {{#if collection}}Constellation_collection_item{{/if}}">
-        <input type="checkbox" id="Constellation-tab-{{id}}" checked={{tabActive}} />&nbsp;
+        <input type="checkbox" class="Constellation_config_tab_toggle" id="Constellation-tab-{{id}}" checked={{tabActive}} />&nbsp;
         <label for="Constellation-tab-{{id}}">{{name}}</label>
       </li>
     {{/each}}
   </ul>
+  
+  <hr />
+  
+  Hotkey to toggle console: <input type="text" value="{{hotkey}}" class="Constellation_hotkey_chooser" size="4" tabindex=-1 />
 
 </template>

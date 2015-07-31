@@ -4,7 +4,15 @@ ConstellationDict = new ReactiveDict('Constellation_dict');
 // In case these need to be available to packages
 Constellation.TabStates = TabStates;
 Constellation.ConstellationDict = ConstellationDict;
-Constellation._keyCode = 67;
+Constellation._keyCode = parseInt(localStorage.constellation_hotkey) || 67;
+
+// To make the getCollections API call reactive
+getCollectionsDep = new Tracker.Dependency;
+Tracker.autorun(function () {
+  if (ConstellationDict.get("Constellation")) {
+    getCollectionsDep.changed();
+  }
+});
 
 Meteor.startup(function() {
 
@@ -35,10 +43,12 @@ Meteor.startup(function() {
   });
   
   Constellation.defaultTabs = [
-    {name: 'Full screen', id: 'constellation_plugin_fullscreen', active:false, noOpen:true, onClick: "toggleFullScreen", headerContentTemplate: 'Constellation_fullscreen_header'},
-    {name: 'Account', id: 'constellation_plugin_user_account', mainContentTemplate: 'Constellation_account_view', headerContentTemplate: 'Constellation_account_status', menuContentTemplate: 'Constellation_account_controls', searchContentTemplate: 'Constellation_account_search', active:false},
-    {name: 'Actions', id: 'constellation_plugin_actions', mainContentTemplate:'Constellation_actions_main', headerContentTemplate: 'Constellation_actions_header', menuContentTemplate: 'Constellation_actions_menu', active:true}
-  ];
+    {name: 'Full screen', id: 'constellation_plugin_fullscreen', active:false, noOpen:true, onClick: "toggleFullScreen", headerContentTemplate: 'Constellation_fullscreen_header'}
+  ]
+  if (!!Package['accounts-base']) {
+    Constellation.defaultTabs.push({name: 'Account', id: 'constellation_plugin_user_account', mainContentTemplate: 'Constellation_account_view', headerContentTemplate: 'Constellation_account_status', menuContentTemplate: 'Constellation_account_controls', searchContentTemplate: 'Constellation_account_search', active:false});
+  }
+  Constellation.defaultTabs.push({name: 'Actions', id: 'constellation_plugin_actions', mainContentTemplate:'Constellation_actions_main', headerContentTemplate: 'Constellation_actions_header', menuContentTemplate: 'Constellation_actions_menu', active:true});
   
   Tracker.autorun(function() {
     
@@ -144,7 +154,7 @@ Meteor.startup(function() {
   // Note: there is also an `EditableJSON.afterUpdate` callback in /client/row_actions/undoRedo.js
   
   EditableJSON.onUnpublishedFieldAdded(function (collection, field, value) {
-    alert("Are you sure you the new field '" + field + "' is published?" + ((!Package["constellation:console-autopublish"]) ? "\n\nmeteor add constellation:console-autopublish\n\nwill allow you to switch autopublish on and off from the Constellation UI for easy checking." : "\n\nSwitch on autopublish to check."));
+    alert("Are you sure you the new field '" + field + "' is published?" + ((!Package["constellation:autopublish"]) ? "\n\nmeteor add constellation:console-autopublish\n\nwill allow you to switch autopublish on and off from the Constellation UI for easy checking." : "\n\nSwitch on autopublish to check."));
   });
   
   Meteor.defer(function () {

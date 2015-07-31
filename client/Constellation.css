@@ -5,6 +5,7 @@
   max-width: 143px;
   max-height: 100%;
   overflow: auto;
+  text-align: left;
 }
 
 .Constellation {
@@ -562,6 +563,13 @@
   vertical-align: middle;
 }
 
+#Constellation input.Constellation_hotkey_chooser {
+  display: inline;
+  width: 20px;
+  color: rgba(43,63,83,.92);
+  padding: 0 4px !important;
+}
+
 .Constellation_search_button_container {
   position: relative;
   display: inline-block;    
@@ -607,8 +615,12 @@
   width: 115px;
   color: rgba(0,0,0,.8);
   opacity: 0.8;
-  margin-left: 5px;
+  margin: 0 0 0 5px;
   height: 16px;
   font-size: smaller;
   padding: 0;
+}
+
+#Constellation select {
+  margin: 0;	
 }

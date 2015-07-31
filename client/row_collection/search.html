@@ -1,10 +1,10 @@
 <template name="Constellation_search">
   {{#if searching}}
-    <select class="Constellation_search_fields">
+    <select class="Constellation_search_fields" tabindex="-1">
       {{#each fields}}
         <option selected={{selected}} title="{{type}}">{{name}}</option>
       {{/each}}
     </select>
-    <input type="text" class="Constellation_search" value="{{value}}" placeholder="search value ..." />
+    <input type="text" class="Constellation_search" value="{{value}}" tabindex="-1" placeholder="search value ..." />
   {{/if}}
 </template>
