@@ -17,7 +17,7 @@ Template.Constellation_config_view.helpers({
     return this.id === 'constellation_plugin_config' || TabStates.get(this.id);
   },
   hotkey : function () {
-	return String.fromCharCode(Constellation._keyCode);  
+    return String.fromCharCode(Constellation._keyCode);  
   }
 });
 
@@ -31,30 +31,30 @@ Template.Constellation_config_view.events({
     });
   },
   'input .Constellation_hotkey_chooser' : function (evt, tmpl) {
-	var letter = tmpl.$(evt.target).val().toUpperCase();
-	if (letter.length === 1) {
-	  var keyCode = letter.charCodeAt(0);
-	  API.setKeyCode(keyCode);
-	  localStorage.constellation_hotkey = keyCode;
-	}
+    var letter = tmpl.$(evt.target).val().toUpperCase();
+    if (letter.length === 1) {
+      var keyCode = letter.charCodeAt(0);
+      API.setKeyCode(keyCode);
+      localStorage.constellation_hotkey = keyCode;
+    }
   }
 });
 
 Template.Constellation_config_menu.events({
 
   'click .Constellation_config_all, click .Constellation_config_none' : function (evt, tmpl) {
-	// Change the state of all collections
-	var cdict = ConstellationDict.get('Constellation_tabs');
-	var show = tmpl.$(evt.target).hasClass('Constellation_config_all');
-	var collections = _.each(cdict, function (tab) {
-	  if (tab.collection) {
-		var key = tab.id.replace(/_/g,"-");
-		TabStates.set(tab.id, show);
-		Meteor.defer(function() {
-		  localStorage[key] = show;
-		});
-	  }
-	});
+    // Change the state of all collections
+    var cdict = ConstellationDict.get('Constellation_tabs');
+    var show = tmpl.$(evt.target).hasClass('Constellation_config_all');
+    var collections = _.each(cdict, function (tab) {
+      if (tab.collection) {
+        var key = tab.id.replace(/_/g,"-");
+        TabStates.set(tab.id, show);
+        Meteor.defer(function() {
+          localStorage[key] = show;
+        });
+      }
+    });
   }
 
 });

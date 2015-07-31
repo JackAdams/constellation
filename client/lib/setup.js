@@ -115,7 +115,7 @@ Meteor.startup(function() {
   var localCollections = function () {
     var locals = [];
     // for (var member in window) {
-	_.each(Object.keys(window), function (member) {
+    _.each(Object.keys(window), function (member) {
       if (window[member] instanceof Mongo.Collection && !window[member]._name) {
         locals.push({name: member});
       }

@@ -298,14 +298,14 @@ Constellation.diffUpdateData = function (dbDoc, newData, oldData) {
         // console.log("Is object:", newData[field]);
         // Recurse into subdocuments
         var diffedSubdocument = Constellation.diffUpdateData(dbDoc[field] || {}, newData[field], oldData[field] || {});
-		// console.log("Diffed subdocument:", diffedSubdocument);
-		if (!diffedSubdocument.cancel) {
+        // console.log("Diffed subdocument:", diffedSubdocument);
+        if (!diffedSubdocument.cancel) {
           finalData[field] = diffedSubdocument.diffedDocument;
-		}
-		else {
-		  // Allow subdocuments to cancel
-		  cancel = true;	
-		}
+        }
+        else {
+          // Allow subdocuments to cancel
+          cancel = true;    
+        }
         
       }
       else {
