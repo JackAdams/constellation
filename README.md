@@ -27,6 +27,7 @@ Examples of plugins are:
 - [constellation:tiny](https://github.com/JackAdams/constellation-tiny) (for _really_ minimizing the UI)
 - [constellation:velocity](https://github.com/JackAdams/constellation-velocity) (`velocity:html-reporter` miniturized for Constellation)
 - [constellation:position](https://github.com/JackAdams/constellation-position) (allows you to change the Constellation console position)
+- [constellation:schema](https://github.com/JackAdams/constellation-schema) (generate SimpleSchema from the Constellation console)
 
 If you want to write a plugin, take a look at the source of the packages above.
 

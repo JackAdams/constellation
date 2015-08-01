@@ -56,6 +56,7 @@ Package.onUse(function(api) {
   api.use('dburles:mongo-collection-instances@0.3.4');
   api.use('gwendall:session-json@0.1.7', 'client');
   api.use('babrahams:editable-json@0.6.0');
+  api.use('accounts-base', {weak: true});
 
   api.add_files(commonFiles);
   api.add_files(clientFiles, "client");
