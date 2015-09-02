@@ -3,7 +3,7 @@ Constellation
 
 ### vNext
 
-Factor out Accounts, Collections and Actions tabs into separate packages ???
+- Factor out Accounts, Collections and Actions tabs into separate packages ???
 
 ### v1.2.1
 
@@ -12,7 +12,7 @@ Factor out Accounts, Collections and Actions tabs into separate packages ???
 - Fixed bugs with accounts tab when no accounts-base added
 - Put tabindex="-1" on relevant inputs to stop display bug when clicking tab key
 - Added default hotkey changer UI in "Config ..." tab
-- Updated dependency on `babrahams:edtiable-json` to 0.6.0 (more robust and user-friendly version)
+- Updated dependency on `babrahams:editable-json` to 0.6.0 (more robust and user-friendly version)
 - Added API call
   - Constellation.getCollections()
 

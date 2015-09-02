@@ -21,11 +21,12 @@ Plugins
 Examples of plugins are:
 
 - [babrahams:temple](https://github.com/JackAdams/temple) (for visualizing template information)
+- [lai:ddp-inspector](https://github.com/rclai/meteor-ddp-inspector) (visualize the DDP traffic between client and server)
 - [constellation:session](https://github.com/JackAdams/constellation-session) (for viewing / manipulating data in the Session variable)
 - [constellation:subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
 - [constellation:autopublish](https://github.com/JackAdams/constellation-autopublish) (for toggling autopublish behaviour)
 - [constellation:tiny](https://github.com/JackAdams/constellation-tiny) (for _really_ minimizing the UI)
-- [constellation:velocity](https://github.com/JackAdams/constellation-velocity) (`velocity:html-reporter` miniturized for Constellation)
+- [constellation:velocity](https://github.com/JackAdams/constellation-velocity) (`velocity:html-reporter` miniaturized for Constellation)
 - [constellation:position](https://github.com/JackAdams/constellation-position) (allows you to change the Constellation console position)
 - [constellation:schema](https://github.com/JackAdams/constellation-schema) (generate SimpleSchema from the Constellation console)
 

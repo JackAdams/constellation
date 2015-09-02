@@ -52,7 +52,7 @@ Package.onUse(function(api) {
 
   api.versionsFrom('1.1');
   api.use(['templating','tracker','mongo','session','underscore','reactive-var','reactive-dict','blaze'], 'client');
-  api.use('aldeed:collection2@2.3.3', {weak: true}); // This must go before: api.use('dburles:mongo-collection-instances@0.3.3');
+  api.use('aldeed:collection2@2.5.0', {weak: true}); // This must go before: api.use('dburles:mongo-collection-instances@0.3.3');
   api.use('dburles:mongo-collection-instances@0.3.4');
   api.use('gwendall:session-json@0.1.7', 'client');
   api.use('babrahams:editable-json@0.6.0');
