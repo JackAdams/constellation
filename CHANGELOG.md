@@ -3,6 +3,7 @@ Constellation
 
 ### vNext
 
+- Add a test suite to ensure base functionality remains unbroken by future changes
 - Factor out Accounts, Collections and Actions tabs into separate packages ???
 
 ### v1.2.1
