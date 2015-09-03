@@ -4,6 +4,7 @@ Constellation
 ### vNext
 
 - Add a test suite to ensure base functionality remains unbroken by future changes
+- Change CSS for Chrome and Safari so that scroll bars show when content overflows pane (or full screen view)
 - Factor out Accounts, Collections and Actions tabs into separate packages ???
 
 ### v1.2.1
