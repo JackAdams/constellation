@@ -93,27 +93,27 @@ var Constellation = Package["constellation:console"].API;
 ```
 then you can write:
 
-`Constellaton.isActive()` to check whether Constellation's UI is active or closed (i.e. has the user pressed __Control + C__ or not)
+`Constellation.isActive()` to check whether Constellation's UI is active or closed (i.e. has the user pressed __Control + C__ or not)
 
-`Constellaton.addTab({name: "my-plugin"})` to register a new tab called "my-plugin" in Constellation's UI - see above for the fields the object can have when adding a tab.
+`Constellation.addTab({name: "my-plugin"})` to register a new tab called "my-plugin" in Constellation's UI - see above for the fields the object can have when adding a tab.
 
 The `type` field/param in the three methods below will be:
  - `"collection"` for collection tabs
  - `"plugin"` for any tab added using `Constellation.addTab` - i.e. for tabs added by plugin packages and for the default tabs ("Fullscreen", "Account", "Actions", "Config")
 
-`Constellaton.getCurrentTab()` to get the `id` and type of the currently selected tab in an object of the form `{id: <tabId}, type: <tabType>}` (both values are strings)
+`Constellation.getCurrentTab()` to get the `id` and type of the currently selected tab in an object of the form `{id: <tabId}, type: <tabType>}` (both values are strings)
 
-`Constellaton.setCurrentTab("unique-id-of-my-tab", type)` to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value if no `id` was set)
+`Constellation.setCurrentTab("unique-id-of-my-tab", type)` to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value if no `id` was set)
 
-`Constellaton.isCurrentTab("unique-id-of-my-tab", type)` to check whether this is the current tab or not (returns `true` if you've passed the `id` of the current open tab, along with the correct `type`)
+`Constellation.isCurrentTab("unique-id-of-my-tab", type)` to check whether this is the current tab or not (returns `true` if you've passed the `id` of the current open tab, along with the correct `type`)
 
-`Constellaton.tabVisible("unique-id-of-my-tab", type)` to check if this tab is currently enabled by the user via the "Config ..." panel (i.e. does it currently appear as a tab in the user's UI)
+`Constellation.tabVisible("unique-id-of-my-tab", type)` to check if this tab is currently enabled by the user via the "Config ..." panel (i.e. does it currently appear as a tab in the user's UI)
 
 `Constellation.isFullScreen()` to see if Constellation is in fullscreen mode
 
-`Constellaton.hideCollection('collectionName')` to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab - they won't even appear there) - accepts an array or a string
+`Constellation.hideCollection('collectionName')` to hide collections programatically (collections hidden this way cannot be unhidden through the "Config" tab - they won't even appear there) - accepts an array or a string
 
-`Constellaton.showCollection('collectionName')` to show collections programatically - accepts an array or a string
+`Constellation.showCollection('collectionName')` to show collections programatically - accepts an array or a string
 
 `Constellation.setKeyCode(keyCode)` to change the default toggle key from CTRL + C to CTRL + [whichever key's keycode you set] (Note: this should only be used in app code, as a last-resort config option, and not in plugin package code)
 
@@ -131,7 +131,7 @@ The `type` field/param in the three methods below will be:
 
 If you put a `callback` in your `addTab({ ... })` (e.g. `Constellation.addTab({name: "my-plugin", callback: "myCallBack", ...});`) you need to register it as follows:
 ```
-Constellaton.registerCallbacks({
+Constellation.registerCallbacks({
   "myCallBack" : function () {
     console.log("Callback fired!");
   }
