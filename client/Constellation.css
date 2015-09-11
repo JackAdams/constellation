@@ -1,4 +1,4 @@
-#Constellation {  
+#Constellation {
   left: 0;
   bottom: 0;
   width: 100%;
@@ -42,8 +42,8 @@
   color: rgba(215,235,255,.8);
 }
 
-#Constellation ::-webkit-scrollbar { 
-    display: none; 
+#Constellation ::-webkit-scrollbar {
+    display: none;
 }
 
 #Constellation.Constellation_expand {
@@ -64,7 +64,7 @@
 }
 
 #Constellation.Constellation_fullscreen .Constellation_contentView {
-  height: 95%;    
+  height: 95%;
 }
 
 .Constellation_editable {
@@ -88,7 +88,7 @@
 #Constellation *, .Constellation_row {
   outline: none;
   font-family: Liberation Mono, Courier, Lucidatypewriter, Fixed, monospace !important;
-} 
+}
 
 #Constellation pre {
   outline: none;
@@ -118,7 +118,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$c1', endColorstr='$c2',GradientType=0);
   color: rgba(255, 255, 255, 0.6);
 }
-  
+
 .Constellation_row {
   padding: 0 8px;
   overflow: hidden;
@@ -156,6 +156,7 @@
   padding: 8px;
   line-height: 16px;
   font-size: 11px;
+  white-space: normal;
 }
 
 .Constellation_expand .ConstellationHide {
@@ -164,7 +165,7 @@
 
 .Constellation_row_expand {
   height: 320px;
-  cursor: default !important; 
+  cursor: default !important;
 }
 .Constellation_row_expand .Constellation_contentView {
   box-shadow: 0 0 0 80px rgba(0,0,0,.68);
@@ -201,7 +202,7 @@
   float: right;
 }
 
-.Constellation_header { 
+.Constellation_header {
   color: rgba(255,255,255,.6);
 }
 
@@ -264,7 +265,7 @@
   z-index: 9999999998;
   position: relative;
   transition: 0.3s;
-  color: rgba(255,255,255,.5); 
+  color: rgba(255,255,255,.5);
 }
 
 .Constellation_documentViewer pre {
@@ -324,7 +325,7 @@
 .Constellation_null {
   color: #AE81FF !important;
 }
-  
+
 /* red */
 .Constellation_key {
   color: #F92772 !important;
@@ -334,7 +335,7 @@
   line-height: 28px;
   height: 28px;
   border-radius: 5px 5px 0 0;
-  
+
   color: rgba(255, 255, 255, 0.6);
   padding-bottom: 1px;
 
@@ -443,7 +444,7 @@
 .Constellation_m_wrapper_expand {
   max-width: 100%;
 }
-  
+
 .Constellation_m_wrapper_expand .Constellation_m_edit {
   background: transparent;
   cursor: default;
@@ -525,11 +526,11 @@
 
 .Constellation_action_time {
   color: grey;
-  font-size: smaller;    
+  font-size: smaller;
 }
 
 .Constellation_action_toggle {
-  font-size: smaller;    
+  font-size: smaller;
 }
 
 .Constellation_installed_tabs {
@@ -539,7 +540,7 @@
 }
 
 .Constellation_installed_tabs li {
-  margin: 0;    
+  margin: 0;
 }
 
 .Constellation_installed_tabs li label{
@@ -572,7 +573,7 @@
 
 .Constellation_search_button_container {
   position: relative;
-  display: inline-block;    
+  display: inline-block;
 }
 
 .Constellation_search_button {
@@ -622,5 +623,5 @@
 }
 
 #Constellation select {
-  margin: 0;    
+  margin: 0;
 }
