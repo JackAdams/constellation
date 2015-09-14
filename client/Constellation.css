@@ -117,6 +117,8 @@
   background-image: -o-linear-gradient(#000, #000);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$c1', endColorstr='$c2',GradientType=0);
   color: rgba(255, 255, 255, 0.6);
+  padding: 8px;
+  white-space: normal;
 }
 
 .Constellation_row {
@@ -150,13 +152,6 @@
 
 .Constellation_row:hover {
   cursor: pointer;
-}
-
-.Constellation_empty {
-  padding: 8px;
-  line-height: 16px;
-  font-size: 11px;
-  white-space: normal;
 }
 
 .Constellation_expand .ConstellationHide {

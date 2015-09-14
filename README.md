@@ -24,6 +24,7 @@ Examples of plugins are:
 
 - [babrahams:temple](https://github.com/JackAdams/temple) (for visualizing template information)
 - [lai:ddp-inspector](https://github.com/rclai/meteor-ddp-inspector) (visualize the DDP traffic between client and server)
+- [yelongren:constellation-reload](https://github.com/yelongren/constellation-reload) (Reload app while preserving Session variables)
 - [constellation:session](https://github.com/JackAdams/constellation-session) (for viewing / manipulating data in the Session variable)
 - [constellation:subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
 - [constellation:autopublish](https://github.com/JackAdams/constellation-autopublish) (for toggling autopublish behaviour)
