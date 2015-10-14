@@ -6,6 +6,10 @@ Constellation
 - Add a test suite to ensure base functionality remains unbroken by future changes
 - Change CSS for Chrome and Safari so that scroll bars show when content overflows pane (or full screen view)
 - Factor out Accounts, Collections and Actions tabs into separate packages ???
+- Standard way of persisting config for packages (provide API)
+- Better search (not easy) -- at least for user accounts, based on email address
+- Clear collections
+- Switch on autopublish on a per-collection basis
 
 ### v1.2.1
 

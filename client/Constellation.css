@@ -571,7 +571,7 @@
   display: inline-block;
 }
 
-.Constellation_search_button {
+.Constellation_search_button, .Constellation_header_button {
   border-radius: 5px;
   background-color: rgba(255,255,255,.2);
   position: absolute;
@@ -619,4 +619,21 @@
 
 #Constellation select {
   margin: 0;
+}
+
+.Constellation_toggle_autopublish {
+  cursor: pointer;
+}
+
+.Constellation_toggle_autopublish:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.Constellation_autopublished {
+  color: rgba(0,0,0,0.9);
+  background-color: #A6E22D;
+}
+
+.Constellation_not_autopublished {
+  background-color: #EB4C16;	
 }

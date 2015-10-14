@@ -3,7 +3,7 @@
   <!-- Collection Count -->
   <div class="Constellation_counter">
     {{#if collectionCount}} 
-      <span class="ConstellationHide">{{> Constellation_search_button}}{{currentPosition}}/</span>{{/if}}{{collectionCount}}
+      <span class="ConstellationHide">{{> Constellation_search_button}}{{#with currentPosition}}{{this}}/{{/with}}</span>{{/if}}<span class="{{autopublished}} {{#if toggleAutopublish}}Constellation_toggle_autopublish{{/if}}" title="{{#if toggleAutopublish}}Toggle autopublish{{/if}}">{{collectionCount}}</span>
   </div>
       
 </template>
