@@ -1,9 +1,9 @@
 Constellation
 =============
 
-This is a fork of the open source part of the __Meteortoys__ project (i.e. [msavin:mongol](https://github.com/msavin/Mongol)).
+__Constellation__ is an extensible, configurable, free, open-source dev console for Meteor.
 
-The main difference is that __Constellation__ provides an API for adding plugins (custom tabs) to the existing UI.
+It provides an API for adding plugins (custom tabs) to the existing UI.
 
 [Constellation Demo Site](http://constellation-demo.meteor.com/demo)
 
@@ -58,14 +58,16 @@ api.use('constellation:console@1.2.1');
 api.imply('constellation:console');
 ```
 
-And put something like this in a js file on the client:
+__Note__: make sure you put `debugOnly: true` in your package's `Package.describe({ ... });`
+
+And then put something like this in a js file on the client:
 
 ```
 Package["constellation:console"].API.addTab({
-  name: 'Temple',
-  mainContentTemplate: 'Constellation_temple_view',
-  headerContentTemplate: 'Constellation_temple_header',
-  menuContentTemplate: 'Constellation_temple_menu'
+  name: 'my-plugin',
+  mainContentTemplate: 'Constellation_my-plugin_view',
+  headerContentTemplate: 'Constellation_my-plugin_header',
+  menuContentTemplate: 'Constellation_my-plugin_menu'
 });
 ```
 
@@ -90,8 +92,6 @@ You can set `active: false` in the object above if you don't want your plugin to
 `title: "Title when I hover over tab"` will give the tab a title. But use this sparingly -- a descriptive tab name is far better. (Note: the tab name bar also gets the class `Constellation_tab_constellation_plugin_<name>` automatically, so you can target it for styling if you need to.)
 
 You can also set `id: "unique-id-for-my-tab"` if you like, but unless two plugins share the same name, this isn't going to be necessary.
-
-__Note__: make sure you put `debugOnly: true` in your package's `Package.describe({ ... });`
 
 API
 ---

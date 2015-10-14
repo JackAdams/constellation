@@ -30,7 +30,7 @@ Constellation.diffDocumentData = function (dbDoc, newData, oldData) {
 
   var dynamicallyAddedFields = _.difference(oldDataFields, dbDocFields);
 
-  // The get the fields that must retain their dbDoc field value, because they we'ren't published
+  // Then get the fields that must retain their dbDoc field value, because they we'ren't published
 
   var unpublishedFields = _.difference(dbDocFields, oldDataFields); // console.log("unpublishedFields",unpublishedFields);
 

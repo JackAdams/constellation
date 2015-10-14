@@ -152,6 +152,7 @@ Meteor.startup(function() {
   // *****************************
   
   // Note: there is also an `EditableJSON.afterUpdate` callback in /client/row_actions/undoRedo.js
+  EditableJSON = Package['babrahams:editable-json'].EditableJSON;
   
   EditableJSON.onUnpublishedFieldAdded(function (collection, field, value) {
     alert("Are you sure you the new field '" + field + "' is published?" + ((!Package["constellation:autopublish"]) ? "\n\nmeteor add constellation:console-autopublish\n\nwill allow you to switch autopublish on and off from the Constellation UI for easy checking." : "\n\nSwitch on autopublish to check."));

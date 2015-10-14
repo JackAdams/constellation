@@ -82,10 +82,36 @@ Constellation.updateDocument = function (collectionName, documentData, originalD
   var updatedDocumentData = Constellation.diffDocumentData(currentDbDoc, documentData, originalDocumentData);
 
   if (!!Package['aldeed:simple-schema'] && !!Package['aldeed:collection2'] && _.isFunction(ConstellationCollection.simpleSchema) && ConstellationCollection._c2) {
+  
+	// I'm guessing we should only use the raw collection if oplog is enabled
+	// The reason for using the raw collection is to sidestep collection2, which has a bug
+	// when updating a document with a field with an empty string value like: {emptyField: ''}.
+	// `emptyField` simply doesn't get added to the document, even
+	// when `removeEmptyStrings` is set to false.
+	// The problem with using the raw collection is that, without oplog, we're waiting for
+	// a poll and diff, so updates might lag by up to 10s.
+	// The below isn't ideal, as the presence of a MONGO_OPLOG_URL doesn't
+	// guarantee that our observers are using the oplog.
+	// This could result in some delayed responses in making updates.
+	// The alternative is weird, buggy behaviour when making updates.
+  
+	if (Meteor.isServer && process.env.MONGO_OPLOG_URL) {
+	  
+	  ConstellationCollection.rawCollection().update({
+		  _id: documentID
+		},
+		updatedDocumentData,
+		function () {
+		  // Apparently a callback is required
+		  // Otherwise an error is thrown (something about `writeConcern` ...)
+		}
+	  );
+	
+	  return;
+		
+	}
     
     // This is to nullify the effects of SimpleSchema/Collection2
-    // Using `upsert` means that a user can change the _id value in the JSON
-    // and then press the 'Update' button to create a duplicate (published keys/values only) with a different _id
     
     ConstellationCollection.update({
       _id: documentID
@@ -98,10 +124,11 @@ Constellation.updateDocument = function (collectionName, documentData, originalD
     
     return;
   }
-  // Run the magic
+  
   ConstellationCollection.update({
       _id: documentID
     },
     updatedDocumentData
   );    
+
 }

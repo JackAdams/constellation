@@ -8,8 +8,13 @@ Constellation
 - Factor out Accounts, Collections and Actions tabs into separate packages ???
 - Standard way of persisting config for packages (provide API)
 - Better search (not easy) -- at least for user accounts, based on email address
-- Clear collections
-- Switch on autopublish on a per-collection basis
+- Add button to clear a collection
+
+### v1.2.2
+
+- Support for autopublish on a per-collection basis
+- Updated dependency on `babrahams:editable-json` to 0.6.1
+- Employed a rough workaround for a bug in `aldeed:collection2`
 
 ### v1.2.1
 
