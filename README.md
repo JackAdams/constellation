@@ -7,8 +7,6 @@ It provides an API for adding plugins (custom tabs) to the existing UI.
 
 [Constellation Demo Site](http://constellation-demo.meteor.com/demo)
 
-[Demo on Meteorpad](http://meteorpad.com/pad/Wm7SreoMmL8QTMKkT/Constellation_Demo)
-
 Usage
 -----
 ```
