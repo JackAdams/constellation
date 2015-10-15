@@ -116,14 +116,13 @@ Meteor.startup(function() {
     var locals = [];
     // for (var member in window) {
     _.each(Object.keys(window), function (member) {
-      if (window[member] instanceof Mongo.Collection && !window[member]._name) {
+      if (member !== 'webkitStorageInfo' && member !=='webkitIndexedDB' && window[member] instanceof Mongo.Collection && !window[member]._name) {
         locals.push({name: member});
       }
     });
     return locals;  
   }
 
-  // Build a default config object
   // Build a default config object
 
   var collections = _.reduce((Mongo.Collection.getAll() || []).concat(localCollections()), function (memo, collection) {

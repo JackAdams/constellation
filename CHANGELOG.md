@@ -10,6 +10,10 @@ Constellation
 - Better search (not easy) -- at least for user accounts, based on email address
 - Add button to clear a collection
 
+### v1.2.3
+
+- Fixes webkitStorageInfo, webkitIndexedDB deprecation warnings on Chrome 
+
 ### v1.2.2
 
 - Support for autopublish on a per-collection basis
