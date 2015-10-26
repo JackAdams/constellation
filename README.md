@@ -3,6 +3,8 @@ Constellation
 
 __Constellation__ is an extensible, configurable, free, open-source dev console for Meteor.
 
+![Constellation Screenshot](screenshot.png)
+
 It provides an API for adding plugins (custom tabs) to the existing UI.
 
 [Constellation Demo Site](http://constellation-demo.meteor.com/demo)
