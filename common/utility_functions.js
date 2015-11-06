@@ -105,3 +105,112 @@ Constellation.diffDocumentData = function (dbDoc, newData, oldData) {
   console.log(Constellation.diffDocumentData(sampleDbDoc, sampleNewData, sampleOldData));
 
 });*/
+
+Constellation.parse = function (data) {
+  var newObject = null;
+  
+  try {
+
+    var reISO = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+
+    var dateParser = function (key, value) {
+      if (_.isString(value)) {
+        var a = reISO.exec(value);
+        if (a) {
+          return new Date(value);
+        }
+      }
+      return value;
+    }
+
+    newObject = JSON.parse(data, dateParser);
+    
+  }
+  catch (error) {
+    
+	if (Meteor.isClient) {
+      Constellation.error("json.parse");
+	}
+    
+  }
+
+  return newObject;
+
+}
+
+Constellation.dumpCollections = function (collectionNames, localCollectionsOnly) {
+
+  check(collectionNames, [String]);
+
+  if (localCollectionsOnly) {
+	// Deal with local collections only
+	collectionNames = _.filter(collectionNames, function (collectionName) {
+	  return Constellation.collectionIsLocal(collectionName);
+	});
+  }
+
+  var dump = {};
+
+  _.each(collectionNames, function (collectionName) {
+
+    var documents = Constellation.Collection(collectionName).find().fetch();
+
+    dump[collectionName] = documents;
+
+  });
+
+  return JSON.stringify(dump);
+
+}
+
+Constellation.restoreCollections = function (dump, localCollectionsOnly) {
+
+  check(dump, String);
+  
+  var error = '';
+  var collections = Constellation.parse(dump);
+  
+  if (localCollectionsOnly) {
+	// Deal with local collections only
+	collections = _.reduce(collections, function (memo, docs, collectionName) {
+	  if (Constellation.collectionIsLocal(collectionName)) {
+		memo[collectionName] = docs;  
+	  }
+	  return memo;
+	},{});
+  }
+
+  _.each(collections, function (docs, collectionName) {
+	
+	var collectionFullyRestored = true;
+	
+    var Collection = Constellation.Collection(collectionName);
+    
+    _.each(docs, function (doc) {
+      
+	  try {
+		insertDoc(Collection, doc, function (err, res) {
+		  if (err) {
+			collectionFullyRestored = false;
+			error += '\n\n' + JSON.stringify(err, null, 2);
+		  }
+		});
+	  }
+	  catch (err) {
+		collectionFullyRestored = false;
+		error += '\n\n' + JSON.stringify(err, null, 2);  
+	  }
+
+    });
+	
+	if (!collectionFullyRestored) {
+	  error = '\n\nCollection not fully restored: ' + collectionName + error;
+	}
+
+  });
+  
+  if (error) {
+    return error;  
+  }
+    
+}

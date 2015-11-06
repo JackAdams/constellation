@@ -17,7 +17,7 @@ Constellation.Collection = function (collectionName) {
   if (!collectionName) {
     return null;  
   }
-  
+
   return Mongo.Collection.get(collectionName)
     // This should automatically match all collections by default
     // including namespaced collections

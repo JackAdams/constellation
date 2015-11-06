@@ -38,6 +38,7 @@ Meteor.methods({
   },
   
   Constellation_impersonate: function(userId) {
+
     check(userId, String);
 
     if (!(Meteor.users && Meteor.users.findOne(userId))) {
@@ -45,6 +46,15 @@ Meteor.methods({
     }
 
     this.setUserId(userId);
+
+  },
+  
+  Constellation_clear_collection: function (collectionName) {
+
+    check(collectionName, String);
+
+    return Constellation.clearCollection(collectionName);
+
   }
   
 });

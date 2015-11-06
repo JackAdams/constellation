@@ -8,7 +8,11 @@ Constellation
 - Factor out Accounts, Collections and Actions tabs into separate packages ???
 - Standard way of persisting config for packages (provide API)
 - Better search (not easy) -- at least for user accounts, based on email address
-- Add button to clear a collection
+
+### v1.3.0
+
+- Click document number to clear collection
+- Added support for dump and restore of collections
 
 ### v1.2.3
 

@@ -1,17 +1,15 @@
 <template name="Constellation_collection_count">
 
-  <!-- Collection Count -->
   <div class="Constellation_counter">
     {{#if collectionCount}} 
-      <span class="ConstellationHide">{{> Constellation_search_button}}{{#with currentPosition}}{{this}}/{{/with}}</span>{{/if}}<span class="{{autopublished}} {{#if toggleAutopublish}}Constellation_toggle_autopublish{{/if}}" title="{{#if toggleAutopublish}}Toggle autopublish{{/if}}">{{collectionCount}}</span>
+      <span class="Constellation_hide">{{> Constellation_search_button}}{{#with currentPosition}}<span class="Constellation_clear_collection" title="Clear collection">{{this}}</span>/{{/with}}</span>{{/if}}<span class="{{autopublished}} {{#if toggleAutopublish}}Constellation_toggle_autopublish{{/if}}" title="{{#if toggleAutopublish}}Toggle autopublish{{/if}}">{{collectionCount}}</span>
   </div>
       
 </template>
 
 <template name="Constellation_collections_notFound">
   <div class="Constellation_empty">
-    If you think this is an error, please report it on
-    <a href="https://github.com/JackAdams/constellation" style="color: #cc0000;">GitHub</a>.
+    If you think this is an error, please report it on <a href="https://github.com/JackAdams/constellation" style="color: #cc0000;">GitHub</a>.
   </div>
 </template>
 

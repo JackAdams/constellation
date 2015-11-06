@@ -47,42 +47,13 @@ _.extend(Constellation, {
       case "update":
         alert("There was an error updating your document. Please review your changes and try again.");
         break;
-      case "permission":
-        // under consideration
-        alert("This Meteor applications looks to be deployed in debug mode. Constellation cannot edit this document because it onlys works if the absolute URL begins with 'http://localhost:'")
+	  case "clearCollection":
+	    alert("There was an error clearing the collection.");
+		break;
       default:
-        return "Request Credentials";
+        return "An error occurred.";
         break;
     }
-
-  },
-  'parse': function (data) {
-    var newObject = null;
-    
-    try {
-
-      var reISO = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-
-      var dateParser = function (key, value) {
-        if (_.isString(value)) {
-          var a = reISO.exec(value);
-          if (a) {
-            return new Date(value);
-          }
-        }
-        return value;
-      }
-
-      newObject = JSON.parse(data, dateParser);
-      
-    }
-    catch (error) {
-        
-      Constellation.error("json.parse");
-      
-    }
-
-    return newObject;
 
   },
   'toggleFullScreen' : function () {
@@ -166,7 +137,7 @@ _.extend(Constellation, {
     }
     return 'undefined';
   },
-  collectionIsLocal : function (collectionName) {
+  'collectionIsLocal' : function (collectionName) {
     var collection = Constellation.Collection(collectionName);
     return collection && !collection._name;
   }

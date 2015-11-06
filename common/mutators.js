@@ -132,3 +132,19 @@ Constellation.updateDocument = function (collectionName, documentData, originalD
   );    
 
 }
+
+Constellation.clearCollection = function (collectionName) {
+
+  var ConstellationCollection = Constellation.Collection(collectionName);
+  
+  // TODO - make this undoable
+  // In the meantime, we'll dump the collection prior to deleting it
+  // then log it in the console
+  
+  var dump = Constellation.dumpCollections([collectionName]);
+  
+  ConstellationCollection.remove({});
+
+  return dump;
+
+}

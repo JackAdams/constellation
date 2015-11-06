@@ -144,7 +144,7 @@
   margin-bottom: 0px;
 }
 
-.ConstellationHide {
+.Constellation_hide {
   opacity: 0;
   transition: 0.3s;
   display: none;
@@ -152,10 +152,6 @@
 
 .Constellation_row:hover {
   cursor: pointer;
-}
-
-.Constellation_expand .ConstellationHide {
-  display: inline;
 }
 
 .Constellation_row_expand {
@@ -166,10 +162,16 @@
   box-shadow: 0 0 0 80px rgba(0,0,0,.68);
 }
 
-.Constellation_row_expand .ConstellationHide {
+.Constellation_row_expand .Constellation_hide {
   opacity: 1;
   max-width: auto;
   overflow: auto;
+  display: inline;
+}
+
+.Constellation_row_expand .Constellation_hide .Constellation_clear_collection:hover {
+  cursor: pointer;
+  color: red;	
 }
 
 .Constellation_row_expand .Constellation_Controls {
@@ -195,6 +197,7 @@
 
 .Constellation_counter {
   float: right;
+  position: relative;
 }
 
 .Constellation_header {
