@@ -1,7 +1,11 @@
 Package.describe({
   name:    'constellation:console',
   summary: 'An extensible development console for Meteor',
+<<<<<<< HEAD
   version: '1.3.0',
+=======
+  version: '1.2.4',
+>>>>>>> origin/master
   git:     'https://github.com/JackAdams/constellation.git',
   documentation: 'README.md',
   debugOnly: true
