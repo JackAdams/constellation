@@ -24,8 +24,8 @@ Examples of plugins are:
 
 - [babrahams:temple](https://github.com/JackAdams/temple) (for visualizing template information)
 - [lai:ddp-inspector](https://github.com/rclai/meteor-ddp-inspector) (visualize the DDP traffic between client and server)
-- [yelongren:constellation-reload](https://github.com/yelongren/constellation-reload) (Reload app while preserving Session variables)
-- [alon:lag-console](https://atmospherejs.com/alon/lag-console) (Add a lag to methods to simulate real-world response times)
+- [yelongren:constellation-reload](https://github.com/yelongren/constellation-reload) (reload app while preserving Session variables)
+- [alon:lag-console](https://atmospherejs.com/alon/lag-console) (add a lag to methods to simulate real-world response times)
 - [fermuch:stats.js](https://atmospherejs.com/fermuch/stats.js) (JS performance monitoring with stats.js)
 - [constellation:session](https://github.com/JackAdams/constellation-session) (for viewing / manipulating data in the Session variable)
 - [constellation:subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
@@ -35,6 +35,7 @@ Examples of plugins are:
 - [constellation:position](https://github.com/JackAdams/constellation-position) (allows you to change the Constellation console position)
 - [constellation:schema](https://github.com/JackAdams/constellation-schema) (generate SimpleSchema from the Constellation console)
 - [constellation:plugins](https://github.com/JackAdams/constellation-plugins) (self-service menu of Constellation plugins)
+- [constellation:dump-restore](https://github.com/JackAdams/constellation-dump-restore) (dump and restore mongo collections)
 
 If you want to write a plugin, take a look at the source of the packages above.
 
