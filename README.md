@@ -27,6 +27,7 @@ Examples of plugins are:
 - [yelongren:constellation-reload](https://github.com/yelongren/constellation-reload) (reload app while preserving Session variables)
 - [alon:lag-console](https://atmospherejs.com/alon/lag-console) (add a lag to methods to simulate real-world response times)
 - [fermuch:stats.js](https://atmospherejs.com/fermuch/stats.js) (JS performance monitoring with stats.js)
+- [fourquet:anti-gravity](https://atmospherejs.com/fourquet/anti-gravity) (for detecting out-of-date packages)
 - [constellation:session](https://github.com/JackAdams/constellation-session) (for viewing / manipulating data in the Session variable)
 - [constellation:subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
 - [constellation:autopublish](https://github.com/JackAdams/constellation-autopublish) (for toggling autopublish behaviour)
