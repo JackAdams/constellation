@@ -78,12 +78,6 @@ Template.Constellation_action.helpers({
   fullDoc : function () {
     return Blaze._templateInstance().showFullDocument.get();
   },
-  json : function (when) {
-    var docToDisplay = (this.action === 'insert') ? ((when === 'before') ? this.updatedDocument : this.document) : ((when === 'after') ? this.updatedDocument : this.document);
-    json_output = JSON.stringify(docToDisplay, null, 2),
-    colorized = Constellation.colorize(json_output);
-    return colorized;
-  },
   singleAction : function () {
     return [this];  
   }
@@ -101,3 +95,14 @@ Template.Constellation_action.events({
 Template.Constellation_action.onCreated(function () {
   this.showFullDocument = new ReactiveVar(false);
 });
+
+Template.Constellation_action_document.helpers({
+  json : function (when) {
+    var docToDisplay = (this.action === 'insert') ? ((when === 'before') ? this.updatedDocument : this.document) : ((when === 'after') ? this.updatedDocument : this.document);
+    json_output = JSON.stringify(docToDisplay, null, 2),
+    colorized = Constellation.colorize(json_output);
+    return colorized;
+  }
+});
+
+Template.Constellation_action_document.events(Constellation.foreignKeyLinkEvents);

@@ -1,7 +1,18 @@
+Blaze.registerHelper('Constellation_guide', function () {
+  return ConstellationDict.get("Constellation_guide");
+});
+
+var guideTab = function () {
+  var tab = _.find(ConstellationDict.get('Constellation_tabs'), function (t) {
+	return ConstellationDict.equals("Constellation_guide", t.id);
+  });
+  return tab;	
+}
+
 Template.Constellation_config_header.events({
-  'click .Constellation_Minimize' : function (e) {
+  'click .Constellation_Close' : function (e) {
     e.stopPropagation();
-    ConstellationDict.set("Constellation_currentTab", null);  
+    API.toggleConsole();  
   },
   'click .Constellation_FullScreen' : function (e) {
     e.stopPropagation();
@@ -18,6 +29,9 @@ Template.Constellation_config_view.helpers({
   },
   hotkey : function () {
     return String.fromCharCode(Constellation._keyCode);  
+  },
+  guide : function () {
+	return guideTab()['guideContentTemplate'];  
   }
 });
 
@@ -37,6 +51,16 @@ Template.Constellation_config_view.events({
       API.setKeyCode(keyCode);
       localStorage.constellation_hotkey = keyCode;
     }
+  },
+  'click .Constellation_show_guide' : function (evt, tmpl) {
+	ConstellationDict.set('Constellation_guide', this.id);  
+  }
+});
+
+Template.Constellation_config_menu.helpers({
+  'pluginName' : function () {
+	var tab = guideTab();
+    return !tab['collection'] && tab['name'] || 'Collections';
   }
 });
 
@@ -55,6 +79,9 @@ Template.Constellation_config_menu.events({
         });
       }
     });
+  },
+  'click .Constellation_close_guide' : function (evt, tmpl) {
+    ConstellationDict.set('Constellation_guide', null);
   }
 
 });

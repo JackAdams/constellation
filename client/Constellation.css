@@ -214,7 +214,7 @@
   cursor: pointer;
 }
 
-.Constellation_Minimize, .Constellation_FullScreen {
+.Constellation_Close, .Constellation_FullScreen {
   display: none;
   padding: 0 9px;
   margin-right: -9px;
@@ -228,7 +228,7 @@
   display: block;
 }
 
-.Constellation_Minimize:hover, .Constellation_FullScreen:hover {
+.Constellation_Close:hover, .Constellation_FullScreen:hover {
   background: rgba(255, 255, 255, 0.15);
   cursor: pointer;
 }
@@ -242,7 +242,7 @@
   height: auto;
 }
 
-.Constellation_expand .Constellation_Minimize, .Constellation_expand .Constellation_FullScreen {
+.Constellation_expand .Constellation_Close, .Constellation_expand .Constellation_FullScreen {
   display: inline;
   opacity: 1;
 }
@@ -354,7 +354,7 @@
   transition: 0.2s;
 }
 
-.Constellation_m_left, .Constellation_m_right, .Constellation_m_new, .Constellation_m_edit, .Constellation_m_delete, .Constellation_menuContent_insert, .Constellation_log_purge, .Constellation_switchAccount, .Constellation_useAccount, .Constellation_config_all, .Constellation_config_none {
+.Constellation_m_left, .Constellation_m_right, .Constellation_m_new, .Constellation_m_edit, .Constellation_m_delete, .Constellation_menuContent_insert, .Constellation_log_purge, .Constellation_switchAccount, .Constellation_useAccount, .Constellation_config_all, .Constellation_config_none, .Constellation_close_guide {
   float: left;
   border-left: 1px solid rgba(0,0,0,.4);
   padding: 0 6px;
@@ -407,7 +407,7 @@
   border-right: 1px solid rgba(0,0,0,.4);
 }
 
-.Constellation_edit_save:hover, .Constellation_edit_cancel:hover, .Constellation_menuContent_insert:hover, .Constellation_m_signout:hover, .Constellation_m_signin:hover, .Constellation_m_left:hover, .Constellation_m_right:hover, .Constellation_m_new:hover, .Constellation_m_edit:hover, .Constellation_m_delete:hover, .Constellation_log_purge:hover, .Constellation_switchAccount:hover, .Constellation_useAccount:hover, .Constellation_config_all:hover, .Constellation_config_none:hover {
+.Constellation_edit_save:hover, .Constellation_edit_cancel:hover, .Constellation_menuContent_insert:hover, .Constellation_m_signout:hover, .Constellation_m_signin:hover, .Constellation_m_left:hover, .Constellation_m_right:hover, .Constellation_m_new:hover, .Constellation_m_edit:hover, .Constellation_m_delete:hover, .Constellation_log_purge:hover, .Constellation_switchAccount:hover, .Constellation_useAccount:hover, .Constellation_config_all:hover, .Constellation_config_none:hover, .Constellation_close_guide:hover {
   color: #2CA6E2;
   transition: .2s;
   cursor: pointer;
@@ -639,4 +639,22 @@
 
 .Constellation_not_autopublished {
   background-color: #EB4C16;	
+}
+
+.Constellation_guide {
+  white-space: normal;
+  font-size: smaller;
+}
+
+#Constellation.Constellation_fullscreen .Constellation_guide {
+  font-size: inherit;	
+}
+
+#Constellation .Constellation_guide ul, #Constellation .Constellation_guide ol {
+  list-style-type: disc;
+  list-style-position: inside;	
+}
+
+#Constellation .Constellation_guide ol {
+  list-style-type: decimal;
 }

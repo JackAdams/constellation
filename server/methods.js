@@ -55,6 +55,30 @@ Meteor.methods({
 
     return Constellation.clearCollection(collectionName);
 
+  },
+  
+  Constellation_findCollectionForDocumentId: function (documentId) {
+
+    var found = null;
+
+    var collections = Mongo.Collection.getAll();
+
+    _.each(collections, function(collection) {
+      if (found) {
+        return false;
+      }
+      var doc = collection.instance.findOne({_id: documentId});
+      if (doc) {
+        found = {
+		  collectionName: collection.name,
+		  document: doc
+		}
+      }
+    });
+
+    return found;
+
   }
   
 });
+    

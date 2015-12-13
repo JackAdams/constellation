@@ -50,19 +50,35 @@ Template.Constellation_collection_count.helpers({
 Template.Constellation_collection_count.events({
   'click .Constellation_toggle_autopublish' : function (evt) {
 	evt.stopPropagation();
+	var collectionName = String(this);
 	var autopublishedOrNot = ((ConstellationDict.get('Constellation_autopublish_all')) ? ConstellationDict.get('Constellation_not_autopublished') : ConstellationDict.get('Constellation_autopublished')) || [];
-	if (_.contains(autopublishedOrNot, String(this))) {
-	  autopublishedOrNot = _.without(autopublishedOrNot, String(this));
+	if (_.contains(autopublishedOrNot, collectionName)) {
+	  autopublishedOrNot = _.without(autopublishedOrNot, collectionName);
 	}
 	else {
-	  autopublishedOrNot.push(String(this));
+	  autopublishedOrNot.push(collectionName);
 	}
+	ConstellationDict.set('Constellation_autopublish_subscription_ready', false);
 	if (ConstellationDict.get('Constellation_autopublish_all')) {
 	  ConstellationDict.set('Constellation_not_autopublished', autopublishedOrNot);
 	}
 	else {
 	  ConstellationDict.set('Constellation_autopublished', autopublishedOrNot);
 	}
+	// Need to reset the counter if the current document disappears
+	Tracker.autorun(function (c) {
+	  if (ConstellationDict.get('Constellation_autopublish_subscription_ready')) {
+		var sesskey = Constellation.sessKey(collectionName);
+		var current = ConstellationDict.get(sesskey);
+		// Truly filthy hack here
+		Meteor.setTimeout(function () {
+		  if (current >= Constellation.Collection(collectionName).find().count()) {
+		    ConstellationDict.set(sesskey, 0);
+		  }
+		}, 300);
+		c.stop();
+	  }
+	});
   },
   'click .Constellation_clear_collection' : function (evt, tmpl) {
 	evt.stopPropagation();

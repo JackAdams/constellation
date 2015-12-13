@@ -140,5 +140,72 @@ _.extend(Constellation, {
   'collectionIsLocal' : function (collectionName) {
     var collection = Constellation.Collection(collectionName);
     return collection && !collection._name;
+  },
+  'resemblesId' : function (text) {
+	if (!_.isString(text)) {
+	  return false;
+	}
+	var pattern = new RegExp('^[0-9a-zA-Z]{3,25}$');
+	return pattern.exec(text) !== null;
+  },
+  'findDocumentFromId' : function (value) {
+	Meteor.call('Constellation_findCollectionForDocumentId', value, function (err, res) {
+	  if (res) {
+		var collectionName = res.collectionName;
+		var documentId = value;
+		var collection = Constellation.Collection(collectionName);
+		if (collection) {
+		  // Check if the doc is present
+		  if (collection.findOne({_id: documentId})) {
+			// Go to the right panel and the right document
+			UndoRedo.setDocumentNumber(collectionName, documentId);	
+		  }
+		  else {
+			// Need to switch on autopublish
+			var standardText = "This document from the '" + collectionName + "' collection isn't published:\n\n" + JSON.stringify(res.document, null, 2) + "\n\n";
+			if (Package['constellation:autopublish']) {
+			  if (confirm(standardText + "Switch on autopublish and try again?")) {
+				var autopublished = ConstellationDict.get('Constellation_autopublished') || [];
+				var notAutopublished = ConstellationDict.get('Constellation_not_autopublished') || [];
+				if (!_.contains(autopublished, collectionName)) {
+				  autopublished.push(collectionName);
+				}
+				ConstellationDict.set('Constellation_autopublished', autopublished);
+				ConstellationDict.set('Constellation_not_autopublished', _.without(notAutopublished, collectionName));
+				Tracker.flush();
+				Tracker.autorun(function (c) {
+				  if (ConstellationDict.get('Constellation_autopublish_subscription_ready')) {
+					UndoRedo.setDocumentNumber(collectionName, documentId);
+					c.stop();
+				  }
+				});
+			  }
+			}
+			else {
+			  alert(standardText + "meteor add constellation:console-autopublish\n\nwill allow you to switch autopublish on and off from the Constellation UI"); 
+			}
+		  }
+		}
+	  }
+	});  
+  },
+  'foreignKeyLinkEvents' : {
+	'click, mouseenter' : function (evt, tmpl) {
+	  var value = tmpl.$(evt.target).text();
+	  if (value && value.length > 2) {
+		value = value.substr(1, value.length - 2);	
+	  }
+	  if (!!Constellation && _.isString(value) && Constellation.resemblesId(value)) {
+		if (evt.type === 'click') {
+		  Constellation.findDocumentFromId(value);
+		}
+		else {
+		  tmpl.$(evt.target).css('text-decoration', 'underline');  
+		}
+	  }
+	},
+	'mouseleave' : function (evt, tmpl) {
+	  tmpl.$(evt.target).css('text-decoration', 'none');
+	}
   }
 });

@@ -83,6 +83,8 @@ Package["constellation:console"].API.addTab({
 
 `mainContentTemplate` is rendered in the space for the main content when a tab is open.
 
+`guideContentTemplate` is rendered in the `Config | Guide` tab when the guide for your plugin is selected.
+
 You can set `active: false` in the object above if you don't want your plugin to be shown automatically (the user can make it visible through the "Config" tab).
 
 `noOpen: true` means the tab won't open when clicked.

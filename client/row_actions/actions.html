@@ -36,10 +36,26 @@
       <br />
       <strong>Before:</strong>
       <br />
-      <pre>{{{json "before"}}}</pre>
+      <pre>{{> Constellation_action_document doc=this state="before"}}</pre>
       <strong>After:</strong>
       <br />
-      <pre>{{{json "after"}}}</pre>
+      <pre>{{> Constellation_action_document doc=this state="after"}}</pre>
     {{/if}}
   </div>
+</template>
+
+<template name="Constellation_action_document">
+  {{#with doc}}{{{json ../state}}}{{/with}}
+</template>
+
+<template name="Constellation_actions_guide">
+
+  <ul>
+    <li>The <strong>Actions</strong> tab keeps a temporary record (until next hard refresh of app) of all changes made to the database <u>using Constellation</u>. Changes made using your app are <u>not</u> recorded in the actions log.</li>
+    <li><strong>Undo/Redo</strong>: any change to the database made through the Constellation interface is logged and can be undone (and redone), <u>except</u> clearing of whole collections (that isn't logged and can't be undone).</li>
+    <li>Clicking <strong>Purge log</strong> will remove the records of actions and they can no longer be undone.</li>
+    <li>Click on the <strong>_id</strong> value in a log entry to see the state of that document before and after the change was made.</li>
+    <li>Clicking on any <strong>_id</strong> value in the before or after state of a document will take you to that document (if it still exists).</li>
+  </ul>
+
 </template>

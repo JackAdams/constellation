@@ -7,7 +7,16 @@ Constellation
 - Change CSS for Chrome and Safari so that scroll bars show when content overflows pane (or full screen view)
 - Factor out Accounts, Collections and Actions tabs into separate packages ???
 - Standard way of persisting config for packages (provide API)
-- Better search (not easy) -- at least for user accounts, based on email address
+- Better search -- at least for user accounts, based on email address (not easy)
+
+### v1.4.0
+
+- Added support for COMMAND-click of foreign key `_id` type fields to jump instantly to the other document - a la [Dr Mongo](https://github.com/DrMongo/DrMongo)
+- Added support for guide material for plugins
+
+### v1.3.1
+
+- Updated dependency on `babrahams:editable-json` to 0.6.2
 
 ### v1.3.0
 

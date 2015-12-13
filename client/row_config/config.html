@@ -1,32 +1,42 @@
 <template name="Constellation_config_header">
 
-  <div style="float: right" class="Constellation_Minimize" title="Minimize">_</div>
+  <div style="float: right" class="Constellation_Close" title="Close Constellation console">_</div>
 
 </template>
   
 <template name="Constellation_config_menu">
   
-  <div class="Constellation_menuContent">
-    <div class="Constellation_config_none" style="float: right" title="Hide all collections">None</div>
-    <div class="Constellation_config_all" style="float: right" title="Show all collections">All</div>
-    <div style="text-indent:8px;">Show and hide tabs</div>
-  </div>
+  {{#if Constellation_guide}}
+    <div class="Constellation_close_guide" style="float: right" title="Back to config">Back</div>
+    <strong style="margin-left: 8px;">{{pluginName}} guide</strong>
+  {{else}}
+    <div class="Constellation_menuContent">
+      <div class="Constellation_config_none" style="float: right" title="Hide all collections">None</div>
+      <div class="Constellation_config_all" style="float: right" title="Show all collections">All</div>
+      <div style="text-indent:8px;">Show and hide tabs</div>
+    </div>
+  {{/if}}
   
 </template>
 
 <template name="Constellation_config_view">
-        
-  <ul class="Constellation_installed_tabs">
-    {{#each installedTabs}}
-      <li class="Constellation_config_item {{#if collection}}Constellation_collection_item{{/if}}">
-        <input type="checkbox" class="Constellation_config_tab_toggle" id="Constellation-tab-{{id}}" checked={{tabActive}} />&nbsp;
-        <label for="Constellation-tab-{{id}}">{{name}}</label>
-      </li>
-    {{/each}}
-  </ul>
-  
-  <hr />
-  
-  Hotkey to toggle console: <input type="text" value="{{hotkey}}" class="Constellation_hotkey_chooser" size="4" tabindex=-1 />
+   
+  {{#with Constellation_guide}}
+    <div class="Constellation_guide">{{> Template.dynamic template=guide}}</div>
+  {{else}}     
+    <ul class="Constellation_installed_tabs">
+      {{#each installedTabs}}
+        <li class="Constellation_config_item {{#if collection}}Constellation_collection_item{{/if}}">
+          {{#if guideContentTemplate}}
+            <div class="constellation-menu-button-container" style="margin-top: 4px;"><div class="Constellation_show_guide constellation-menu-button" title="{{name}} guide">Guide</div></div>
+          {{/if}}
+          <input type="checkbox" class="Constellation_config_tab_toggle" id="Constellation-tab-{{id}}" checked={{tabActive}} />&nbsp;
+          <label for="Constellation-tab-{{id}}">{{name}}</label>
+        </li>
+      {{/each}}
+    </ul>
+    <hr />
+    Hotkey to toggle console: <input type="text" value="{{hotkey}}" class="Constellation_hotkey_chooser" size="4" tabindex=-1 />
+  {{/with}}
 
 </template>

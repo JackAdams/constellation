@@ -43,12 +43,36 @@ Meteor.startup(function() {
   });
   
   Constellation.defaultTabs = [
-    {name: 'Full screen', id: 'constellation_plugin_fullscreen', active:false, noOpen:true, onClick: "toggleFullScreen", headerContentTemplate: 'Constellation_fullscreen_header'}
+    {
+	  name: 'Full screen',
+	  id: 'constellation_plugin_fullscreen',
+	  active:false,
+	  noOpen:true,
+	  onClick: "toggleFullScreen",
+	  headerContentTemplate: 'Constellation_fullscreen_header'
+	}
   ]
   if (!!Package['accounts-base']) {
-    Constellation.defaultTabs.push({name: 'Account', id: 'constellation_plugin_user_account', mainContentTemplate: 'Constellation_account_view', headerContentTemplate: 'Constellation_account_status', menuContentTemplate: 'Constellation_account_controls', searchContentTemplate: 'Constellation_account_search', active:false});
+    Constellation.defaultTabs.push({
+	  name: 'Account',
+	  id: 'constellation_plugin_user_account',
+	  mainContentTemplate: 'Constellation_account_view',
+	  headerContentTemplate: 'Constellation_account_status',
+	  menuContentTemplate: 'Constellation_account_controls',
+	  searchContentTemplate: 'Constellation_account_search',
+	  guideContentTemplate: 'Constellation_account_guide',
+	  active:false
+	});
   }
-  Constellation.defaultTabs.push({name: 'Actions', id: 'constellation_plugin_actions', mainContentTemplate:'Constellation_actions_main', headerContentTemplate: 'Constellation_actions_header', menuContentTemplate: 'Constellation_actions_menu', active:true});
+  Constellation.defaultTabs.push({
+	name: 'Actions',
+	id: 'constellation_plugin_actions',
+	mainContentTemplate: 'Constellation_actions_main',
+	headerContentTemplate: 'Constellation_actions_header',
+	menuContentTemplate: 'Constellation_actions_menu',
+	guideContentTemplate: 'Constellation_actions_guide',
+	active:true
+  });
   
   Tracker.autorun(function() {
     
@@ -68,6 +92,7 @@ Meteor.startup(function() {
           menuContentTemplate: "Constellation_docControls",
           mainContentTemplate: "Constellation_docViewer",
           searchContentTemplate: "Constellation_search",
+		  guideContentTemplate: "Constellation_guide",
           active: true,
           collection: true 
         }); 
@@ -82,7 +107,14 @@ Meteor.startup(function() {
     }
     
     // Config goes at the bottom
-    Constellation.tabs.push({name: 'Config ...', id: 'constellation_plugin_config', headerContentTemplate: 'Constellation_config_header', menuContentTemplate: 'Constellation_config_menu', mainContentTemplate: 'Constellation_config_view', active: true});
+    Constellation.tabs.push({
+	  name: 'Config | Guide',
+	  id: 'constellation_plugin_config',
+	  headerContentTemplate: 'Constellation_config_header',
+	  menuContentTemplate: 'Constellation_config_menu',
+	  mainContentTemplate: 'Constellation_config_view',
+	  active: true
+	});
 
     var constellationClasses = '';
 
@@ -155,6 +187,13 @@ Meteor.startup(function() {
   
   EditableJSON.onUnpublishedFieldAdded(function (collection, field, value) {
     alert("Are you sure you the new field '" + field + "' is published?" + ((!Package["constellation:autopublish"]) ? "\n\nmeteor add constellation:console-autopublish\n\nwill allow you to switch autopublish on and off from the Constellation UI for easy checking." : "\n\nSwitch on autopublish to check."));
+  });
+  
+  EditableJSON.onMetaKeyClickStringField(function (collection, field, value) {
+	// Try to find the document of the _id click (if it's an _id)
+	if (Constellation.resemblesId(value)) {
+	  Constellation.findDocumentFromId(value);
+	}
   });
   
   Meteor.defer(function () {
