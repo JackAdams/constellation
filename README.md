@@ -32,6 +32,7 @@ Examples of plugins are:
 - [constellation:subscriptions](https://github.com/JackAdams/constellation-subscriptions) (for viewing current subscriptions)
 - [constellation:autopublish](https://github.com/JackAdams/constellation-autopublish) (for toggling autopublish behaviour)
 - [constellation:tiny](https://github.com/JackAdams/constellation-tiny) (for _really_ minimizing the UI)
+- [constellation:shorten-collection-names](https://github.com/JackAdams/constellation-shorten-collection-names) (when your collection names get too long)
 - [constellation:velocity](https://github.com/JackAdams/constellation-velocity) (`velocity:html-reporter` miniaturized for Constellation)
 - [constellation:position](https://github.com/JackAdams/constellation-position) (allows you to change the Constellation console position)
 - [constellation:schema](https://github.com/JackAdams/constellation-schema) (generate SimpleSchema from the Constellation console)

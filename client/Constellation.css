@@ -543,6 +543,7 @@
 
 .Constellation_installed_tabs li label{
   display: inline-block;
+  cursor: pointer;
 }
 
 #Constellation .Constellation_tool {
@@ -552,6 +553,10 @@
 #Constellation .Constellation_config_item {
   padding: 0 8px;
   overflow: hidden;
+}
+
+#Constellation .Constellation_config_item:hover {
+  background-color: rgba(255,255,255,0.1);
 }
 
 #Constellation .Constellation_collection_item {
@@ -657,4 +662,18 @@
 
 #Constellation .Constellation_guide ol {
   list-style-type: decimal;
+}
+
+#Constellation .Constellation_guide ul {
+  margin: 0;
+  padding: 0;
+}
+
+#Constellation .Constellation_show_guide {
+  cursor: pointer;	
+}
+
+#Constellation .Constellation_show_guide:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255,255,255,0.5);
 }
