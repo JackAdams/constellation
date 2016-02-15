@@ -57,7 +57,7 @@ Making plugins
 Make a package with the following in the `package.js` file:
 
 ```
-api.use('constellation:console@1.2.1');
+api.use('constellation:console@1.4.0');
 api.imply('constellation:console');
 ```
 

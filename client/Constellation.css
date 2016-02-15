@@ -550,9 +550,14 @@
   background-color: rgba(43,63,83,.92);
 }
 
+#Constellation ul.Constellation_installed_tabs {
+  background-color: inherit;	
+}
+
 #Constellation .Constellation_config_item {
   padding: 0 8px;
   overflow: hidden;
+  border: 0;
 }
 
 #Constellation .Constellation_config_item:hover {
