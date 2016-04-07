@@ -7,7 +7,7 @@ __Constellation__ is an extensible, configurable, free, open-source dev console 
 
 It provides an API for adding plugins (custom tabs) to the existing UI.
 
-[Constellation Demo Site](http://constellation-demo.meteor.com/demo)
+[Constellation Demo Site](http://constellation.taonova.com/demo)
 
 Usage
 -----
