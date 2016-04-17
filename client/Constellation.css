@@ -568,6 +568,10 @@
   color: rgba(255,255,255,.8);
 }
 
+#Constellation .Constellation_config_item label {
+  margin-bottom: 0;	
+}
+
 #Constellation .Constellation_config_item input {
   vertical-align: middle;
 }
@@ -662,16 +666,22 @@
 
 #Constellation .Constellation_guide ul, #Constellation .Constellation_guide ol {
   list-style-type: disc;
-  list-style-position: inside;	
+  list-style-position: outside;
+  margin: 0;
+  padding: 0;
 }
 
 #Constellation .Constellation_guide ol {
   list-style-type: decimal;
 }
 
-#Constellation .Constellation_guide ul {
-  margin: 0;
+#Constellation .Constellation_guide ul li, #Constellation .Constellation_guide ol li {
+  margin: 0 0 6px 7px;
   padding: 0;
+}
+
+#Constellation .Constellation_guide ol li {
+  margin: 0 0 6px 18px;
 }
 
 #Constellation .Constellation_show_guide {

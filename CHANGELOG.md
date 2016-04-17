@@ -9,6 +9,11 @@ Constellation
 - Standard way of persisting config for packages (provide API)
 - Better search -- at least for user accounts, based on email address (not easy)
 
+### v1.4.1
+
+- Updated dependencies on several packages
+- Fixed CSS for lists in guide screens
+
 ### v1.4.0
 
 - Added support for COMMAND-click of foreign key `_id` type fields to jump instantly to the other document - a la [Dr Mongo](https://github.com/DrMongo/DrMongo)
