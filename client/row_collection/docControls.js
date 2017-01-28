@@ -64,6 +64,7 @@ var afterRemove = function (error, result, CollectionName, sessionKey, Collectio
     // Log the action
     console.log("Removed " + DocumentID + " from " + CollectionName + ". Back-up below:");
     console.log(result);
+	console.log(JSON.stringify(result));
   
     // Adjust the position
     if (DocumentPosition >= CollectionCount - 1) {

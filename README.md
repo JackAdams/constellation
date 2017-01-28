@@ -58,7 +58,7 @@ Making plugins
 Make a package with the following in the `package.js` file:
 
 ```
-api.use('constellation:console@1.4.0');
+api.use('constellation:console@1.4.1');
 api.imply('constellation:console');
 ```
 
@@ -116,7 +116,7 @@ The `type` field/param in the three methods below will be:
  - `"collection"` for collection tabs
  - `"plugin"` for any tab added using `Constellation.addTab` - i.e. for tabs added by plugin packages and for the default tabs ("Fullscreen", "Account", "Actions", "Config")
 
-`Constellation.getCurrentTab()` to get the `id` and type of the currently selected tab in an object of the form `{id: <tabId}, type: <tabType>}` (both values are strings)
+`Constellation.getCurrentTab()` to get the `id` and type of the currently selected tab in an object of the form `{id: <tabId, type: <tabType>}` (both values are strings)
 
 `Constellation.setCurrentTab("unique-id-of-my-tab", type)` to change tabs programatically (use either the `id` value set in `addTab({ ... })` or the `name` value if no `id` was set)
 
@@ -130,7 +130,7 @@ The `type` field/param in the three methods below will be:
 
 `Constellation.showCollection('collectionName')` to show collections programatically - accepts an array or a string
 
-`Constellation.setKeyCode(keyCode)` to change the default toggle key from CTRL + C to CTRL + [whichever key's keycode you set] (Note: this should only be used in app code, as a last-resort config option, and not in plugin package code)
+`Constellation.setKeyCode(keyCode)` to change the default toggle key from CTRL + C to CTRL + [whichever key's keycode you set] (Note: this should only be used in app code, as a last-resort config option, and not in plugin package code). In fact, this can be set using the 'Config | Guide' tab now, so I'd say don't use this at all.
 
 `Constellation.excludeSessionKeysContaining(prefix)` to hide any `Session` keys containing the given string (`prefix`) from the `constellation:session` package
 
