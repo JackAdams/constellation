@@ -200,4 +200,25 @@ Meteor.startup(function() {
     Blaze.render(Template.Constellation, document.body);
   });
   
+  
+  // *****************************
+  // Start impersonating if needed
+  // *****************************
+  
+  Tracker.autorun(function (c) {
+	if (Meteor.user()) {
+	  if (ConstellationDict.get('impersonatingUserId') && ConstellationDict.get('realUserId') === Meteor.userId()) {
+		// console.log("Actual user:", Meteor.userId());
+		// console.log("'Real user':", ConstellationDict.get('realUserId'));
+		// console.log("Impersonating:", ConstellationDict.get('impersonatingUserId'));
+		Meteor.call('Constellation_impersonate', ConstellationDict.get('impersonatingUserId'), function (err) {
+		  if (!err) {
+			Meteor.connection.setUserId(ConstellationDict.get('impersonatingUserId'));	
+		  }
+		});
+	  }
+	  c.stop;
+	}
+  });
+  
 });

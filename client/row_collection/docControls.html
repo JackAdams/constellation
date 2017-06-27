@@ -12,7 +12,7 @@
             {{else}}
               <div class="Constellation_m_edit Constellation_m_updateAccount">Update</div>
               <div class="Constellation_switchAccount">Switch</div>
-              <div class="Constellation_m_signout">Sign Out</div>
+              <div class="Constellation_m_signout">{{#if impersonating}}Back to me{{else}}Sign Out{{/if}}</div>
             {{/if}}
           {{else}}
             {{#with "users"}}
