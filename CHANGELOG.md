@@ -12,6 +12,8 @@ Constellation
 ### v1.4.2
 
 - Impersonation of users is persisted across hot code reloads
+- Search of accounts/users collection by `emails` field is special-cased to allow easy searching by typing email address strings
+- Removed documents are printed to console as a string (as well as an object)
 
 ### v1.4.1
 
