@@ -43,7 +43,8 @@ Package.onUse(function(api) {
   ];
 
   var serverFiles = [
-    "server/methods.js"
+    "server/methods.js",
+	"server/publications.js"
   ];
   
   var commonFiles = [

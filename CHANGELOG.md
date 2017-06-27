@@ -9,6 +9,10 @@ Constellation
 - Standard way of persisting config for packages (provide API)
 - Better search -- at least for user accounts, based on email address (not easy)
 
+### v1.4.2
+
+- Impersonation of users is persisted across hot code reloads
+
 ### v1.4.1
 
 - Updated dependencies on several packages

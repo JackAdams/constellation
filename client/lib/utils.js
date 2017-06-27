@@ -67,13 +67,19 @@ _.extend(Constellation, {
     return 'Constellation_' + collectionName + '_' + type;
   },
   'searchSelector' : function (collectionName, exact) {
-    var selector = {};
+    var selector = {}, matcher;
     if (!ConstellationDict.get('Constellation_searching')) {
       return selector;    
     }
     var field = ConstellationDict.get(Constellation.searchKey(collectionName, 'field')) || {name: '_id', type: 'string'};
-    var searchValue = ConstellationDict.get(Constellation.searchKey(collectionName, 'value')), matcher;
+    var searchValue = ConstellationDict.get(Constellation.searchKey(collectionName, 'value'));
+	
     if (typeof searchValue !== 'undefined' && searchValue !== '') {
+	  // Special case email searches
+	  if (collectionName === 'users' && field.name === 'emails' && field.type === 'array') {
+	    selector["emails.0.address"] = {$regex: searchValue, $options: 'i'};
+	    return selector;
+	  }
       if (exact) {
         matcher = searchValue;
       }
@@ -90,8 +96,6 @@ _.extend(Constellation, {
             catch (err) {
               matcher = (field.type === 'array') ? [] : {};    
             }
-            break;
-            matcher = JSON.parse(searchValue) || {};
             break;
           case 'date' :
             matcher = new Date(searchValue);

@@ -1,3 +1,19 @@
+if (!!Package["accounts-base"]) {
+
+  var searchSubscription = function (searchValue) {
+	Meteor.subscribe('Constellation_search_by_emails', searchValue);
+  }
+  var debouncedSearchSubscription = _.debounce(searchSubscription, 300);
+  Tracker.autorun(function () {
+	var field = ConstellationDict.get(Constellation.searchKey('users', 'field')) || {name: '_id', type: 'string'};
+	var searchValue = ConstellationDict.get(Constellation.searchKey('users', 'value'));
+	if (field.name === 'emails' && field.type === 'array' && searchValue && searchValue.length > 1) {
+	  debouncedSearchSubscription(searchValue);
+	}
+  });
+
+}
+
 Template.Constellation_search.helpers({
   fields: function () {
      // Take a sample of up to 10 documents
@@ -10,13 +26,13 @@ Template.Constellation_search.helpers({
      }
      docs = Collection.find({}, {limit: 10}, {transform: null}).fetch();
      return _.reduce(docs, function (memo, doc) {
-       _.each(doc, function (val,key) {
+       _.each(doc, function (val, key) {
          if (!_.find(memo,function (field) { return field.name === key})) {
            memo.push({name: key, type: Constellation.guessType(val)}); 
          }
        });
        return memo;
-     },[{name:'_id',type:'string'}]);
+     },[{name:'_id', type:'string'}]);
   },
   selected: function () {
     var field = ConstellationDict.get(Constellation.searchKey(String(Template.instance().data), 'field'));

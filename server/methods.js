@@ -1,6 +1,6 @@
 Meteor.methods({
   
-  Constellation_impersonate: function(userId) {
+  Constellation_impersonate: function (userId) {
 
     check(userId, String);
 
