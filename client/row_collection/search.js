@@ -1,14 +1,10 @@
 if (!!Package["accounts-base"]) {
-
-  var searchSubscription = function (searchValue) {
-	Meteor.subscribe('Constellation_search_by_emails', searchValue);
-  }
-  var debouncedSearchSubscription = _.debounce(searchSubscription, 300);
+  
   Tracker.autorun(function () {
 	var field = ConstellationDict.get(Constellation.searchKey('users', 'field')) || {name: '_id', type: 'string'};
 	var searchValue = ConstellationDict.get(Constellation.searchKey('users', 'value'));
-	if (field.name === 'emails' && field.type === 'array' && searchValue && searchValue.length > 1) {
-	  debouncedSearchSubscription(searchValue);
+	if (ConstellationDict.get('Constellation_searching') && field.name === 'emails' && field.type === 'array' && searchValue && searchValue.length > 1) {
+      Meteor.subscribe('Constellation_search_by_emails', searchValue);
 	}
   });
 
