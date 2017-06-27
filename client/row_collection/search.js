@@ -1,11 +1,11 @@
 if (!!Package["accounts-base"]) {
   
   Tracker.autorun(function () {
-	var field = ConstellationDict.get(Constellation.searchKey('users', 'field')) || {name: '_id', type: 'string'};
-	var searchValue = ConstellationDict.get(Constellation.searchKey('users', 'value'));
-	if (ConstellationDict.get('Constellation_searching') && field.name === 'emails' && field.type === 'array' && searchValue && searchValue.length > 1) {
+    var field = ConstellationDict.get(Constellation.searchKey('users', 'field')) || {name: '_id', type: 'string'};
+    var searchValue = ConstellationDict.get(Constellation.searchKey('users', 'value'));
+    if (ConstellationDict.get('Constellation_searching') && field.name === 'emails' && field.type === 'array' && searchValue && searchValue.length > 1) {
       Meteor.subscribe('Constellation_search_by_emails', searchValue);
-	}
+    }
   });
 
 }

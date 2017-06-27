@@ -64,7 +64,7 @@ var afterRemove = function (error, result, CollectionName, sessionKey, Collectio
     // Log the action
     console.log("Removed " + DocumentID + " from " + CollectionName + ". Back-up below:");
     console.log(result);
-	console.log(JSON.stringify(result));
+    console.log(JSON.stringify(result));
   
     // Adjust the position
     if (DocumentPosition >= CollectionCount - 1) {
@@ -289,16 +289,16 @@ Template.Constellation_docControls.events({
   },
   'click .Constellation_m_signout': function () {
     if (ConstellationDict.get('impersonatingUserId') && ConstellationDict.get('realUserId')) {
-	  Meteor.call('Constellation_impersonate', ConstellationDict.get('realUserId'), function (err) {
-		if (!err) {
-		  Meteor.connection.setUserId(ConstellationDict.get('realUserId'));	
-		}
-		ConstellationDict.set('impersonatingUserId', null);
-	  });
-	}
-	else {
+      Meteor.call('Constellation_impersonate', ConstellationDict.get('realUserId'), function (err) {
+        if (!err) {
+          Meteor.connection.setUserId(ConstellationDict.get('realUserId'));    
+        }
+        ConstellationDict.set('impersonatingUserId', null);
+      });
+    }
+    else {
       Meteor.logout();
-	}
+    }
   },
   'click .Constellation_switchAccount' : function () {
     ConstellationDict.set('Constellation_switchingAccount', true);
@@ -329,17 +329,17 @@ Template.Constellation_docControls.events({
           // Not sure why
           Meteor.call('Constellation_impersonate', userId);
         }
-		else {
-		  if (currentUser._id !== userId) {
-			if (!ConstellationDict.get('impersonatingUserId')) {
+        else {
+          if (currentUser._id !== userId) {
+            if (!ConstellationDict.get('impersonatingUserId')) {
               ConstellationDict.set('realUserId', currentUser._id);
-			}
+            }
             ConstellationDict.set('impersonatingUserId', userId);
-		  }
-		  else {
-			ConstellationDict.set('impersonatingUserId', null);
-		  }
-		}
+          }
+          else {
+            ConstellationDict.set('impersonatingUserId', null);
+          }
+        }
       }
     });  
   }
@@ -401,7 +401,7 @@ Template.Constellation_docControls.helpers({
     }
   },
   impersonating: function () {
-	return ConstellationDict.get('impersonatingUserId') && ConstellationDict.get('realUserId');
+    return ConstellationDict.get('impersonatingUserId') && ConstellationDict.get('realUserId');
   }
 });
 

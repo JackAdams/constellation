@@ -14,6 +14,7 @@ Constellation
 - Impersonation of users is persisted across hot code reloads
 - Search of accounts/users collection by `emails` field is special-cased to allow easy searching by typing email address strings
 - Removed documents are printed to console as a string (as well as an object)
+- Updated weak dependency on `aldeed:collection2` to v2.10.0
 
 ### v1.4.1
 

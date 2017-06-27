@@ -44,34 +44,34 @@ Meteor.startup(function() {
   
   Constellation.defaultTabs = [
     {
-	  name: 'Full screen',
-	  id: 'constellation_plugin_fullscreen',
-	  active:false,
-	  noOpen:true,
-	  onClick: "toggleFullScreen",
-	  headerContentTemplate: 'Constellation_fullscreen_header'
-	}
+      name: 'Full screen',
+      id: 'constellation_plugin_fullscreen',
+      active:false,
+      noOpen:true,
+      onClick: "toggleFullScreen",
+      headerContentTemplate: 'Constellation_fullscreen_header'
+    }
   ]
   if (!!Package['accounts-base']) {
     Constellation.defaultTabs.push({
-	  name: 'Account',
-	  id: 'constellation_plugin_user_account',
-	  mainContentTemplate: 'Constellation_account_view',
-	  headerContentTemplate: 'Constellation_account_status',
-	  menuContentTemplate: 'Constellation_account_controls',
-	  searchContentTemplate: 'Constellation_account_search',
-	  guideContentTemplate: 'Constellation_account_guide',
-	  active:false
-	});
+      name: 'Account',
+      id: 'constellation_plugin_user_account',
+      mainContentTemplate: 'Constellation_account_view',
+      headerContentTemplate: 'Constellation_account_status',
+      menuContentTemplate: 'Constellation_account_controls',
+      searchContentTemplate: 'Constellation_account_search',
+      guideContentTemplate: 'Constellation_account_guide',
+      active:false
+    });
   }
   Constellation.defaultTabs.push({
-	name: 'Actions',
-	id: 'constellation_plugin_actions',
-	mainContentTemplate: 'Constellation_actions_main',
-	headerContentTemplate: 'Constellation_actions_header',
-	menuContentTemplate: 'Constellation_actions_menu',
-	guideContentTemplate: 'Constellation_actions_guide',
-	active:true
+    name: 'Actions',
+    id: 'constellation_plugin_actions',
+    mainContentTemplate: 'Constellation_actions_main',
+    headerContentTemplate: 'Constellation_actions_header',
+    menuContentTemplate: 'Constellation_actions_menu',
+    guideContentTemplate: 'Constellation_actions_guide',
+    active:true
   });
   
   Tracker.autorun(function() {
@@ -92,7 +92,7 @@ Meteor.startup(function() {
           menuContentTemplate: "Constellation_docControls",
           mainContentTemplate: "Constellation_docViewer",
           searchContentTemplate: "Constellation_search",
-		  guideContentTemplate: "Constellation_guide",
+          guideContentTemplate: "Constellation_guide",
           active: true,
           collection: true 
         }); 
@@ -108,13 +108,13 @@ Meteor.startup(function() {
     
     // Config goes at the bottom
     Constellation.tabs.push({
-	  name: 'Config | Guide',
-	  id: 'constellation_plugin_config',
-	  headerContentTemplate: 'Constellation_config_header',
-	  menuContentTemplate: 'Constellation_config_menu',
-	  mainContentTemplate: 'Constellation_config_view',
-	  active: true
-	});
+      name: 'Config | Guide',
+      id: 'constellation_plugin_config',
+      headerContentTemplate: 'Constellation_config_header',
+      menuContentTemplate: 'Constellation_config_menu',
+      mainContentTemplate: 'Constellation_config_view',
+      active: true
+    });
 
     var constellationClasses = '';
 
@@ -190,10 +190,10 @@ Meteor.startup(function() {
   });
   
   EditableJSON.onMetaKeyClickStringField(function (collection, field, value) {
-	// Try to find the document of the _id click (if it's an _id)
-	if (Constellation.resemblesId(value)) {
-	  Constellation.findDocumentFromId(value);
-	}
+    // Try to find the document of the _id click (if it's an _id)
+    if (Constellation.resemblesId(value)) {
+      Constellation.findDocumentFromId(value);
+    }
   });
   
   Meteor.defer(function () {
@@ -206,19 +206,19 @@ Meteor.startup(function() {
   // *****************************
   
   Tracker.autorun(function (c) {
-	if (Meteor.user()) {
-	  if (ConstellationDict.get('impersonatingUserId') && ConstellationDict.get('realUserId') === Meteor.userId()) {
-		// console.log("Actual user:", Meteor.userId());
-		// console.log("'Real user':", ConstellationDict.get('realUserId'));
-		// console.log("Impersonating:", ConstellationDict.get('impersonatingUserId'));
-		Meteor.call('Constellation_impersonate', ConstellationDict.get('impersonatingUserId'), function (err) {
-		  if (!err) {
-			Meteor.connection.setUserId(ConstellationDict.get('impersonatingUserId'));	
-		  }
-		});
-	  }
-	  c.stop;
-	}
+    if (Meteor.user()) {
+      if (ConstellationDict.get('impersonatingUserId') && ConstellationDict.get('realUserId') === Meteor.userId()) {
+        // console.log("Actual user:", Meteor.userId());
+        // console.log("'Real user':", ConstellationDict.get('realUserId'));
+        // console.log("Impersonating:", ConstellationDict.get('impersonatingUserId'));
+        Meteor.call('Constellation_impersonate', ConstellationDict.get('impersonatingUserId'), function (err) {
+          if (!err) {
+            Meteor.connection.setUserId(ConstellationDict.get('impersonatingUserId'));    
+          }
+        });
+      }
+      c.stop;
+    }
   });
   
 });

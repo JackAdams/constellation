@@ -33,9 +33,9 @@ Meteor.methods({
       var doc = collection.instance.findOne({_id: documentId});
       if (doc) {
         found = {
-		  collectionName: collection.name,
-		  document: doc
-		}
+          collectionName: collection.name,
+          document: doc
+        }
       }
     });
 
