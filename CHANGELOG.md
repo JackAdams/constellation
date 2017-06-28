@@ -9,6 +9,10 @@ Constellation
 - Standard way of persisting config for packages (provide API)
 - Better search -- at least for user accounts, based on email address (not easy)
 
+### v1.4.3
+
+- Added `pointer-events: auto;` to css so Constellation is still usable with modals that have `pointer-events: auto;`
+
 ### v1.4.2
 
 - Impersonation of users is persisted across hot code reloads

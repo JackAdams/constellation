@@ -6,6 +6,7 @@
   max-height: 100%;
   overflow: auto;
   text-align: left;
+  pointer-events: auto;
 }
 
 .Constellation {
