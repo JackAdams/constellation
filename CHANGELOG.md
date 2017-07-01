@@ -9,6 +9,11 @@ Constellation
 - Standard way of persisting config for packages (provide API)
 - Better search -- at least for user accounts, based on email address (not easy)
 
+### v1.4.4
+
+- When clicking on foreign keys, UI scrolls to correct collection tab
+- Show account username or email in account tab when UI is expanded
+
 ### v1.4.3
 
 - Added `pointer-events: auto;` to css so Constellation is still usable with modals that have `pointer-events: auto;`

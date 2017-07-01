@@ -126,7 +126,7 @@
   padding: 0 8px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space:nowrap;
+  white-space: nowrap;
   height: 28px;
   position: relative;
   transition: 0.3s;
@@ -692,4 +692,8 @@
 #Constellation .Constellation_show_guide:hover {
   background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255,255,255,0.5);
+}
+
+.Constellation_current_account {
+  color: #999;
 }

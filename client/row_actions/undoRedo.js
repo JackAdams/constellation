@@ -246,6 +246,10 @@ UndoRedo.setDocumentNumber = function (collection, _id) {
   ConstellationDict.set(sessionKey, docNumber);
   if (!ConstellationDict.equals("Constellation_currentTab", "constellation_actions_record")) {
     ConstellationDict.set("Constellation_currentTab", collection);
+	Tracker.flush();
+	Meteor.setTimeout(function () {
+      $('#Constellation').animate({scrollTop: $('#Constellation').scrollTop() + $('.Constellation_tab_' + collection).parent().position().top}, 'fast');
+	}, 300);
   }
 }
 

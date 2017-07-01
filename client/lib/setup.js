@@ -58,6 +58,7 @@ Meteor.startup(function() {
       id: 'constellation_plugin_user_account',
       mainContentTemplate: 'Constellation_account_view',
       headerContentTemplate: 'Constellation_account_status',
+	  rightHeaderContentTemplate: 'Constellation_current_account',
       menuContentTemplate: 'Constellation_account_controls',
       searchContentTemplate: 'Constellation_account_search',
       guideContentTemplate: 'Constellation_account_guide',

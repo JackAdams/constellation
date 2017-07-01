@@ -12,7 +12,7 @@ caching-compiler@1.1.9
 caching-html-compiler@1.0.5
 callback-hook@1.0.10
 check@1.2.5
-constellation:console@1.4.2
+constellation:console@1.4.3
 dburles:mongo-collection-instances@0.3.5
 ddp@1.2.5
 ddp-client@1.3.4

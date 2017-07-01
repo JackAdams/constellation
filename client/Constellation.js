@@ -74,6 +74,12 @@ Template.Constellation_headerContent.helpers({
   }
 });
 
+Template.Constellation_rightHeaderContent.helpers({
+  template: function () {
+    return this.rightHeaderContentTemplate || null;
+  }
+});
+
 Template.Constellation_searchContent.helpers({
   template: function () {
     return this.searchContentTemplate || null;
