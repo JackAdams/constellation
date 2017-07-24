@@ -300,13 +300,20 @@ Template.Constellation_docControls.events({
       Meteor.logout();
     }
   },
-  'click .Constellation_switchAccount' : function () {
+  'click .Constellation_switchAccount' : function (evt, tmpl) {
     ConstellationDict.set('Constellation_switchingAccount', true);
+	var clickedElem = tmpl.$(evt.target).closest(".Constellation_contentView");
     var sessionKey = Constellation.sessKey("users");
     var current = ConstellationDict.get(sessionKey);
     if (_.isUndefined(current)) {
       ConstellationDict.set(sessionKey, 0);
     }
+	// Automatically turn search on and default to the emails field
+	ConstellationDict.set('Constellation_searching', true);
+	ConstellationDict.set('Constellation_users_field', {name: "emails", type: "array"});
+	Tracker.afterFlush(function () {
+	  clickedElem.find(".Constellation_search").focus();
+	});
   },
   'click .Constellation_useAccount' : function (evt, tmpl) {
       

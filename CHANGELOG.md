@@ -7,7 +7,10 @@ Constellation
 - Change CSS for Chrome and Safari so that scroll bars show when content overflows pane (or full screen view)
 - Factor out Accounts, Collections and Actions tabs into separate packages ???
 - Standard way of persisting config for packages (provide API)
-- Better search -- at least for user accounts, based on email address (not easy)
+
+### v1.4.5
+
+- Better search for accounts experience. Default to searching on, choose the email field, and focus input when switching accounts (saves four clicks each time).
 
 ### v1.4.4
 
