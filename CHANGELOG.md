@@ -8,6 +8,10 @@ Constellation
 - Factor out Accounts, Collections and Actions tabs into separate packages ???
 - Standard way of persisting config for packages (provide API)
 
+### v1.4.7
+
+- Added dependencies on `random` and `underscore` (on server) for apps that don't include these packages.
+
 ### v1.4.6
 
 - Removed weak dependency on `aldeed:collection2`.
