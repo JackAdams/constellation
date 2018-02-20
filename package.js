@@ -1,7 +1,7 @@
 Package.describe({
   name:    'constellation:console',
   summary: 'An extensible development console for Meteor',
-  version: '1.4.5',
+  version: '1.4.6',
   git:     'https://github.com/JackAdams/constellation.git',
   documentation: 'README.md',
   debugOnly: true
@@ -57,10 +57,10 @@ Package.onUse(function(api) {
   api.versionsFrom('1.0');
   api.use(['templating', 'tracker', 'mongo', 'session', 'underscore', 'reactive-var', 'reactive-dict', 'blaze', 'jquery'], 'client');
   api.use('check');
-  api.use('aldeed:collection2@2.10.0', {weak: true}); // This must go before: api.use('dburles:mongo-collection-instances@0.3.4');
+  // api.use('aldeed:collection2@3.0.0', {weak: true}); // This must go before: api.use('dburles:mongo-collection-instances@0.3.4');
   api.use('dburles:mongo-collection-instances@0.3.5');
   api.use('gwendall:session-json@0.1.7', 'client');
-  api.use('babrahams:editable-json@0.6.4');
+  api.use('babrahams:editable-json@0.6.5');
   api.use('accounts-base', {weak: true});
 
   api.add_files(commonFiles);

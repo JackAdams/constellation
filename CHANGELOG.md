@@ -8,6 +8,10 @@ Constellation
 - Factor out Accounts, Collections and Actions tabs into separate packages ???
 - Standard way of persisting config for packages (provide API)
 
+### v1.4.6
+
+- Removed weak dependency on `aldeed:collection2`.
+
 ### v1.4.5
 
 - Better search for accounts experience. Default to searching on, choose the email field, and focus input when switching accounts (saves four clicks each time).
