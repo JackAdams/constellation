@@ -8,6 +8,10 @@ Constellation
 - Factor out Accounts, Collections and Actions tabs into separate packages ???
 - Standard way of persisting config for packages (provide API)
 
+### v1.4.8 & v.1.4.9
+
+- Version bump as per 1.8.2 instructions in [Meteor changelog](https://github.com/meteor/meteor/blob/devel/History.md)
+
 ### v1.4.7
 
 - Added dependencies on `random` and `underscore` (on server) for apps that don't include these packages.
